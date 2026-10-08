@@ -240,41 +240,41 @@ export default function HighPackageCoursesAndCertificates() {
   };
 
   return (
-    <div className="glass-card rounded-2xl border-2 border-pink-500/40 p-5 sm:p-7 space-y-6 shadow-2xl shadow-pink-900/10 transition-all duration-300">
+    <div className="bg-white rounded-2xl border border-[#cbe1d0] p-5 sm:p-7 space-y-6 shadow-sm transition-all duration-300">
       {/* Top Header Banner */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-pink-900/30">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#cbe1d0]/60">
         <div>
-          <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-pink-950/70 border border-pink-600/40 text-pink-300 text-xs font-semibold mb-1">
-            <Sparkles className="w-3 h-3 text-pink-400" />
+          <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-[#daf0e3] border border-[#cbe1d0] text-[[rgb(18,84,79)]] text-xs font-semibold mb-1">
+            <Sparkles className="w-3 h-3 text-[[rgb(18,84,79)]]" />
             <span>Pathways & Credentials</span>
           </div>
-          <h2 className="text-xl sm:text-2xl font-bold text-white">
+          <h2 className="text-xl sm:text-2xl font-bold text-[#123835]">
             Courses & Certifications
           </h2>
-          <p className="text-xs text-rose-200/80 mt-0.5">
+          <p className="text-xs text-[#2a4e46] mt-0.5">
             Degree pathways and industry certifications.
           </p>
         </div>
 
         {/* Package Highlights Badge */}
-        <div className="flex items-center gap-3 shrink-0 p-2.5 rounded-xl bg-[#1a0c28] border border-peach-500/30">
-          <DollarSign className="w-5 h-5 text-peach-400" />
+        <div className="flex items-center gap-3 shrink-0 p-2.5 rounded-xl bg-[#f7faf8] border border-[#cbe1d0]">
+          <DollarSign className="w-5 h-5 text-[[rgb(18,84,79)]]" />
           <div>
-            <span className="text-xs text-peach-300/80 font-bold block">Target Band</span>
-            <span className="text-sm font-bold text-peach-300">₹32L – ₹55 LPA</span>
+            <span className="text-xs text-[#2a4e46] font-bold block">Target Band</span>
+            <span className="text-sm font-bold text-[#123835]">₹32L – ₹55 LPA</span>
           </div>
         </div>
       </div>
 
       {/* Sub-Tab Navigation Switcher */}
-      <div className="grid grid-cols-3 p-1 rounded-xl bg-[#140a1e] border border-purple-900/40 gap-1 text-xs">
+      <div className="grid grid-cols-3 p-1 rounded-xl bg-[#f7faf8] border border-[#cbe1d0] gap-1 text-xs">
         <button
           type="button"
           onClick={() => setActiveSubTab("courses")}
           className={`flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg font-semibold transition-all ${
             activeSubTab === "courses"
-              ? "bg-pink-600 text-white shadow-sm"
-              : "text-rose-300/70 hover:text-white"
+              ? "bg-[[rgb(18,84,79)]] text-white shadow-sm"
+              : "text-[#123835] hover:text-[[rgb(18,84,79)]]"
           }`}
         >
           <GraduationCap className="w-4 h-4" />
@@ -286,8 +286,8 @@ export default function HighPackageCoursesAndCertificates() {
           onClick={() => setActiveSubTab("certificates")}
           className={`flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg font-semibold transition-all ${
             activeSubTab === "certificates"
-              ? "bg-pink-600 text-white shadow-sm"
-              : "text-rose-300/70 hover:text-white"
+              ? "bg-[[rgb(18,84,79)]] text-white shadow-sm"
+              : "text-[#123835] hover:text-[[rgb(18,84,79)]]"
           }`}
         >
           <Award className="w-4 h-4" />
@@ -299,8 +299,8 @@ export default function HighPackageCoursesAndCertificates() {
           onClick={() => setActiveSubTab("companies")}
           className={`flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg font-semibold transition-all ${
             activeSubTab === "companies"
-              ? "bg-pink-600 text-white shadow-sm"
-              : "text-rose-300/70 hover:text-white"
+              ? "bg-[[rgb(18,84,79)]] text-white shadow-sm"
+              : "text-[#123835] hover:text-[[rgb(18,84,79)]]"
           }`}
         >
           <Building2 className="w-4 h-4" />
@@ -313,9 +313,9 @@ export default function HighPackageCoursesAndCertificates() {
       {/* ========================================================================= */}
       {activeSubTab === "courses" && (
         <div className="space-y-4">
-          <div className="p-3.5 rounded-xl bg-pink-950/20 border border-pink-700/30 flex items-start gap-3">
-            <BookOpen className="w-4 h-4 text-pink-400 mt-0.5 shrink-0" />
-            <p className="text-xs text-rose-100/90 leading-relaxed">
+          <div className="p-3.5 rounded-xl bg-[#f7faf8] border border-[#cbe1d0] flex items-start gap-3">
+            <BookOpen className="w-4 h-4 text-[[rgb(18,84,79)]] mt-0.5 shrink-0" />
+            <p className="text-xs text-[#2a4e46] leading-relaxed">
               <strong>Academic Strategy:</strong> To enter high-package product firms (Google, NVIDIA, Microsoft), select a core Computer Science degree and specialize in <strong>Distributed Systems, GPU Architecture, or LLM Systems</strong> starting in Semester 4.
             </p>
           </div>
@@ -324,49 +324,49 @@ export default function HighPackageCoursesAndCertificates() {
             {COURSES_DATA.map((course) => (
               <div
                 key={course.id}
-                className="p-5 rounded-xl bg-[#180d24]/90 border border-purple-900/40 hover:border-pink-500/50 transition-all space-y-3.5 flex flex-col justify-between"
+                className="p-5 rounded-xl bg-white border border-[#cbe1d0] hover:border-[[rgb(18,84,79)]] shadow-sm transition-all space-y-3.5 flex flex-col justify-between"
               >
                 <div className="space-y-2">
                   <div className="flex items-center justify-between gap-2">
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-900/50 text-purple-200 border border-purple-700/40">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[#f7faf8] text-[#123835] border border-[#cbe1d0]">
                       {course.degreeType}
                     </span>
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-pink-950/70 text-pink-300 border border-pink-800/40">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[#daf0e3] text-[[rgb(18,84,79)]] border border-[#cbe1d0]">
                       {course.difficulty}
                     </span>
                   </div>
 
-                  <h3 className="text-base font-bold text-white tracking-tight">
+                  <h3 className="text-base font-bold text-[#123835] tracking-tight">
                     {course.title}
                   </h3>
 
                   {/* CTC Package & Duration Bar */}
-                  <div className="flex items-center justify-between p-2 rounded-lg bg-[#12071d] border border-pink-900/30 text-xs">
+                  <div className="flex items-center justify-between p-2.5 rounded-lg bg-[#f7faf8] border border-[#cbe1d0] text-xs">
                     <div>
-                      <span className="text-[10px] text-rose-300/60 block">Expected Package</span>
-                      <strong className="text-peach-300 font-extrabold">{course.expectedPackage}</strong>
+                      <span className="text-[10px] text-[#2a4e46] block">Expected Package</span>
+                      <strong className="text-[[rgb(18,84,79)]] font-extrabold">{course.expectedPackage}</strong>
                     </div>
                     <div className="text-right">
-                      <span className="text-[10px] text-rose-300/60 block">Duration</span>
-                      <span className="text-rose-100 font-semibold">{course.duration}</span>
+                      <span className="text-[10px] text-[#2a4e46] block">Duration</span>
+                      <span className="text-[#123835] font-semibold">{course.duration}</span>
                     </div>
                   </div>
 
                   {/* Why High Package */}
-                  <p className="text-[11px] text-rose-200/80 leading-relaxed">
+                  <p className="text-[11px] text-[#2a4e46] leading-relaxed">
                     {course.highPackageReason}
                   </p>
 
                   {/* Core Subjects */}
                   <div className="space-y-1.5 pt-1">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-rose-300/70 block">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#2a4e46] block">
                       Core High-Impact Subjects:
                     </span>
                     <div className="flex flex-wrap gap-1.5">
                       {course.coreSubjects.map((sub, i) => (
                         <span
                           key={i}
-                          className="text-[10px] px-2 py-0.5 rounded-md bg-[#140822] text-rose-100 border border-purple-800/30"
+                          className="text-[10px] px-2 py-0.5 rounded-md bg-[#f7faf8] text-[#123835] border border-[#cbe1d0]"
                         >
                           {sub}
                         </span>
@@ -376,14 +376,14 @@ export default function HighPackageCoursesAndCertificates() {
 
                   {/* Target Companies */}
                   <div className="pt-2">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-peach-300/70 block mb-1">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#2a4e46] block mb-1">
                       Target Recruiters:
                     </span>
                     <div className="flex flex-wrap gap-1.5">
                       {course.targetCompanies.map((comp, idx) => (
                         <span
                           key={idx}
-                          className="text-[10px] font-semibold px-2 py-0.5 rounded bg-peach-950/40 text-peach-300 border border-peach-800/30"
+                          className="text-[10px] font-semibold px-2 py-0.5 rounded bg-[#f0fdf4] text-[#15803d] border border-[#bbf7d0]"
                         >
                           {comp}
                         </span>
@@ -393,22 +393,22 @@ export default function HighPackageCoursesAndCertificates() {
                 </div>
 
                 {/* Selection & Parent Permission Request Action Bar */}
-                <div className="pt-3 border-t border-purple-900/30 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                  <div className="text-[10px] text-rose-300/70 truncate">
+                <div className="pt-3 border-t border-[#cbe1d0]/60 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <div className="text-[10px] text-[#2a4e46] truncate">
                     Top Institutes: {course.topInstitutes.slice(0, 2).join(", ")}
                   </div>
 
                   {(selectedCourse?.title || "").toLowerCase().includes(course.title.slice(0, 15).toLowerCase()) ? (
                     <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-bold text-pink-300 flex items-center gap-1 bg-pink-950/60 px-2 py-0.5 rounded border border-pink-700/40">
-                        <CheckCircle2 className="w-3 h-3 text-pink-400" />
+                      <span className="text-[10px] font-bold text-[[rgb(18,84,79)]] flex items-center gap-1 bg-[#daf0e3] px-2 py-0.5 rounded border border-[#cbe1d0]">
+                        <CheckCircle2 className="w-3 h-3 text-[[rgb(18,84,79)]]" />
                         <span>Active Course</span>
                       </span>
                       {step === "course_selection" && (
                         <button
                           type="button"
                           onClick={requestParentPermission}
-                          className="px-2.5 py-1 rounded-lg bg-gradient-to-r from-pink-600 to-purple-600 text-white text-[10px] font-bold shadow-sm flex items-center gap-1 hover:from-pink-500 hover:to-purple-500"
+                          className="px-2.5 py-1 rounded-lg bg-[[rgb(18,84,79)]] text-white text-[10px] font-bold shadow-sm flex items-center gap-1 hover:bg-[[rgb(14,68,64)]]"
                         >
                           <Send className="w-3 h-3" />
                           <span>Ask Parent 📩</span>
@@ -427,10 +427,10 @@ export default function HighPackageCoursesAndCertificates() {
                           topInstitutes: course.topInstitutes
                         });
                       }}
-                      className="px-2.5 py-1 rounded-lg bg-purple-950/60 hover:bg-pink-600/30 text-rose-200 hover:text-white border border-purple-800/40 text-[10px] font-semibold transition-colors flex items-center gap-1 shrink-0"
+                      className="px-3 py-1.5 rounded-lg bg-[[rgb(18,84,79)]] hover:bg-[[rgb(14,68,64)]] text-white text-[10px] font-semibold transition-colors flex items-center gap-1 shrink-0 shadow-sm"
                     >
                       <span>Select for Trajectory</span>
-                      <ChevronRight className="w-3 h-3 text-pink-400" />
+                      <ChevronRight className="w-3 h-3 text-white" />
                     </button>
                   )}
                 </div>
@@ -445,8 +445,8 @@ export default function HighPackageCoursesAndCertificates() {
       {/* ========================================================================= */}
       {activeSubTab === "certificates" && (
         <div className="space-y-6">
-          <div className="p-3.5 rounded-xl bg-purple-950/30 border border-purple-800/40 flex items-start gap-3">
-            <Award className="w-4 h-4 text-purple-400 mt-0.5 shrink-0" />
+          <div className="p-3.5 rounded-xl bg-[#f7faf8] border border-[#cbe1d0] flex items-start gap-3">
+            <Award className="w-4 h-4 text-[[rgb(18,84,79)]] mt-0.5 shrink-0" />
             <p className="text-xs text-rose-100/90 leading-relaxed">
               <strong>Verifiable Credentials in Tab:</strong> Top tech companies require industry-standard credentials alongside your degree. Select any certificate on the left to preview your verifiable certificate and syllabus details on the right.
             </p>
@@ -468,24 +468,24 @@ export default function HighPackageCoursesAndCertificates() {
                     onClick={() => setSelectedCertId(cert.id)}
                     className={`w-full text-left p-3.5 rounded-xl border transition-all ${
                       isSelected
-                        ? "bg-[#231238] border-pink-500 shadow-md shadow-pink-600/20"
-                        : "bg-[#160b24]/80 border-purple-900/40 hover:border-pink-500/40 hover:bg-[#1a0e2c]"
+                        ? "bg-[#e3ede5] border-[[rgb(18,84,79)]] shadow-sm"
+                        : "bg-white border-[#cbe1d0] hover:border-[[rgb(18,84,79)]] hover:bg-[#f7faf7]"
                     }`}
                   >
                     <div className="flex items-start justify-between gap-2">
                       <div className="min-w-0">
                         <div className="flex items-center gap-1.5 mb-1">
-                          <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-pink-950/70 text-pink-300 border border-pink-700/40">
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[#daf0e3] text-[[rgb(18,84,79)]] border border-[#cbe1d0]">
                             {cert.code}
                           </span>
-                          <span className="text-[10px] font-extrabold text-peach-300">
+                          <span className="text-[10px] font-extrabold text-[#15803d]">
                             {cert.salaryBoost}
                           </span>
                         </div>
-                        <h4 className="text-xs font-bold text-white truncate">
+                        <h4 className="text-xs font-bold text-[#123835] truncate">
                           {cert.title}
                         </h4>
-                        <p className="text-[11px] text-rose-300/70 mt-0.5 truncate">
+                        <p className="text-[11px] text-[#2a4e46] mt-0.5 truncate">
                           {cert.issuer}
                         </p>
                       </div>
@@ -503,30 +503,30 @@ export default function HighPackageCoursesAndCertificates() {
 
             {/* Right Column: LIVE CERTIFICATE VIEWER DOCUMENT */}
             <div className="lg:col-span-7 flex flex-col justify-between">
-              <div className="cert-document relative p-6 sm:p-8 rounded-2xl border-4 border-double border-pink-400/50 bg-gradient-to-b from-[#180a26] via-[#12071d] to-[#1c0c2c] shadow-2xl space-y-5 overflow-hidden">
+              <div className="cert-document relative p-6 sm:p-8 rounded-2xl border-4 border-double border-[#cbe1d0] bg-[#fcfcfb] shadow-md space-y-5 overflow-hidden text-[#123835]">
                 {/* Decorative Watermark & Ornate Corner Accents */}
                 <div className="absolute -top-12 -right-12 w-36 h-36 bg-pink-500/10 rounded-full blur-2xl pointer-events-none" />
                 <div className="absolute -bottom-12 -left-12 w-36 h-36 bg-purple-500/10 rounded-full blur-2xl pointer-events-none" />
 
                 {/* Certificate Header Banner */}
                 <div className="text-center space-y-1 relative z-10">
-                  <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-pink-950/60 border border-pink-600/40 text-pink-300 text-[10px] font-bold uppercase tracking-widest">
-                    <ShieldCheck className="w-3.5 h-3.5 text-pink-400" />
+                  <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#daf0e3] border border-[#cbe1d0] text-[[rgb(18,84,79)]] text-[10px] font-bold uppercase tracking-widest">
+                    <ShieldCheck className="w-3.5 h-3.5 text-[[rgb(18,84,79)]]" />
                     <span>Official Industry Credential</span>
                   </div>
-                  <h3 className="text-xs sm:text-sm font-extrabold tracking-widest text-rose-200 uppercase pt-1">
+                  <h3 className="text-xs sm:text-sm font-extrabold tracking-widest text-[#123835] uppercase pt-1">
                     Certificate of Competency & Specialization
                   </h3>
-                  <div className="w-24 h-0.5 bg-gradient-to-r from-transparent via-pink-500 to-transparent mx-auto" />
+                  <div className="w-24 h-0.5 bg-gradient-to-r from-transparent via-[[rgb(18,84,79)]] to-transparent mx-auto" />
                 </div>
 
                 {/* Student Recipient Presentation */}
                 <div className="text-center space-y-1 relative z-10">
-                  <span className="text-[11px] text-rose-300/70 italic block">This certifies that</span>
-                  <h2 className="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-rose-200 to-peach-300 tracking-wide">
+                  <span className="text-[11px] text-[#2a4e46] italic block">This certifies that</span>
+                  <h2 className="text-2xl sm:text-3xl font-black text-[[rgb(18,84,79)]] tracking-wide">
                     Arun Kumar
                   </h2>
-                  <p className="text-[11px] text-rose-200/80 max-w-md mx-auto pt-1">
+                  <p className="text-[11px] text-[#2a4e46] max-w-md mx-auto pt-1">
                     has successfully satisfied all rigorous curriculum evaluations, laboratory projects, and examination requirements for
                   </p>
                 </div>
@@ -555,7 +555,7 @@ export default function HighPackageCoursesAndCertificates() {
                         key={idx}
                         className="text-[10px] px-2 py-0.5 rounded-full bg-purple-950/60 border border-purple-700/40 text-rose-100 flex items-center gap-1"
                       >
-                        <CheckCircle2 className="w-3 h-3 text-pink-400" />
+                        <CheckCircle2 className="w-3 h-3 text-[[rgb(18,84,79)]]" />
                         <span>{skill}</span>
                       </span>
                     ))}
@@ -565,7 +565,7 @@ export default function HighPackageCoursesAndCertificates() {
                 {/* Certificate Footer / Authentication Seal */}
                 <div className="pt-4 border-t border-pink-900/40 flex items-center justify-between text-xs relative z-10">
                   <div>
-                    <span className="text-[10px] text-rose-300/60 block">Issued Status:</span>
+                    <span className="text-[10px] text-[#2a4e46] block">Issued Status:</span>
                     <strong className="text-emerald-400 font-bold flex items-center gap-1">
                       <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
                       <span>Verified Active</span>
@@ -579,8 +579,8 @@ export default function HighPackageCoursesAndCertificates() {
                   </div>
 
                   <div className="text-right">
-                    <span className="text-[10px] text-rose-300/60 block">Package Impact:</span>
-                    <strong className="text-peach-300 font-extrabold">{selectedCert.salaryBoost}</strong>
+                    <span className="text-[10px] text-[#2a4e46] block">Package Impact:</span>
+                    <strong className="text-[[rgb(18,84,79)]] font-extrabold">{selectedCert.salaryBoost}</strong>
                   </div>
                 </div>
               </div>
@@ -590,7 +590,7 @@ export default function HighPackageCoursesAndCertificates() {
                 <button
                   type="button"
                   onClick={() => handleCopyCode(selectedCert.verificationId)}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#140822] hover:bg-purple-900/40 border border-purple-800/40 text-xs font-semibold text-rose-200 transition-colors"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#f7faf8] hover:bg-[#d8e6d9] border border-[#cbe1d0] text-xs font-semibold text-[#123835] transition-colors"
                 >
                   {copiedId ? (
                     <>
@@ -610,7 +610,7 @@ export default function HighPackageCoursesAndCertificates() {
                     href="https://aws.amazon.com/certification/"
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white text-xs font-bold shadow-md shadow-pink-600/25 transition-all"
+                    className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-[[rgb(18,84,79)]] hover:bg-[[rgb(14,68,64)]] text-white text-xs font-bold shadow-sm transition-all"
                   >
                     <span>Official Certification Portal</span>
                     <ExternalLink className="w-3 h-3" />
@@ -627,8 +627,8 @@ export default function HighPackageCoursesAndCertificates() {
       {/* ========================================================================= */}
       {activeSubTab === "companies" && (
         <div className="space-y-4">
-          <div className="p-3.5 rounded-xl bg-peach-950/20 border border-peach-700/30 flex items-start gap-3">
-            <TrendingUp className="w-4 h-4 text-peach-400 mt-0.5 shrink-0" />
+          <div className="p-3.5 rounded-xl bg-[#f7faf8] border border-[#cbe1d0] flex items-start gap-3">
+            <TrendingUp className="w-4 h-4 text-[[rgb(18,84,79)]] mt-0.5 shrink-0" />
             <p className="text-xs text-rose-100/90 leading-relaxed">
               <strong>Tier-1 Recruitment Criteria:</strong> Companies offer high-bracket entry packages (₹32L–₹55L) to candidates who combine a rigorous computer science foundation with verified cloud/AI certifications and system design skills.
             </p>
@@ -638,43 +638,43 @@ export default function HighPackageCoursesAndCertificates() {
             {COMPANIES_DATA.map((company, idx) => (
               <div
                 key={idx}
-                className="p-5 rounded-xl bg-[#180d24]/90 border border-purple-900/40 hover:border-peach-500/50 transition-all space-y-3.5"
+                className="p-5 rounded-xl bg-white border border-[#cbe1d0] hover:border-[[rgb(18,84,79)]] shadow-sm space-y-3.5"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div>
-                    <h3 className="text-lg font-black text-white">{company.name}</h3>
-                    <p className="text-xs font-semibold text-pink-300 mt-0.5">{company.role}</p>
+                    <h3 className="text-lg font-black text-[#123835]">{company.name}</h3>
+                    <p className="text-xs font-semibold text-[[rgb(18,84,79)]] mt-0.5">{company.role}</p>
                   </div>
-                  <span className="text-xs font-extrabold px-2.5 py-1 rounded-lg bg-peach-950/60 text-peach-300 border border-peach-800/40 shrink-0">
+                  <span className="text-xs font-extrabold px-2.5 py-1 rounded-lg bg-[#f0fdf4] text-[#15803d] border border-[#bbf7d0] shrink-0">
                     {company.packageRange}
                   </span>
                 </div>
 
-                <div className="p-2.5 rounded-lg bg-[#12071d] border border-purple-900/30 text-[11px] text-rose-200/90">
+                <div className="p-2.5 rounded-lg bg-[#f7faf8] border border-[#cbe1d0] text-[11px] text-[#2a4e46]">
                   <span className="text-[10px] text-rose-300/60 block font-bold uppercase">Compensation Structure:</span>
                   <span>{company.breakdown}</span>
                 </div>
 
                 <div className="space-y-1.5">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-rose-300/70 block">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#2a4e46] block">
                     Screening & Hiring Requirements:
                   </span>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
                     {company.prerequisites.map((req, rIdx) => (
                       <div
                         key={rIdx}
-                        className="flex items-center gap-1.5 p-1.5 rounded-md bg-[#140822] text-rose-100 text-[10px] border border-purple-800/30"
+                        className="flex items-center gap-1.5 p-1.5 rounded-md bg-[#f7faf8] text-[#123835] text-[10px] border border-[#cbe1d0]"
                       >
-                        <CheckCircle2 className="w-3 h-3 text-pink-400 shrink-0" />
+                        <CheckCircle2 className="w-3 h-3 text-[[rgb(18,84,79)]] shrink-0" />
                         <span className="truncate">{req}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <div className="pt-2 border-t border-purple-900/30 text-[10px] text-rose-300/60 flex items-center justify-between">
+                <div className="pt-2 border-t border-[#cbe1d0]/60 text-[10px] text-[#2a4e46] flex items-center justify-between">
                   <span>Hiring Hubs: {company.location}</span>
-                  <span className="text-pink-300 font-bold">High Annual Velocity</span>
+                  <span className="text-[[rgb(18,84,79)]] font-bold">High Annual Velocity</span>
                 </div>
               </div>
             ))}

@@ -159,21 +159,21 @@ export default function StudentAssessmentPage() {
   return (
     <div className="max-w-3xl mx-auto space-y-6 py-6 px-4">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-purple-900/40 pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#a9caa6]/60 pb-4">
         <div>
-          <h1 className="text-3xl font-bold text-white">
+          <h1 className="text-3xl font-black text-[#123835]">
             Aptitude & Skills
           </h1>
-          <p className="text-sm text-rose-200/80 mt-1">
+          <p className="text-sm text-[rgb(18,84,79)]/75 mt-1 font-medium">
             15 questions and competency evaluation.
           </p>
         </div>
 
         <button
           onClick={openProfileModal}
-          className="text-pink-300 hover:text-white text-sm font-semibold underline flex items-center gap-1 self-start sm:self-auto"
+          className="text-[rgb(18,84,79)] hover:text-[#0b3834] text-sm font-semibold underline flex items-center gap-1 self-start sm:self-auto"
         >
-          <Sliders className="w-4 h-4" />
+          <Sliders className="w-4 h-4 text-[rgb(42,131,95)]" />
           <span>{profile.qualification} ({activeQuestionData.badge})</span>
         </button>
       </div>
@@ -185,15 +185,15 @@ export default function StudentAssessmentPage() {
           onClick={() => setCurrentStep(1)}
           className={`p-3.5 rounded-xl border text-left transition-all ${
             currentStep === 1
-              ? "bg-pink-950/50 border-pink-500 text-white font-bold"
-              : "bg-purple-950/20 border-purple-900/30 text-rose-300 font-medium"
+              ? "bg-white border-2 border-[rgb(18,84,79)] text-[#123835] font-bold shadow-sm"
+              : "bg-white/70 border border-[#cbe1d0] text-[rgb(18,84,79)] font-medium hover:bg-white"
           }`}
         >
           <div className="flex items-center gap-2">
-            <Brain className="w-4 h-4 text-pink-400" />
+            <Brain className="w-4 h-4 text-[rgb(42,131,95)]" />
             <span className="text-base">1. Aptitude Test</span>
           </div>
-          <span className="text-xs text-rose-200/70 block mt-1">
+          <span className="text-xs text-[rgb(18,84,79)]/75 block mt-1">
             {answeredCount} / {totalQuestions} answered
           </span>
         </button>
@@ -203,15 +203,15 @@ export default function StudentAssessmentPage() {
           onClick={() => setCurrentStep(2)}
           className={`p-3.5 rounded-xl border text-left transition-all ${
             currentStep === 2
-              ? "bg-pink-950/50 border-pink-500 text-white font-bold"
-              : "bg-purple-950/20 border-purple-900/30 text-rose-300 font-medium"
+              ? "bg-white border-2 border-[rgb(18,84,79)] text-[#123835] font-bold shadow-sm"
+              : "bg-white/70 border border-[#cbe1d0] text-[rgb(18,84,79)] font-medium hover:bg-white"
           }`}
         >
           <div className="flex items-center gap-2">
-            <Sliders className="w-4 h-4 text-peach-400" />
+            <Sliders className="w-4 h-4 text-[rgb(42,131,95)]" />
             <span className="text-base">2. Skills Matrix</span>
           </div>
-          <span className="text-xs text-rose-200/70 block mt-1">
+          <span className="text-xs text-[rgb(18,84,79)]/75 block mt-1">
             6 Dimensions
           </span>
         </button>

@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { usePathname } from "next/navigation";
 import { AuthProvider } from "@/lib/auth-context";
-import { ThemeProvider, useTheme } from "@/lib/theme-context";
+import { ThemeProvider } from "@/lib/theme-context";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -16,14 +16,10 @@ function AppLayoutInner({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const hideSidebar = pathname === "/" || pathname === "/login";
   const isLoginPage = pathname === "/login";
-  const { theme } = useTheme();
-  const isWhite = theme === "white";
 
   return (
     <div
-      className={`min-h-screen flex ${
-        isWhite ? "bg-[#fff8fa] text-purple-950" : "bg-[#0d0614] text-rose-50"
-      } antialiased selection:bg-pink-500 selection:text-white transition-colors duration-200`}
+      className="min-h-screen flex bg-[rgb(139,187,146)] text-[#123835] antialiased selection:bg-[rgb(18,84,79)] selection:text-white transition-colors duration-200"
     >
       {/* Modern Sidebar (only shown when not on landing page or login page) */}
       {!hideSidebar && (

@@ -284,7 +284,7 @@ export default function StudentDashboardPage() {
                   <span>Family Financial Parameters Confirmed: <strong>{metrics.affordabilityLabel}</strong></span>
                 </p>
                 <p className="text-[11px] text-rose-200/70">
-                  Annual Income: ₹{(parentParameters.parentAnnualIncome / 100000).toFixed(1)}L • Fees Payable: <strong>₹{parentParameters.feesCanBePaidPerYear.toLocaleString("en-IN")}/yr</strong> (Tuition: ₹{selectedCourse.annualFee.toLocaleString("en-IN")}/yr). Financial Stability ({metrics.financialStabilityScore}%) and Parent Alignment ({metrics.parentAlignmentScore}%) are now active!
+                  Annual Income: ₹{(Number(parentParameters.parentAnnualIncome || 1000000) / 100000).toFixed(1)}L • Fees Payable: <strong>₹{Number(parentParameters.feesCanBePaidPerYear || 400000).toLocaleString("en-IN")}/yr</strong> (Tuition: ₹{Number(selectedCourse?.annualFee || 350000).toLocaleString("en-IN")}/yr). Financial Stability ({metrics.financialStabilityScore}%) and Parent Alignment ({metrics.parentAlignmentScore}%) are now active!
                 </p>
               </div>
               <div className="flex items-center gap-2 shrink-0">
@@ -371,7 +371,7 @@ export default function StudentDashboardPage() {
             <div className="flex items-center justify-between">
               <span className="text-[10px] text-purple-300/80">
                 {step === "parent_approved"
-                  ? `Budget: ₹${parentParameters.annualBudget.toLocaleString("en-IN")}`
+                  ? `Budget: ₹${Number(parentParameters.annualBudget || parentParameters.feesCanBePaidPerYear || 400000).toLocaleString("en-IN")}`
                   : "Awaiting Parent Sliders"}
               </span>
               <span className="text-[9px] text-peach-300 font-semibold group-hover:underline">
@@ -519,8 +519,8 @@ export default function StudentDashboardPage() {
                   </div>
                   <div className="p-3 rounded-xl bg-[#140822] border border-peach-900/40">
                     <span className="text-[10px] text-rose-300/70 block uppercase font-semibold">Fees Payable by Parent</span>
-                    <strong className="text-sm font-black text-peach-300">₹{parentParameters.feesCanBePaidPerYear.toLocaleString("en-IN")} / yr</strong>
-                    <span className="text-[10px] text-peach-300/70 block font-mono">Payment × 4 Yrs: ₹{parentParameters.total4YearPayable.toLocaleString("en-IN")}</span>
+                    <strong className="text-sm font-black text-peach-300">₹{Number(parentParameters.feesCanBePaidPerYear || 400000).toLocaleString("en-IN")} / yr</strong>
+                    <span className="text-[10px] text-peach-300/70 block font-mono">Payment × 4 Yrs: ₹{Number(parentParameters.total4YearPayable || 1600000).toLocaleString("en-IN")}</span>
                   </div>
                   <div className="p-3 rounded-xl bg-[#140822] border border-peach-900/40">
                     <span className="text-[10px] text-rose-300/70 block uppercase font-semibold">Affordability Status</span>
@@ -539,7 +539,7 @@ export default function StudentDashboardPage() {
                   </div>
                 </div>
                 <p className="text-xs text-rose-200/80">
-                  {metrics.affordabilityDescription} Parent Income: <strong>₹{(parentParameters.parentAnnualIncome / 100000).toFixed(1)}L/yr</strong>. Confirmed on {parentParameters.approvedAt || "recent update"}.
+                  {metrics.affordabilityDescription} Parent Income: <strong>₹{(Number(parentParameters.parentAnnualIncome || 1000000) / 100000).toFixed(1)}L/yr</strong>. Confirmed on {parentParameters.approvedAt || "recent update"}.
                 </p>
               </div>
             )}

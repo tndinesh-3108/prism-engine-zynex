@@ -124,6 +124,50 @@ const DEFAULT_PARENT_PARAMS: ParentParametersInfo = {
   affordabilityLabel: "OK (Safe & Affordable)",
 };
 
+export function normalizeParentParams(params?: Partial<ParentParametersInfo> | null): ParentParametersInfo {
+  if (!params) return DEFAULT_PARENT_PARAMS;
+  const feesCanBePaid = Number(
+    params.feesCanBePaidPerYear ??
+    params.annualBudget ??
+    DEFAULT_PARENT_PARAMS.feesCanBePaidPerYear
+  );
+  const income = Number(
+    params.parentAnnualIncome ??
+    DEFAULT_PARENT_PARAMS.parentAnnualIncome
+  );
+  const total4Year = Number(
+    params.total4YearPayable ??
+    params.degreeCeiling ??
+    feesCanBePaid * 4
+  );
+
+  return {
+    ...DEFAULT_PARENT_PARAMS,
+    ...params,
+    parentAnnualIncome: income,
+    feesCanBePaidPerYear: feesCanBePaid,
+    total4YearPayable: total4Year,
+    annualBudget: feesCanBePaid,
+    degreeCeiling: total4Year,
+  };
+}
+
+export function normalizeCourse(course?: Partial<SelectedCourseInfo> | null): SelectedCourseInfo {
+  if (!course) return DEFAULT_COURSE;
+  const annual = Number(course.annualFee ?? DEFAULT_COURSE.annualFee);
+  const total4Year = Number(course.total4YearFee ?? (annual * 4));
+  return {
+    ...DEFAULT_COURSE,
+    ...course,
+    annualFee: annual,
+    total4YearFee: total4Year,
+    title: course.title || DEFAULT_COURSE.title,
+    expectedPackage: course.expectedPackage || DEFAULT_COURSE.expectedPackage,
+    degreeType: course.degreeType || DEFAULT_COURSE.degreeType,
+    topInstitutes: course.topInstitutes || DEFAULT_COURSE.topInstitutes,
+  };
+}
+
 const CAREER_TIERS_DATA: {
   safe: CareerTierItem[];
   match: CareerTierItem[];
@@ -242,13 +286,16 @@ const CAREER_TIERS_DATA: {
 const STORAGE_KEY = "prism_flow_full_v2";
 
 function computeMetrics(course: SelectedCourseInfo, parent: ParentParametersInfo): CalculatedFinancialMetrics {
-  const studentAnnualFee = course.annualFee || 350000;
-  const studentTotal4YearFee = studentAnnualFee * 4;
-  const parentAnnualIncome = parent.parentAnnualIncome || 1000000;
-  const feesCanBePaidPerYear = parent.feesCanBePaidPerYear || parent.annualBudget || 400000;
-  const total4YearPayable = feesCanBePaidPerYear * 4;
+  const normCourse = normalizeCourse(course);
+  const normParent = normalizeParentParams(parent);
 
-  const coveragePercentage = Math.min(100, Math.round((total4YearPayable / studentTotal4YearFee) * 100));
+  const studentAnnualFee = normCourse.annualFee;
+  const studentTotal4YearFee = normCourse.total4YearFee;
+  const parentAnnualIncome = normParent.parentAnnualIncome;
+  const feesCanBePaidPerYear = normParent.feesCanBePaidPerYear;
+  const total4YearPayable = normParent.total4YearPayable;
+
+  const coveragePercentage = Math.min(100, Math.round((total4YearPayable / Math.max(studentTotal4YearFee, 1)) * 100));
   const loanNeeded = Math.max(0, studentTotal4YearFee - total4YearPayable);
   const budgetSurplus = feesCanBePaidPerYear - studentAnnualFee;
 
@@ -333,8 +380,8 @@ export function StudentParentFlowProvider({ children }: { children: React.ReactN
         if (parsed.step) setStep(parsed.step);
         if (parsed.syncCode) setSyncCode(parsed.syncCode);
         if (parsed.isFamilySynced !== undefined) setIsFamilySynced(parsed.isFamilySynced);
-        if (parsed.selectedCourse) setSelectedCourse(parsed.selectedCourse);
-        if (parsed.parentParameters) setParentParameters(parsed.parentParameters);
+        if (parsed.selectedCourse) setSelectedCourse(normalizeCourse(parsed.selectedCourse));
+        if (parsed.parentParameters) setParentParameters(normalizeParentParams(parsed.parentParameters));
       }
     } catch (e) {
       console.warn("Could not load flow state from localStorage", e);
@@ -356,8 +403,8 @@ export function StudentParentFlowProvider({ children }: { children: React.ReactN
           step: newStep,
           syncCode: newSyncCode,
           isFamilySynced: newIsSynced,
-          selectedCourse: newCourse,
-          parentParameters: newParent,
+          selectedCourse: normalizeCourse(newCourse),
+          parentParameters: normalizeParentParams(newParent),
         })
       );
     } catch (e) {
@@ -374,8 +421,8 @@ export function StudentParentFlowProvider({ children }: { children: React.ReactN
           if (parsed.step) setStep(parsed.step);
           if (parsed.syncCode) setSyncCode(parsed.syncCode);
           if (parsed.isFamilySynced !== undefined) setIsFamilySynced(parsed.isFamilySynced);
-          if (parsed.selectedCourse) setSelectedCourse(parsed.selectedCourse);
-          if (parsed.parentParameters) setParentParameters(parsed.parentParameters);
+          if (parsed.selectedCourse) setSelectedCourse(normalizeCourse(parsed.selectedCourse));
+          if (parsed.parentParameters) setParentParameters(normalizeParentParams(parsed.parentParameters));
         } catch {}
       }
     };

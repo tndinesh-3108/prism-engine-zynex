@@ -398,7 +398,7 @@ export default function HighPackageCoursesAndCertificates() {
                     Top Institutes: {course.topInstitutes.slice(0, 2).join(", ")}
                   </div>
 
-                  {selectedCourse.title.toLowerCase().includes(course.title.slice(0, 15).toLowerCase()) ? (
+                  {(selectedCourse?.title || "").toLowerCase().includes(course.title.slice(0, 15).toLowerCase()) ? (
                     <div className="flex items-center gap-2">
                       <span className="text-[10px] font-bold text-pink-300 flex items-center gap-1 bg-pink-950/60 px-2 py-0.5 rounded border border-pink-700/40">
                         <CheckCircle2 className="w-3 h-3 text-pink-400" />

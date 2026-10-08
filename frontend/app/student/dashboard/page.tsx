@@ -195,7 +195,7 @@ export default function StudentDashboardPage() {
                 <span className="text-rose-200/90">{metrics.affordabilityDescription}</span>
               </div>
               <span className="text-[11px] text-rose-300/70 font-mono self-start sm:self-auto">
-                Income: ₹{(parentParameters.parentAnnualIncome / 100000).toFixed(1)}L/yr
+                Income: ₹{(Number(parentParameters.parentAnnualIncome || 1000000) / 100000).toFixed(1)}L/yr
               </span>
             </div>
 
@@ -228,10 +228,10 @@ export default function StudentDashboardPage() {
                   <DollarSign className="w-3.5 h-3.5 text-peach-400" />
                 </div>
                 <p className="text-xl font-extrabold text-white font-mono">
-                  ₹{(parentParameters.feesCanBePaidPerYear / 100000).toFixed(1)}L
+                  ₹{(Number(parentParameters.feesCanBePaidPerYear || 400000) / 100000).toFixed(1)}L
                 </p>
                 <p className="text-[10px] text-peach-300/80">
-                  Payment × 4 Yrs: ₹{(parentParameters.total4YearPayable / 100000).toFixed(1)}L
+                  Payment × 4 Yrs: ₹{(Number(parentParameters.total4YearPayable || 1600000) / 100000).toFixed(1)}L
                 </p>
               </div>
 

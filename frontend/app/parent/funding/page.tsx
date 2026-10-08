@@ -76,7 +76,7 @@ export default function ParentFundingPage() {
   const { parentParameters, selectedCourse } = useStudentParentFlow();
   const [selectedFilter, setSelectedFilter] = useState<"All" | "Merit" | "Corporate" | "Government">("All");
 
-  const degreeCost = selectedCourse.total4YearFee || 1800000;
+  const degreeCost = selectedCourse?.total4YearFee || 1400000;
   const startingSalaryYear1 = 3200000; // ₹32L average starting package
   const estimated5YearEarnings = 3200000 + 3600000 + 4200000 + 4900000 + 5800000; // 5-Yr Cumulative: ~₹2.17 Cr
   const roiMultiple = (estimated5YearEarnings / degreeCost).toFixed(1);

@@ -304,7 +304,7 @@ export default function ParentDashboardPage() {
                 Financial Parameters Approved & Synced with Student Portal
               </h4>
               <p className="text-[11px] text-rose-200/70">
-                Annual Budget: ₹{parentParameters.annualBudget.toLocaleString("en-IN")}/yr • Ceiling: ₹{parentParameters.degreeCeiling.toLocaleString("en-IN")} • Status: 100% Feasible.
+                Annual Income: ₹{Number(parentParameters.parentAnnualIncome || 1000000).toLocaleString("en-IN")}/yr • Fees Payable: ₹{Number(parentParameters.feesCanBePaidPerYear || parentParameters.annualBudget || 400000).toLocaleString("en-IN")}/yr • 4-Yr Total: ₹{Number(parentParameters.total4YearPayable || 1600000).toLocaleString("en-IN")}.
               </p>
             </div>
           </div>

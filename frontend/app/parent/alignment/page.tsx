@@ -72,7 +72,7 @@ export default function ParentAlignmentPage() {
             {
               dimension: "Financial Risk & Debt",
               student_value: "Growth Focused (₹32L+ Packages)",
-              parent_value: `Loan Tolerance: ${parentParameters.loanTolerance}`,
+              parent_value: `Loan Tolerance: ${parentParameters.loanTolerance || "Low"}`,
               alignment_score: 85,
               weight: "15%",
               status: "Feasible",

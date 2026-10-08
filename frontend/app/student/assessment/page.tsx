@@ -3,14 +3,12 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { 
-  Compass, 
   ArrowRight, 
   ArrowLeft, 
   Sparkles, 
   Brain, 
   Sliders, 
   Check,
-  GraduationCap,
   RotateCcw
 } from "lucide-react";
 import { createStudent, submitAssessment } from "@/lib/api";
@@ -34,31 +32,27 @@ export default function StudentAssessmentPage() {
   const getActiveQuestionBank = () => {
     if (profile.qualification === "12th") {
       return {
-        title: "12th Standard Aptitude Battery",
-        subtitle: "Kinematics, algebra, geometry, and logical reasoning.",
+        title: "12th Standard Aptitude",
         badge: "12th Standard",
         questions: TWELFTH_APTITUDE_QUESTIONS,
       };
     }
     if (profile.qualification === "UG pursuing" && (profile.ugPursuingYear === "I" || profile.ugPursuingYear === "II")) {
       return {
-        title: "Foundational MNC Aptitude",
-        subtitle: "Syllogisms, relations, patterns, and core logic.",
+        title: "Junior UG Aptitude",
         badge: "Junior UG",
         questions: UG_JUNIOR_APTITUDE_QUESTIONS,
       };
     }
     if (profile.qualification === "UG" || (profile.qualification === "UG pursuing" && (profile.ugPursuingYear === "III" || profile.ugPursuingYear === "IV"))) {
       return {
-        title: "MNC Placement Battery",
-        subtitle: "Quantitative speed, logic, and algorithm analysis.",
+        title: "Placement Aptitude",
         badge: "UG Placement",
         questions: UG_SENIOR_APTITUDE_QUESTIONS,
       };
     }
     return {
-      title: "Postgraduate Technical Battery",
-      subtitle: `Advanced computing, systems, and reasoning for ${profile.pgCourse || "specialization"}.`,
+      title: "PG Technical Aptitude",
       badge: "PG Track",
       questions: PG_TECHNICAL_QUESTIONS,
     };
@@ -163,171 +157,127 @@ export default function StudentAssessmentPage() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto space-y-6 py-4 px-4 sm:px-6">
+    <div className="max-w-3xl mx-auto space-y-6 py-6 px-4">
       {/* Header */}
-      <div className="space-y-1">
-        <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-pink-950/70 text-pink-300 text-xs font-semibold border border-pink-700/40">
-          <Compass className="w-3 h-3 text-pink-400" />
-          <span>Stage 2 • Aptitude Discovery</span>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-purple-900/40 pb-4">
+        <div>
+          <h1 className="text-3xl font-bold text-white">
+            Aptitude & Skills
+          </h1>
+          <p className="text-sm text-rose-200/80 mt-1">
+            15 questions and competency evaluation.
+          </p>
         </div>
-        <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-          Aptitude & Skills Assessment
-        </h1>
-        <p className="text-xs text-rose-200/70">
-          Answer the 15 questions and evaluate your core competencies.
-        </p>
-      </div>
 
-      {/* Qualification Recall Bar */}
-      <div className="glass-card p-3 rounded-xl border border-pink-500/20 flex items-center justify-between gap-3 text-xs">
-        <div className="flex items-center gap-2">
-          <GraduationCap className="w-3.5 h-3.5 text-pink-400 shrink-0" />
-          <span className="text-rose-200/80">
-            {profile.qualification === "12th"
-              ? `12th Grade (${profile.twelfthGroup || "CS/Maths"})`
-              : profile.qualification === "UG pursuing"
-              ? `UG Year ${profile.ugPursuingYear}`
-              : profile.qualification === "UG"
-              ? `UG Graduate (${profile.ugDegree || "B.Tech"})`
-              : `Postgraduate`}
-            {" • "}
-            <span className="text-pink-300 font-semibold">{activeQuestionData.badge}</span>
-          </span>
-        </div>
         <button
           onClick={openProfileModal}
-          className="text-pink-400 hover:text-pink-300 font-medium underline underline-offset-2 flex items-center gap-1 shrink-0"
+          className="text-pink-300 hover:text-white text-sm font-semibold underline flex items-center gap-1 self-start sm:self-auto"
         >
-          <Sliders className="w-3 h-3" />
-          <span>Change</span>
+          <Sliders className="w-4 h-4" />
+          <span>{profile.qualification} ({activeQuestionData.badge})</span>
         </button>
       </div>
 
-      {/* 2-Step Tabs */}
+      {/* Tabs */}
       <div className="grid grid-cols-2 gap-3">
-        {[
-          { 
-            num: 1 as const, 
-            label: "1. Aptitude Test", 
-            sub: `${answeredCount}/${totalQuestions} answered`, 
-            icon: Brain 
-          },
-          { 
-            num: 2 as const, 
-            label: "2. Skills Matrix", 
-            sub: "6 Dimensions", 
-            icon: Sliders 
-          },
-        ].map((s) => {
-          const Icon = s.icon;
-          const isActive = currentStep === s.num;
-          const isPassed = currentStep > s.num;
-          return (
-            <button
-              key={s.num}
-              type="button"
-              onClick={() => setCurrentStep(s.num)}
-              className={`p-3 rounded-xl border text-left transition-all ${
-                isActive
-                  ? "bg-pink-950/40 border-pink-500/80 shadow-sm"
-                  : isPassed
-                  ? "bg-purple-950/30 border-purple-800/40 text-rose-300"
-                  : "bg-purple-950/15 border-purple-900/20 text-rose-400/50"
-              }`}
-            >
-              <div className="flex items-center gap-2.5">
-                <div className={`p-1.5 rounded-lg shrink-0 ${
-                  isActive ? "bg-pink-500/20 text-pink-300" : isPassed ? "bg-emerald-500/20 text-emerald-300" : "bg-purple-900/30 text-purple-400/50"
-                }`}>
-                  <Icon className="w-3.5 h-3.5" />
-                </div>
-                <div>
-                  <span className="text-xs sm:text-sm font-bold text-white block">{s.label}</span>
-                  <p className="text-[10px] text-rose-300/60">{s.sub}</p>
-                </div>
-              </div>
-            </button>
-          );
-        })}
+        <button
+          type="button"
+          onClick={() => setCurrentStep(1)}
+          className={`p-3.5 rounded-xl border text-left transition-all ${
+            currentStep === 1
+              ? "bg-pink-950/50 border-pink-500 text-white font-bold"
+              : "bg-purple-950/20 border-purple-900/30 text-rose-300 font-medium"
+          }`}
+        >
+          <div className="flex items-center gap-2">
+            <Brain className="w-4 h-4 text-pink-400" />
+            <span className="text-base">1. Aptitude Test</span>
+          </div>
+          <span className="text-xs text-rose-200/70 block mt-1">
+            {answeredCount} / {totalQuestions} answered
+          </span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setCurrentStep(2)}
+          className={`p-3.5 rounded-xl border text-left transition-all ${
+            currentStep === 2
+              ? "bg-pink-950/50 border-pink-500 text-white font-bold"
+              : "bg-purple-950/20 border-purple-900/30 text-rose-300 font-medium"
+          }`}
+        >
+          <div className="flex items-center gap-2">
+            <Sliders className="w-4 h-4 text-peach-400" />
+            <span className="text-base">2. Skills Matrix</span>
+          </div>
+          <span className="text-xs text-rose-200/70 block mt-1">
+            6 Dimensions
+          </span>
+        </button>
       </div>
 
       {/* STEP 1: 15-QUESTION APTITUDE TEST */}
       {currentStep === 1 && (
-        <div className="glass-card p-5 sm:p-6 rounded-2xl border border-pink-500/20 space-y-5">
-          {/* Tracker */}
-          <div className="flex items-center justify-between gap-3 text-xs bg-purple-950/30 p-2.5 rounded-xl border border-purple-800/25">
-            <div className="flex items-center gap-2.5">
-              <div className="w-24 sm:w-32 h-1.5 bg-purple-900/60 rounded-full overflow-hidden">
+        <div className="glass-card p-6 rounded-2xl border border-pink-500/20 space-y-6">
+          {/* Progress Tracker */}
+          <div className="flex items-center justify-between text-sm bg-purple-950/30 p-3 rounded-xl border border-purple-900/30">
+            <div className="flex items-center gap-3">
+              <div className="w-28 sm:w-36 h-2 bg-purple-900/60 rounded-full overflow-hidden">
                 <div 
-                  className="h-full bg-gradient-to-r from-pink-500 to-rose-400 rounded-full transition-all duration-300" 
+                  className="h-full bg-pink-500 rounded-full transition-all" 
                   style={{ width: `${progressPercent}%` }} 
                 />
               </div>
-              <span className="font-semibold text-white">
+              <span className="font-bold text-white">
                 {answeredCount} / {totalQuestions} Answered
               </span>
             </div>
 
-            <div className="flex items-center gap-2">
-              <span className="text-[11px] text-rose-300/70">
-                {totalQuestions - answeredCount > 0 ? `${totalQuestions - answeredCount} unsolved` : "All solved"}
-              </span>
-              {answeredCount > 0 && (
-                <button
-                  type="button"
-                  onClick={handleClearAllAnswers}
-                  className="text-[11px] text-rose-300 hover:text-white flex items-center gap-1 underline underline-offset-2 ml-1"
-                >
-                  <RotateCcw className="w-2.5 h-2.5" />
-                  <span>Reset</span>
-                </button>
-              )}
-            </div>
+            {answeredCount > 0 && (
+              <button
+                type="button"
+                onClick={handleClearAllAnswers}
+                className="text-xs text-rose-300 hover:text-white underline flex items-center gap-1"
+              >
+                <RotateCcw className="w-3.5 h-3.5" />
+                <span>Reset</span>
+              </button>
+            )}
           </div>
 
-          {/* 15 Questions */}
-          <div className="space-y-4">
+          {/* Questions */}
+          <div className="space-y-5">
             {activeQuestionData.questions.map((q, idx) => {
               const isAnswered = aptitudeAnswers[q.id] !== undefined;
               return (
                 <div
                   key={q.id}
-                  className={`p-4 rounded-xl transition-all border ${
+                  className={`p-4 rounded-xl border transition-all ${
                     isAnswered
-                      ? "bg-purple-950/30 border-pink-500/25"
+                      ? "bg-purple-950/30 border-pink-500/30"
                       : "bg-purple-950/15 border-purple-900/20"
                   }`}
                 >
-                  <div className="flex items-start justify-between gap-2.5 mb-2.5">
-                    <div className="flex items-start gap-2">
-                      <span className={`w-5 h-5 rounded font-bold text-[11px] flex items-center justify-center shrink-0 ${
-                        isAnswered ? "bg-pink-600 text-white" : "bg-purple-900/40 text-purple-300 border border-purple-800/30"
+                  <div className="flex items-start justify-between gap-3 mb-3">
+                    <div className="flex items-start gap-2.5">
+                      <span className={`w-6 h-6 rounded-md font-bold text-xs flex items-center justify-center shrink-0 ${
+                        isAnswered ? "bg-pink-600 text-white" : "bg-purple-900/40 text-purple-200 border border-purple-700/40"
                       }`}>
                         {idx + 1}
                       </span>
-                      <h3 className="text-xs sm:text-sm font-semibold text-white leading-snug">
+                      <h3 className="text-sm sm:text-base font-semibold text-white leading-snug">
                         {q.question}
                       </h3>
                     </div>
 
-                    <div className="flex items-center gap-1 shrink-0 text-[10px]">
-                      <span className="px-1.5 py-0.5 rounded bg-purple-900/50 text-purple-300 border border-purple-800/30">
-                        {q.domain}
-                      </span>
-                      {isAnswered ? (
-                        <span className="px-1.5 py-0.5 rounded bg-pink-950 text-pink-300 border border-pink-700/40 flex items-center gap-0.5">
-                          <Check className="w-2.5 h-2.5" />
-                        </span>
-                      ) : (
-                        <span className="px-1.5 py-0.5 rounded bg-purple-950/50 text-purple-300/50">
-                          Unsolved
-                        </span>
-                      )}
-                    </div>
+                    <span className="text-xs font-semibold px-2 py-0.5 rounded bg-purple-900/50 text-purple-200 shrink-0">
+                      {q.domain}
+                    </span>
                   </div>
 
                   {/* Options */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-0.5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     {q.options.map((opt, oIdx) => {
                       const isSelected = aptitudeAnswers[q.id] === oIdx;
                       return (
@@ -335,19 +285,19 @@ export default function StudentAssessmentPage() {
                           key={oIdx}
                           type="button"
                           onClick={() => handleOptionSelect(q.id, oIdx)}
-                          className={`p-2.5 rounded-lg text-xs text-left transition-all border flex items-center justify-between group ${
+                          className={`p-3 rounded-lg text-sm text-left transition-all border flex items-center justify-between ${
                             isSelected
-                              ? "bg-gradient-to-r from-pink-600 to-rose-600 text-white border-pink-400 shadow-sm"
-                              : "bg-purple-950/30 text-rose-100 border-purple-900/20 hover:bg-purple-900/30 hover:border-pink-500/30"
+                              ? "bg-pink-600 text-white border-pink-400 font-semibold shadow"
+                              : "bg-purple-950/30 text-rose-100 border-purple-900/30 hover:bg-purple-900/30"
                           }`}
                         >
-                          <div className="flex items-center gap-2 min-w-0">
-                            <span className={`w-3.5 h-3.5 rounded-full flex items-center justify-center shrink-0 ${
-                              isSelected ? "bg-white text-pink-600" : "border border-purple-400/40 group-hover:border-pink-400/60"
+                          <div className="flex items-center gap-2.5 min-w-0">
+                            <span className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 ${
+                              isSelected ? "bg-white text-pink-600" : "border-2 border-purple-400/40"
                             }`}>
-                              {isSelected && <Check className="w-2 h-2 stroke-[3]" />}
+                              {isSelected && <Check className="w-2.5 h-2.5 stroke-[3]" />}
                             </span>
-                            <span className={`font-mono font-bold text-[11px] shrink-0 ${isSelected ? "text-white" : "text-pink-300"}`}>
+                            <span className="font-bold text-xs shrink-0">
                               {String.fromCharCode(65 + oIdx)}.
                             </span>
                             <span className="truncate">{opt}</span>
@@ -361,19 +311,15 @@ export default function StudentAssessmentPage() {
             })}
           </div>
 
-          {/* Stepper Footer */}
-          <div className="flex items-center justify-between pt-3 border-t border-purple-900/30">
-            <span className="text-xs text-rose-300/70">
-              {answeredCount === totalQuestions ? "All questions answered" : `${answeredCount} of ${totalQuestions} answered`}
-            </span>
-
+          {/* Navigation */}
+          <div className="flex justify-end pt-2">
             <button
               type="button"
               onClick={() => setCurrentStep(2)}
-              className="px-5 py-2 rounded-xl bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white text-xs font-semibold flex items-center gap-1.5 transition-all shadow-md shadow-pink-600/25"
+              className="px-6 py-2.5 rounded-xl bg-pink-600 hover:bg-pink-500 text-white text-sm font-bold flex items-center gap-2 shadow"
             >
-              <span>Proceed to Skills Matrix</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+              <span>Next: Skills Matrix</span>
+              <ArrowRight className="w-4 h-4" />
             </button>
           </div>
         </div>
@@ -381,20 +327,20 @@ export default function StudentAssessmentPage() {
 
       {/* STEP 2: SKILLS MATRIX */}
       {currentStep === 2 && (
-        <div className="glass-card p-5 sm:p-6 rounded-2xl border border-purple-500/20 space-y-5">
-          <div className="space-y-1">
-            <h2 className="text-lg font-bold text-white">Skills Matrix</h2>
-            <p className="text-xs text-rose-200/70">
-              Rate your competency level across the 6 core PRISM dimensions.
+        <div className="glass-card p-6 rounded-2xl border border-purple-500/20 space-y-6">
+          <div>
+            <h2 className="text-xl font-bold text-white">Skills Matrix</h2>
+            <p className="text-sm text-rose-200/80">
+              Rate your skill levels (40–100).
             </p>
           </div>
 
-          <div className="space-y-3 pt-1">
+          <div className="space-y-4">
             {Object.entries(skills).map(([skill, val]) => (
-              <div key={skill} className="space-y-1 p-3 rounded-xl bg-purple-950/30 border border-purple-900/25">
-                <div className="flex justify-between items-center text-xs">
-                  <span className="font-semibold text-white">{skill}</span>
-                  <span className="font-mono font-bold text-pink-400">{val}/100</span>
+              <div key={skill} className="space-y-1.5 p-3 rounded-xl bg-purple-950/30 border border-purple-900/30">
+                <div className="flex justify-between items-center text-sm font-semibold">
+                  <span className="text-white">{skill}</span>
+                  <span className="text-pink-400 font-bold">{val}/100</span>
                 </div>
                 <input
                   type="range"
@@ -402,38 +348,35 @@ export default function StudentAssessmentPage() {
                   max="100"
                   value={val}
                   onChange={(e) => setSkills({ ...skills, [skill]: Number(e.target.value) })}
-                  className="w-full accent-pink-500 h-1.5 bg-purple-950 rounded-lg cursor-pointer"
+                  className="w-full accent-pink-500 h-2 bg-purple-950 rounded-lg cursor-pointer"
                 />
               </div>
             ))}
           </div>
 
-          <div className="flex justify-between items-center pt-3 border-t border-purple-900/30">
+          <div className="flex items-center justify-between pt-2">
             <button
               type="button"
               onClick={() => setCurrentStep(1)}
-              className="px-3.5 py-2 rounded-xl bg-purple-950/50 text-purple-200 hover:text-white border border-purple-800/30 text-xs font-medium flex items-center gap-1 transition-colors"
+              className="px-4 py-2 rounded-xl bg-purple-950/50 hover:bg-purple-900/50 text-white text-sm font-semibold flex items-center gap-1.5"
             >
-              <ArrowLeft className="w-3.5 h-3.5" />
-              <span>Back to Aptitude Test</span>
+              <ArrowLeft className="w-4 h-4" />
+              <span>Back</span>
             </button>
 
             <button
               type="button"
               onClick={handleSubmitAll}
               disabled={isSubmitting}
-              className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white text-xs font-bold shadow-lg shadow-pink-600/25 flex items-center gap-1.5 transition-all disabled:opacity-50"
+              className="px-6 py-2.5 rounded-xl bg-pink-600 hover:bg-pink-500 text-white text-sm font-bold shadow flex items-center gap-2 disabled:opacity-50"
             >
               {isSubmitting ? (
-                <>
-                  <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  <span>Synthesizing...</span>
-                </>
+                <span>Submitting...</span>
               ) : (
                 <>
-                  <Sparkles className="w-3.5 h-3.5 text-peach-300" />
-                  <span>Submit & Synthesize Career DNA</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <Sparkles className="w-4 h-4 text-peach-200" />
+                  <span>Submit Assessment</span>
+                  <ArrowRight className="w-4 h-4" />
                 </>
               )}
             </button>

@@ -447,59 +447,40 @@ export default function StudentDashboardPage() {
           {/* 1. MATCH TIERS */}
           {(activeTierTab === "all" || activeTierTab === "match") && (
             <div className="space-y-4">
-              <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-pink-400">
+              <div className="flex items-center gap-2 text-sm font-bold text-pink-400">
                 <Sparkles className="w-4 h-4" />
-                <span>🎯 Match Tier (Top Synergy)</span>
+                <span>Match Tier</span>
               </div>
               {careerTiers.match.map((item) => (
                 <div
                   key={item.id}
-                  className="glass-card p-5 rounded-2xl border-2 border-pink-500/50 hover:border-pink-400 transition-all space-y-3 relative overflow-hidden group shadow-lg shadow-pink-950/40"
+                  className="glass-card p-5 rounded-2xl border-2 border-pink-500/50 hover:border-pink-400 transition-all space-y-3 relative group shadow-lg"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-pink-950 text-pink-300 border border-pink-600/50">
+                    <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-pink-950 text-pink-300 border border-pink-600/50">
                       {item.tagline}
                     </span>
-                    <span className="text-xs font-black text-pink-400 font-mono">
-                      {item.matchScore}% Match
+                    <span className="text-sm font-bold text-pink-400 font-mono">
+                      {item.matchScore}% Fit
                     </span>
                   </div>
 
-                  {/* Automation Risk & Sector Velocity Badges */}
-                  <div className="flex items-center gap-1.5 flex-wrap pt-0.5">
-                    <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold border transition-colors ${
-                      item.automationRiskIndex <= 0.12
-                        ? "bg-pink-950/80 text-pink-300 border-pink-600/50"
-                        : item.automationRiskIndex <= 0.22
-                        ? "bg-purple-950/80 text-purple-300 border-purple-600/50"
-                        : "bg-peach-950/80 text-peach-300 border-peach-600/50"
-                    }`}>
-                      <ShieldAlert className="w-3 h-3 text-pink-400" />
-                      <span>{Math.round(item.automationRiskIndex * 100)}% Auto Risk {item.automationRiskIndex <= 0.12 ? "(Resilient)" : ""}</span>
-                    </span>
-
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-pink-950/80 text-pink-300 border border-pink-600/50">
-                      <Zap className="w-3 h-3 text-pink-400" />
-                      <span>+{item.sectorVelocity10yr}% 10-Yr Velocity</span>
-                    </span>
-                  </div>
-
-                  <h3 className="text-base font-extrabold text-white group-hover:text-pink-300 transition-colors">
+                  <h3 className="text-lg font-bold text-white group-hover:text-pink-300 transition-colors">
                     {item.name}
                   </h3>
 
-                  <p className="text-[11px] text-rose-200/80 leading-relaxed">
+                  <p className="text-xs text-rose-200/80 leading-relaxed">
                     {item.description}
                   </p>
 
-                  <div className="pt-2 border-t border-purple-900/40 grid grid-cols-2 gap-2 text-[11px]">
+                  <div className="pt-2 border-t border-purple-900/40 grid grid-cols-2 gap-2 text-xs">
                     <div>
-                      <span className="text-rose-300/60 block text-[10px]">Expected CTC</span>
-                      <span className="font-extrabold text-white font-mono">{item.expectedCTC}</span>
+                      <span className="text-rose-300/70 block">Expected CTC</span>
+                      <span className="font-bold text-white font-mono text-sm">{item.expectedCTC}</span>
                     </div>
                     <div>
-                      <span className="text-rose-300/60 block text-[10px]">Annual Fee</span>
-                      <span className="font-extrabold text-white font-mono">₹{(item.annualCost / 100000).toFixed(1)}L / yr</span>
+                      <span className="text-rose-300/70 block">Annual Fee</span>
+                      <span className="font-bold text-white font-mono text-sm">₹{(item.annualCost / 100000).toFixed(1)}L / yr</span>
                     </div>
                   </div>
 
@@ -507,7 +488,7 @@ export default function StudentDashboardPage() {
                     href={`/student/roadmap`}
                     className="w-full mt-2 py-2 px-3 rounded-xl bg-pink-600/30 hover:bg-pink-600 text-pink-200 hover:text-white text-xs font-bold flex items-center justify-center gap-1.5 border border-pink-500/40 transition-all"
                   >
-                    <span>View 5-Year Action Roadmap</span>
+                    <span>Roadmap</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
@@ -518,59 +499,40 @@ export default function StudentDashboardPage() {
           {/* 2. SAFE TIERS */}
           {(activeTierTab === "all" || activeTierTab === "safe") && (
             <div className="space-y-4">
-              <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-peach-400">
-                <ShieldCheck className="w-4 h-4 text-peach-400" />
-                <span>🛡️ Safe Tier (100% Feasible)</span>
+              <div className="flex items-center gap-2 text-sm font-bold text-peach-400">
+                <ShieldCheck className="w-4 h-4" />
+                <span>Safe Tier</span>
               </div>
               {careerTiers.safe.map((item) => (
                 <div
                   key={item.id}
-                  className="glass-card p-5 rounded-2xl border-2 border-peach-500/50 hover:border-peach-400 transition-all space-y-3 relative overflow-hidden group shadow-lg shadow-peach-950/30"
+                  className="glass-card p-5 rounded-2xl border-2 border-peach-500/50 hover:border-peach-400 transition-all space-y-3 relative group shadow-lg"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-peach-950 text-peach-300 border border-peach-600/50">
+                    <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-peach-950 text-peach-300 border border-peach-600/50">
                       {item.tagline}
                     </span>
-                    <span className="text-xs font-black text-peach-400 font-mono">
-                      {item.matchScore}% Match
+                    <span className="text-sm font-bold text-peach-400 font-mono">
+                      {item.matchScore}% Fit
                     </span>
                   </div>
 
-                  {/* Automation Risk & Sector Velocity Badges */}
-                  <div className="flex items-center gap-1.5 flex-wrap pt-0.5">
-                    <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold border transition-colors ${
-                      item.automationRiskIndex <= 0.12
-                        ? "bg-peach-950/80 text-peach-300 border-peach-600/50"
-                        : item.automationRiskIndex <= 0.22
-                        ? "bg-purple-950/80 text-purple-300 border-purple-600/50"
-                        : "bg-rose-950/80 text-rose-300 border-rose-600/50"
-                    }`}>
-                      <ShieldAlert className="w-3 h-3 text-peach-400" />
-                      <span>{Math.round(item.automationRiskIndex * 100)}% Auto Risk</span>
-                    </span>
-
-                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-peach-950/80 text-peach-300 border border-peach-600/50">
-                      <Zap className="w-3 h-3 text-peach-400" />
-                      <span>+{item.sectorVelocity10yr}% 10-Yr Velocity</span>
-                    </span>
-                  </div>
-
-                  <h3 className="text-base font-extrabold text-white group-hover:text-peach-300 transition-colors">
+                  <h3 className="text-lg font-bold text-white group-hover:text-peach-300 transition-colors">
                     {item.name}
                   </h3>
 
-                  <p className="text-[11px] text-rose-200/80 leading-relaxed">
+                  <p className="text-xs text-rose-200/80 leading-relaxed">
                     {item.description}
                   </p>
 
-                  <div className="pt-2 border-t border-purple-900/40 grid grid-cols-2 gap-2 text-[11px]">
+                  <div className="pt-2 border-t border-purple-900/40 grid grid-cols-2 gap-2 text-xs">
                     <div>
-                      <span className="text-rose-300/60 block text-[10px]">Expected CTC</span>
-                      <span className="font-extrabold text-white font-mono">{item.expectedCTC}</span>
+                      <span className="text-rose-300/70 block">Expected CTC</span>
+                      <span className="font-bold text-white font-mono text-sm">{item.expectedCTC}</span>
                     </div>
                     <div>
-                      <span className="text-rose-300/60 block text-[10px]">Annual Fee</span>
-                      <span className="font-extrabold text-white font-mono">₹{(item.annualCost / 100000).toFixed(1)}L / yr</span>
+                      <span className="text-rose-300/70 block">Annual Fee</span>
+                      <span className="font-bold text-white font-mono text-sm">₹{(item.annualCost / 100000).toFixed(1)}L / yr</span>
                     </div>
                   </div>
 
@@ -578,7 +540,7 @@ export default function StudentDashboardPage() {
                     href={`/student/roadmap`}
                     className="w-full mt-2 py-2 px-3 rounded-xl bg-peach-600/30 hover:bg-peach-600 text-peach-200 hover:text-white text-xs font-bold flex items-center justify-center gap-1.5 border border-peach-500/40 transition-all"
                   >
-                    <span>View 5-Year Action Roadmap</span>
+                    <span>Roadmap</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
@@ -589,59 +551,40 @@ export default function StudentDashboardPage() {
           {/* 3. REACH TIERS */}
           {(activeTierTab === "all" || activeTierTab === "reach") && (
             <div className="space-y-4">
-              <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-purple-400">
+              <div className="flex items-center gap-2 text-sm font-bold text-purple-400">
                 <Flame className="w-4 h-4" />
-                <span>🚀 Reach Tier (Ultra-High CTC)</span>
+                <span>Reach Tier</span>
               </div>
               {careerTiers.reach.map((item) => (
                 <div
                   key={item.id}
-                  className="glass-card p-5 rounded-2xl border border-purple-500/40 hover:border-purple-400 transition-all space-y-3 relative overflow-hidden group shadow-lg shadow-purple-950/20"
+                  className="glass-card p-5 rounded-2xl border border-purple-500/40 hover:border-purple-400 transition-all space-y-3 relative group shadow-lg"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-purple-950 text-purple-300 border border-purple-600/50">
+                    <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-purple-950 text-purple-300 border border-purple-600/50">
                       {item.tagline}
                     </span>
-                    <span className="text-xs font-black text-purple-400 font-mono">
-                      {item.matchScore}% Match
+                    <span className="text-sm font-bold text-purple-400 font-mono">
+                      {item.matchScore}% Fit
                     </span>
                   </div>
 
-                  {/* Automation Risk & Sector Velocity Badges */}
-                  <div className="flex items-center gap-1.5 flex-wrap pt-0.5">
-                    <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold border transition-colors ${
-                      item.automationRiskIndex <= 0.12
-                        ? "bg-purple-950/80 text-purple-300 border-purple-600/50"
-                        : item.automationRiskIndex <= 0.22
-                        ? "bg-pink-950/80 text-pink-300 border-pink-600/50"
-                        : "bg-peach-950/80 text-peach-300 border-peach-600/50"
-                    }`}>
-                      <ShieldAlert className="w-3 h-3 text-purple-400" />
-                      <span>{Math.round(item.automationRiskIndex * 100)}% Auto Risk {item.automationRiskIndex <= 0.12 ? "(Resilient)" : ""}</span>
-                    </span>
-
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-950/80 text-purple-300 border border-purple-600/50">
-                      <Zap className="w-3 h-3 text-purple-400" />
-                      <span>+{item.sectorVelocity10yr}% 10-Yr Velocity</span>
-                    </span>
-                  </div>
-
-                  <h3 className="text-base font-extrabold text-white group-hover:text-purple-300 transition-colors">
+                  <h3 className="text-lg font-bold text-white group-hover:text-purple-300 transition-colors">
                     {item.name}
                   </h3>
 
-                  <p className="text-[11px] text-rose-200/80 leading-relaxed">
+                  <p className="text-xs text-rose-200/80 leading-relaxed">
                     {item.description}
                   </p>
 
-                  <div className="pt-2 border-t border-purple-900/40 grid grid-cols-2 gap-2 text-[11px]">
+                  <div className="pt-2 border-t border-purple-900/40 grid grid-cols-2 gap-2 text-xs">
                     <div>
-                      <span className="text-rose-300/60 block text-[10px]">Expected CTC</span>
-                      <span className="font-extrabold text-white font-mono">{item.expectedCTC}</span>
+                      <span className="text-rose-300/70 block">Expected CTC</span>
+                      <span className="font-bold text-white font-mono text-sm">{item.expectedCTC}</span>
                     </div>
                     <div>
-                      <span className="text-rose-300/60 block text-[10px]">Annual Fee</span>
-                      <span className="font-extrabold text-white font-mono">₹{(item.annualCost / 100000).toFixed(1)}L / yr</span>
+                      <span className="text-rose-300/70 block">Annual Fee</span>
+                      <span className="font-bold text-white font-mono text-sm">₹{(item.annualCost / 100000).toFixed(1)}L / yr</span>
                     </div>
                   </div>
 
@@ -649,7 +592,7 @@ export default function StudentDashboardPage() {
                     href={`/student/roadmap`}
                     className="w-full mt-2 py-2 px-3 rounded-xl bg-purple-950/40 hover:bg-purple-600 text-purple-200 hover:text-white text-xs font-bold flex items-center justify-center gap-1.5 border border-purple-500/40 transition-all"
                   >
-                    <span>View 5-Year Action Roadmap</span>
+                    <span>Roadmap</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>

@@ -13,8 +13,33 @@
   font-family: "Times New Roman", Times, Georgia, serif;
 }
 
+html {
+  font-size: 16px;
+}
+
+/* Elevate small font sizes for Times New Roman readability */
+.text-\[8px\],
+.text-\[9px\],
+.text-\[10px\] {
+  font-size: 13px !important;
+  line-height: 1.4 !important;
+}
+
+.text-\[11px\],
+.text-xs {
+  font-size: 14px !important;
+  line-height: 1.4 !important;
+}
+
+.text-sm {
+  font-size: 15px !important;
+  line-height: 1.5 !important;
+}
+
 body {
   font-family: "Times New Roman", Times, Georgia, serif;
+  font-size: 15px;
+  line-height: 1.6;
   color: var(--foreground);
   background: var(--background);
   min-height: 100vh;

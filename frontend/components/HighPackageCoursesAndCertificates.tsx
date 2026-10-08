@@ -244,69 +244,67 @@ export default function HighPackageCoursesAndCertificates() {
       {/* Top Header Banner */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-pink-900/30">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pink-950/70 border border-pink-600/40 text-pink-300 text-xs font-semibold mb-2">
-            <Sparkles className="w-3.5 h-3.5 text-pink-400" />
-            <span>High-Package Strategic Career Roadmap (₹30–₹55+ LPA)</span>
+          <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-pink-950/70 border border-pink-600/40 text-pink-300 text-xs font-semibold mb-1">
+            <Sparkles className="w-3 h-3 text-pink-400" />
+            <span>Pathways & Credentials</span>
           </div>
-          <h2 className="text-xl sm:text-2xl font-black text-white">
-            High-Package Study Pathways & Industry Certifications
+          <h2 className="text-xl sm:text-2xl font-bold text-white">
+            Courses & Certifications
           </h2>
-          <p className="text-xs text-rose-200/80 mt-1">
-            Choose the recommended degree specialization and earn verified credentials to crack Tier-1 product tech companies.
+          <p className="text-xs text-rose-200/80 mt-0.5">
+            Degree pathways and industry certifications.
           </p>
         </div>
 
         {/* Package Highlights Badge */}
-        <div className="flex items-center gap-3 shrink-0 p-3 rounded-xl bg-[#1a0c28] border border-peach-500/30">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-peach-500 to-pink-600 flex items-center justify-center text-white shadow-md">
-            <DollarSign className="w-5 h-5 text-white" />
-          </div>
+        <div className="flex items-center gap-3 shrink-0 p-2.5 rounded-xl bg-[#1a0c28] border border-peach-500/30">
+          <DollarSign className="w-5 h-5 text-peach-400" />
           <div>
-            <span className="text-[10px] text-peach-300/80 font-bold uppercase tracking-wider block">Target CTC Band</span>
-            <span className="text-base font-black text-peach-300">₹32 LPA – ₹55 LPA</span>
+            <span className="text-xs text-peach-300/80 font-bold block">Target Band</span>
+            <span className="text-sm font-bold text-peach-300">₹32L – ₹55 LPA</span>
           </div>
         </div>
       </div>
 
       {/* Sub-Tab Navigation Switcher */}
-      <div className="grid grid-cols-3 p-1.5 rounded-xl bg-[#140a1e] border border-purple-900/40 gap-1.5">
+      <div className="grid grid-cols-3 p-1 rounded-xl bg-[#140a1e] border border-purple-900/40 gap-1 text-xs">
         <button
           type="button"
           onClick={() => setActiveSubTab("courses")}
-          className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg text-xs font-bold transition-all ${
+          className={`flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg font-semibold transition-all ${
             activeSubTab === "courses"
-              ? "bg-gradient-to-r from-pink-600 to-rose-500 text-white shadow-md shadow-pink-600/30"
-              : "text-rose-300/70 hover:text-white hover:bg-purple-950/40"
+              ? "bg-pink-600 text-white shadow-sm"
+              : "text-rose-300/70 hover:text-white"
           }`}
         >
           <GraduationCap className="w-4 h-4" />
-          <span className="truncate">1. Courses to Study</span>
+          <span>Courses</span>
         </button>
 
         <button
           type="button"
           onClick={() => setActiveSubTab("certificates")}
-          className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg text-xs font-bold transition-all ${
+          className={`flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg font-semibold transition-all ${
             activeSubTab === "certificates"
-              ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-md shadow-purple-600/30"
-              : "text-rose-300/70 hover:text-white hover:bg-purple-950/40"
+              ? "bg-pink-600 text-white shadow-sm"
+              : "text-rose-300/70 hover:text-white"
           }`}
         >
           <Award className="w-4 h-4" />
-          <span className="truncate">2. Certificates in Tab</span>
+          <span>Certifications</span>
         </button>
 
         <button
           type="button"
           onClick={() => setActiveSubTab("companies")}
-          className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg text-xs font-bold transition-all ${
+          className={`flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg font-semibold transition-all ${
             activeSubTab === "companies"
-              ? "bg-gradient-to-r from-peach-500 to-pink-600 text-white shadow-md shadow-peach-500/30"
-              : "text-rose-300/70 hover:text-white hover:bg-purple-950/40"
+              ? "bg-pink-600 text-white shadow-sm"
+              : "text-rose-300/70 hover:text-white"
           }`}
         >
           <Building2 className="w-4 h-4" />
-          <span className="truncate">3. High-Package Companies</span>
+          <span>Companies</span>
         </button>
       </div>
 

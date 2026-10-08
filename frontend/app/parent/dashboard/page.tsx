@@ -507,30 +507,24 @@ export default function ParentDashboardPage() {
       <div className="glass-card p-6 sm:p-8 rounded-2xl border-2 border-purple-500/40 space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-purple-900/40">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-peach-950/60 text-peach-300 text-[10px] font-bold uppercase tracking-wider border border-peach-700/40 mb-1">
-              <Sliders className="w-3 h-3 text-peach-400" />
-              <span>Real-Time Affordability Simulator</span>
-            </div>
-            <h2 className="text-lg font-bold text-white flex items-center gap-2">
+            <h2 className="text-xl font-bold text-white flex items-center gap-2">
               <DollarSign className="w-5 h-5 text-peach-400" />
-              <span>Interactive Education Budget & Loan Sliders</span>
+              <span>Budget & Loan Controls</span>
             </h2>
-            <p className="text-xs text-rose-200/70">
-              Slide to adjust your family's financial parameters. PRISM dynamically recalculates affordability and loan necessity.
+            <p className="text-sm text-rose-200/70">
+              Adjust parameters to calculate feasibility and loan exposure.
             </p>
           </div>
 
-          <div className="flex items-center gap-2">
-            <span
-              className={`text-xs font-bold px-3 py-1.5 rounded-xl border ${
-                isFeasible
-                  ? "bg-emerald-950/70 text-emerald-300 border-emerald-700/50"
-                  : "bg-rose-950/70 text-rose-300 border-rose-700/50"
-              }`}
-            >
-              {isFeasible ? "✓ 100% Financially Feasible" : "⚠️ Exceeds Family Budget"}
-            </span>
-          </div>
+          <span
+            className={`text-xs font-bold px-3 py-1.5 rounded-xl border ${
+              isFeasible
+                ? "bg-emerald-950/70 text-emerald-300 border-emerald-700/50"
+                : "bg-rose-950/70 text-rose-300 border-rose-700/50"
+            }`}
+          >
+            {isFeasible ? "✓ Feasible" : "⚠️ Exceeds Budget"}
+          </span>
         </div>
 
         {/* Sliders Grid */}
@@ -716,8 +710,8 @@ export default function ParentDashboardPage() {
 
         {/* Submit Financial Parameters Button */}
         <div className="pt-4 border-t border-purple-900/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <p className="text-[11px] text-rose-300/80 max-w-md">
-            Clicking submit commits these financial parameters to Arun&apos;s Student Portal, unlocking his <strong>Financial Stability</strong> and <strong>Parent Alignment</strong> metrics.
+          <p className="text-xs text-rose-300/80">
+            Sync financial parameters to Arun&apos;s Student Portal.
           </p>
 
           <button
@@ -731,21 +725,21 @@ export default function ParentDashboardPage() {
               setSubmittedMessage(true);
               setTimeout(() => setSubmittedMessage(false), 5000);
             }}
-            className="flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 via-pink-600 to-peach-500 hover:from-purple-500 hover:to-peach-400 text-white text-xs font-extrabold shadow-lg shadow-pink-600/30 transition-all shrink-0 active:scale-95"
+            className="flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-pink-600 hover:bg-pink-500 text-white text-sm font-bold shadow-md transition-all shrink-0"
           >
             <ShieldCheck className="w-4 h-4" />
-            <span>Approve & Submit Financial Parameters for Student Portal ✅</span>
+            <span>Approve Parameters</span>
           </button>
         </div>
 
         {submittedMessage && (
-          <div className="p-3.5 rounded-xl bg-emerald-950/80 border border-emerald-500/50 text-emerald-200 text-xs font-semibold flex flex-col sm:flex-row sm:items-center justify-between gap-2 animate-fadeIn">
-            <span>✓ Parameters successfully submitted! Arun&apos;s Student Portal now displays 100% Financial Feasibility and {metrics.parentAlignmentScore}% Parent Alignment.</span>
+          <div className="p-3 rounded-xl bg-emerald-950/80 border border-emerald-500/50 text-emerald-200 text-xs font-semibold flex items-center justify-between gap-2">
+            <span>✓ Parameters approved and synced to Student Portal.</span>
             <Link
               href="/dashboard"
-              className="inline-flex items-center gap-1 text-white bg-emerald-600/80 hover:bg-emerald-500 px-3 py-1 rounded-lg text-xs font-bold shrink-0 transition-colors"
+              className="text-white bg-emerald-600 hover:bg-emerald-500 px-3 py-1 rounded-lg text-xs font-bold"
             >
-              <span>Open Student Portal ➔</span>
+              <span>Student Portal ➔</span>
             </Link>
           </div>
         )}

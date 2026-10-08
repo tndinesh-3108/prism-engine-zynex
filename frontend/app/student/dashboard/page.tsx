@@ -21,8 +21,6 @@ import {
   Flame,
   Sliders,
   Brain,
-  Zap,
-  ShieldAlert,
   Compass
 } from "lucide-react";
 import { 

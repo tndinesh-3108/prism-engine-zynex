@@ -89,22 +89,22 @@ export default function StudentCareerDNAPage() {
       <div className="flex items-center justify-between text-xs text-rose-300/80 bg-purple-950/40 p-3 rounded-xl border border-purple-800/40">
         <Link href="/student/setup" className="flex items-center gap-1.5 hover:text-white transition-colors">
           <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-          <span>1. Setup & Sync Code</span>
+          <span>1. Setup</span>
         </Link>
         <ArrowRight className="w-3.5 h-3.5 text-purple-400" />
         <Link href="/student/assessment" className="flex items-center gap-1.5 hover:text-white transition-colors">
           <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-          <span>2. Aptitude & Skills</span>
+          <span>2. Aptitude Test</span>
         </Link>
         <ArrowRight className="w-3.5 h-3.5 text-purple-400" />
         <div className="flex items-center gap-1.5">
-          <span className="w-5 h-5 rounded-full bg-pink-500 text-white flex items-center justify-center font-bold text-[11px]">3</span>
-          <span className="font-bold text-white">Career DNA (Current)</span>
+          <span className="w-5 h-5 rounded-full bg-pink-500 text-white flex items-center justify-center font-bold text-xs">3</span>
+          <span className="font-bold text-white">Career DNA</span>
         </div>
         <ArrowRight className="w-3.5 h-3.5 text-purple-400" />
         <Link href="/student/dashboard" className="flex items-center gap-1.5 text-rose-300/70 hover:text-white transition-colors">
-          <span className="w-5 h-5 rounded-full bg-purple-900 text-purple-300 flex items-center justify-center font-bold text-[11px]">4</span>
-          <span>Ranked Dashboard ➔</span>
+          <span className="w-5 h-5 rounded-full bg-purple-900 text-purple-300 flex items-center justify-center font-bold text-xs">4</span>
+          <span>Careers</span>
         </Link>
       </div>
 
@@ -113,13 +113,13 @@ export default function StudentCareerDNAPage() {
         <div>
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-950/70 text-pink-300 text-xs font-semibold mb-2 border border-pink-700/40">
             <Dna className="w-3.5 h-3.5 text-pink-400" />
-            <span>PRISM Core Engine Output</span>
+            <span>Profile DNA</span>
           </div>
-          <h1 className="text-3xl font-extrabold text-white">
-            {dna.student_name}'s Cognitive Career DNA
+          <h1 className="text-3xl font-bold text-white">
+            {dna.student_name}&apos;s Career DNA
           </h1>
-          <p className="text-xs text-rose-200/70">
-            Algorithmic quantification of cognitive strengths, mathematical aptitude, and STEAM readiness.
+          <p className="text-sm text-rose-200/80">
+            Cognitive strengths and readiness.
           </p>
         </div>
 
@@ -129,13 +129,13 @@ export default function StudentCareerDNAPage() {
             className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-purple-950/60 hover:bg-purple-900/60 text-purple-200 border border-purple-700/50 text-xs font-semibold transition-colors"
           >
             <Compass className="w-3.5 h-3.5 text-pink-400" />
-            <span>Retake Assessment</span>
+            <span>Retake Test</span>
           </Link>
           <Link
             href="/student/dashboard"
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-pink-600 via-rose-500 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white text-xs font-bold shadow-lg shadow-pink-600/30 transition-all"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white text-xs font-bold shadow-md shadow-pink-600/30 transition-all"
           >
-            <span>Proceed to Ranked Careers (Safe/Match/Reach)</span>
+            <span>View Careers</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -268,11 +268,11 @@ export default function StudentCareerDNAPage() {
         {/* Cognitive Synthesis & Top Strengths (5 cols) */}
         <div className="lg:col-span-5 space-y-6">
           {/* Top Strengths */}
-          <div className="glass-card p-6 rounded-3xl border border-pink-500/30 space-y-4">
+          <div className="glass-card p-6 rounded-2xl border border-pink-500/30 space-y-4">
             <div className="flex items-center gap-2">
               <Award className="w-5 h-5 text-peach-400" />
-              <h3 className="text-sm font-extrabold text-white">
-                Identified Core Strengths
+              <h3 className="text-base font-bold text-white">
+                Core Strengths
               </h3>
             </div>
             <div className="space-y-2.5">
@@ -284,25 +284,25 @@ export default function StudentCareerDNAPage() {
                   <div className="w-6 h-6 rounded-lg bg-pink-500/20 text-pink-300 flex items-center justify-center text-xs font-bold shrink-0">
                     #{idx + 1}
                   </div>
-                  <span className="text-xs font-bold text-white">{str}</span>
+                  <span className="text-sm font-semibold text-white">{str}</span>
                 </div>
               ))}
             </div>
           </div>
 
           {/* AI DNA Summary */}
-          <div className="glass-card p-6 rounded-3xl border border-peach-500/30 space-y-3">
+          <div className="glass-card p-6 rounded-2xl border border-peach-500/30 space-y-3">
             <div className="flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-pink-400" />
-              <h3 className="text-sm font-extrabold text-white">
-                PRISM Diagnostic Synthesis
+              <h3 className="text-base font-bold text-white">
+                Summary
               </h3>
             </div>
-            <p className="text-xs text-rose-100/90 leading-relaxed">
+            <p className="text-sm text-rose-100/90 leading-relaxed">
               {dna.ai_dna_summary}
             </p>
-            <div className="pt-2 border-t border-purple-900/40 flex items-center justify-between text-[11px] text-rose-300/70">
-              <span>Risk Tolerance: {dna.risk_profile}</span>
+            <div className="pt-2 border-t border-purple-900/40 flex items-center justify-between text-xs text-rose-300/70">
+              <span>Risk: {dna.risk_profile}</span>
               <span>Sync Code: {syncCode}</span>
             </div>
           </div>
@@ -310,10 +310,10 @@ export default function StudentCareerDNAPage() {
           {/* Action Gateway Button */}
           <Link
             href="/student/dashboard"
-            className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-pink-600 via-rose-500 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white font-extrabold text-sm shadow-xl shadow-pink-600/30 flex items-center justify-center gap-2.5 transition-all text-center"
+            className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-pink-600 via-rose-500 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white font-bold text-sm shadow-md shadow-pink-600/30 flex items-center justify-center gap-2 transition-all text-center"
           >
-            <span>Proceed to Ranked Careers Dashboard</span>
-            <ArrowRight className="w-5 h-5" />
+            <span>View Ranked Careers</span>
+            <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
       </div>

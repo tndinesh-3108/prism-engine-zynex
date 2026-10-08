@@ -93,13 +93,13 @@ export default function ParentFundingPage() {
         <div>
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-peach-950/70 text-peach-300 text-xs font-semibold mb-2 border border-peach-700/40">
             <DollarSign className="w-3.5 h-3.5 text-peach-400" />
-            <span>Financial Safeguards</span>
+            <span>Funding & ROI</span>
           </div>
-          <h1 className="text-3xl font-extrabold text-white">
-            Targeted Scholarships & 5-Year Degree ROI
+          <h1 className="text-3xl font-bold text-white">
+            Scholarships & ROI
           </h1>
-          <p className="text-xs text-rose-200/70">
-            Objective financial returns, fee offset grants, and government interest subsidies for Arun's engineering track.
+          <p className="text-sm text-rose-200/80">
+            Estimated returns and available scholarships.
           </p>
         </div>
 
@@ -109,34 +109,34 @@ export default function ParentFundingPage() {
             className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-purple-950/60 hover:bg-purple-900/60 text-purple-200 border border-purple-800/40 text-xs font-semibold transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>Parent Dashboard</span>
+            <span>Dashboard</span>
           </Link>
           <Link
             href="/parent/alignment"
             className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-purple-950/60 hover:bg-purple-900/60 text-purple-200 border border-purple-800/40 text-xs font-semibold transition-colors"
           >
             <Scale className="w-3.5 h-3.5 text-pink-400" />
-            <span>Conflict Index</span>
+            <span>Alignment</span>
           </Link>
         </div>
       </div>
 
       {/* 5-Year ROI Simulation Hero Card */}
-      <div className="glass-card p-6 sm:p-8 rounded-3xl border border-peach-500/30 space-y-6">
+      <div className="glass-card p-6 sm:p-8 rounded-2xl border border-peach-500/30 space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-purple-900/40 pb-4">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
               <Calculator className="w-5 h-5 text-peach-400" />
-              <h2 className="text-base font-extrabold text-white">
-                5-Year Return on Education Investment (ROI)
+              <h2 className="text-base font-bold text-white">
+                5-Year Degree ROI
               </h2>
             </div>
-            <p className="text-xs text-rose-200/70">
-              Evaluated for: {selectedCourse.title} (4-Year Pathway)
+            <p className="text-xs text-rose-200/80">
+              Evaluated for: {selectedCourse.title}
             </p>
           </div>
-          <span className="text-xs font-black text-emerald-300 bg-emerald-950/80 px-3 py-1 rounded-full border border-emerald-500/40 w-fit">
-            ✓ Exceptional {roiMultiple}x Payback Ratio
+          <span className="text-xs font-bold text-emerald-300 bg-emerald-950/80 px-3 py-1 rounded-full border border-emerald-500/40 w-fit">
+            ✓ {roiMultiple}x Payback Ratio
           </span>
         </div>
 

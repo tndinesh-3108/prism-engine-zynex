@@ -30,12 +30,12 @@ const PRESET_QUESTIONS = [
 ];
 
 export default function StudentMentorPage() {
-  const { syncCode, parentParameters } = useStudentParentFlow();
+  const { parentParameters } = useStudentParentFlow();
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
       sender: "mentor",
-      text: `Hello Arun! I am your PRISM AI Career Mentor. I've analyzed your cognitive Career DNA (91 Aptitude, 92 Programming, 89 Mathematics) and your family's ₹${(parentParameters.annualBudget / 100000).toFixed(1)}L annual budget parameters (Sync Code: ${syncCode}). Ask me anything about your 5-year roadmap, high-package placements, or exam prep!`,
+      text: `Hello Arun! I am your AI Career Mentor. Ask me anything about your career path, exams, or colleges.`,
       time: "Just now",
       isGemini: true,
     },
@@ -80,11 +80,11 @@ export default function StudentMentorPage() {
     } catch (err) {
       console.warn("AI mentor fallback:", err);
       setTimeout(() => {
-        let reply = "Based on your PRISM profile, you have top-tier mathematical aptitude. For an AI Engineer targeting ₹32L+ packages, focusing on Data Structures in C++ during Year 1 and building end-to-end PyTorch models by Year 2 will make you a prime candidate for Day-1 campus recruitment.";
+        let reply = "Based on your PRISM profile, you have strong mathematical and programming aptitude. Focus on core problem solving and projects for top placement opportunities.";
         if (textToSend.toLowerCase().includes("budget") || textToSend.toLowerCase().includes("cost")) {
-          reply = `Your family budget of ₹${(parentParameters.annualBudget / 100000).toFixed(1)}L/year comfortably covers leading 4-Year B.Tech programs in Chennai and South India without exceeding your parent's loan tolerance.`;
+          reply = `Your family budget of ₹${(parentParameters.annualBudget / 100000).toFixed(1)}L/year covers leading B.Tech programs in your state.`;
         } else if (textToSend.toLowerCase().includes("safe") || textToSend.toLowerCase().includes("reach")) {
-          reply = "Safe careers (like Data Systems Architect) have 100% budget fit and immense corporate hiring. Match careers (like AI/ML Engineer) align with your peak cognitive abilities. Reach careers (like Algorithmic Quant) offer ₹45L+ CTC but require extreme math rigor.";
+          reply = "Safe careers align with high stability and budget. Match careers align with your core strengths. Reach careers offer high packages with advanced specializations.";
         }
         setMessages((prev) => [
           ...prev,
@@ -109,11 +109,11 @@ export default function StudentMentorPage() {
         <div>
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-950/70 text-pink-300 text-xs font-semibold mb-2 border border-pink-700/40">
             <Bot className="w-3.5 h-3.5 text-pink-400" />
-            <span>Autonomous Career Advisory</span>
+            <span>AI Mentor</span>
           </div>
-          <h1 className="text-3xl font-extrabold text-white">AI Career Mentor</h1>
-          <p className="text-xs text-rose-200/70">
-            Real-time guidance contextualized by your Career DNA, PCM aptitude, and parent financial boundaries.
+          <h1 className="text-3xl font-bold text-white">Career Mentor</h1>
+          <p className="text-sm text-rose-200/80">
+            Ask questions regarding careers, roadmap, and exams.
           </p>
         </div>
 
@@ -137,15 +137,15 @@ export default function StudentMentorPage() {
 
       {/* Preset Questions Horizontal Carousel */}
       <div className="space-y-1.5">
-        <span className="text-[11px] font-bold text-rose-300/70 uppercase tracking-wider">
-          Suggested Discussion Prompts:
+        <span className="text-xs font-bold text-rose-300/80 uppercase tracking-wider">
+          Suggested Prompts:
         </span>
         <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-thin">
           {PRESET_QUESTIONS.map((q, idx) => (
             <button
               key={idx}
               onClick={() => handleSend(q)}
-              className="px-3 py-1.5 rounded-xl bg-purple-950/50 hover:bg-purple-900/60 text-purple-200 border border-purple-800/40 text-[11px] font-semibold whitespace-nowrap transition-colors text-left shrink-0"
+              className="px-3 py-1.5 rounded-xl bg-purple-950/50 hover:bg-purple-900/60 text-purple-200 border border-purple-800/40 text-xs font-semibold whitespace-nowrap transition-colors text-left shrink-0"
             >
               {q}
             </button>

@@ -75,19 +75,19 @@ export default function StudentOpportunitiesPage() {
         <div>
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-peach-950/70 text-peach-300 text-xs font-semibold mb-2 border border-peach-700/40">
             <MapPin className="w-3.5 h-3.5 text-peach-400" />
-            <span>Targeted Opportunities Ecosystem</span>
+            <span>Opportunities</span>
           </div>
-          <h1 className="text-3xl font-extrabold text-white">
+          <h1 className="text-3xl font-bold text-white">
             {profile.qualification === "12th"
-              ? "Premier Colleges & State Engineering Hubs"
+              ? "Colleges & Institutes"
               : isJuniorUG
-              ? "Hackathons, Projects & Exam Tracking"
+              ? "Hackathons & Projects"
               : isSeniorUG
-              ? "MNC Job Offers, Internships & Drives"
-              : "Postgraduate R&D Roles & Technical Quiz"}
+              ? "Jobs & Internships"
+              : "R&D Opportunities"}
           </h1>
-          <p className="text-xs text-rose-200/70">
-            Dynamically customized for {profile.country} • {profile.state} based on your qualification profile.
+          <p className="text-sm text-rose-200/80">
+            Targeted for {profile.state}, {profile.country}.
           </p>
         </div>
 
@@ -104,43 +104,30 @@ export default function StudentOpportunitiesPage() {
             className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-pink-950/70 hover:bg-pink-900 text-pink-200 border border-pink-700/50 text-xs font-semibold transition-colors"
           >
             <Sliders className="w-3.5 h-3.5 text-pink-400" />
-            <span>Switch Qualification</span>
+            <span>Change</span>
           </button>
         </div>
       </div>
 
-      {/* ========================================================================= */}
-      {/* QUALIFICATION RECALL & CONTEXT BANNER                                    */}
-      {/* ========================================================================= */}
-      <div className="glass-card p-4 sm:p-5 rounded-2xl border border-pink-500/30 flex flex-col md:flex-row md:items-center justify-between gap-3 bg-gradient-to-r from-purple-950/50 via-[#180924] to-pink-950/40">
+      {/* QUALIFICATION RECALL & CONTEXT BANNER */}
+      <div className="glass-card p-4 rounded-2xl border border-pink-500/30 flex flex-col md:flex-row md:items-center justify-between gap-3 bg-gradient-to-r from-purple-950/50 via-[#180924] to-pink-950/40">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-pink-600 to-purple-600 text-white flex items-center justify-center shrink-0 shadow-md">
-            <GraduationCap className="w-5 h-5" />
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-pink-600 to-purple-600 text-white flex items-center justify-center shrink-0 shadow-md">
+            <GraduationCap className="w-4 h-4" />
           </div>
-          <div>
-            <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-xs font-black text-white">
-                {profile.qualification === "12th"
-                  ? `Class 12 • Stream: ${profile.twelfthGroup || "CS/Maths"}`
-                  : profile.qualification === "UG pursuing"
-                  ? `UG Pursuing • Year ${profile.ugPursuingYear} • ${profile.ugPursuingCourse || "Engineering"}`
-                  : profile.qualification === "UG"
-                  ? `UG Graduate • ${profile.ugDegree || "B.Tech"} • CGPA: ${profile.ugCgpa}`
-                  : `Postgraduate Track • ${profile.pgCourse || "M.Tech AI"} (UG CGPA: ${profile.ugPassedCgpa})`}
-              </span>
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-pink-950 text-pink-300 border border-pink-700/40">
-                {profile.state}, {profile.country}
-              </span>
-            </div>
-            <p className="text-[11px] text-rose-200/80 mt-0.5">
+          <div className="flex items-center gap-2 flex-wrap text-sm font-semibold text-white">
+            <span>
               {profile.qualification === "12th"
-                ? `Showing premier state-by-state engineering colleges tailored for 12th ${profile.twelfthGroup || "CS/Maths"} students.`
-                : isJuniorUG
-                ? `Recalling ${profile.ugPursuingCourse || "your course"}: Showing upcoming hackathons, project ideas, certifications with direct links, and AMCAT/SAT/IELTS/JLPT dates.`
-                : isSeniorUG
-                ? `Filtered for your CGPA (${profile.qualification === "UG" ? profile.ugCgpa : profile.ugPursuingCgpa}/10): Live Present, Upcoming, and Past placement drives.`
-                : `Specialized R&D research opportunities and course-related questions for ${profile.pgCourse}.`}
-            </p>
+                ? `Class 12 (${profile.twelfthGroup || "CS/Maths"})`
+                : profile.qualification === "UG pursuing"
+                ? `UG Year ${profile.ugPursuingYear}`
+                : profile.qualification === "UG"
+                ? `UG Graduate (CGPA: ${profile.ugCgpa})`
+                : `PG (${profile.pgCourse || "Master"})`}
+            </span>
+            <span className="text-xs px-2 py-0.5 rounded-full bg-pink-950 text-pink-300 border border-pink-700/40 font-normal">
+              {profile.state}
+            </span>
           </div>
         </div>
 
@@ -148,7 +135,7 @@ export default function StudentOpportunitiesPage() {
           onClick={openProfileModal}
           className="text-xs font-bold text-pink-400 hover:text-pink-300 underline underline-offset-2 shrink-0 self-start md:self-auto"
         >
-          Change Stream / Year ➔
+          Change ➔
         </button>
       </div>
 

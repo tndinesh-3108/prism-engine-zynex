@@ -1,13 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { 
-  Sliders, 
   ArrowRight, 
-  CheckCircle2, 
-  Sparkles, 
   MapPin
 } from "lucide-react";
 import { useStudentParentFlow } from "@/lib/student-parent-flow";

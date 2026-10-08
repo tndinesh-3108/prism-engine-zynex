@@ -129,24 +129,24 @@ export default function LoginPage() {
         <div className="text-center space-y-2">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pink-950/70 border border-pink-700/40 text-pink-300 text-xs font-semibold">
             <Sparkles className="w-3.5 h-3.5 text-pink-400" />
-            <span>Role-Based Portal</span>
+            <span>Portal Login</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
-            Welcome to PRISM Portal
+          <h1 className="text-3xl font-bold tracking-tight text-white">
+            Sign In
           </h1>
-          <p className="text-sm text-rose-200/70 max-w-md mx-auto">
-            Choose your portal below to sign in or explore with verified demo credentials.
+          <p className="text-sm text-rose-200/80 max-w-md mx-auto">
+            Select your role to access your dashboard.
           </p>
         </div>
 
         {/* Central Auth Container */}
-        <div className="glass-card rounded-2xl border border-pink-500/25 bg-[#140822]/90 p-6 sm:p-8 shadow-2xl shadow-purple-950/40 space-y-6">
+        <div className="glass-card rounded-2xl border border-pink-500/25 bg-[#140822]/90 p-6 sm:p-8 shadow-xl shadow-purple-950/40 space-y-6">
           {/* Tab Selector: Student vs Parent */}
           <div className="grid grid-cols-2 p-1.5 rounded-xl bg-[#140a1e] border border-purple-900/40">
             <button
               type="button"
               onClick={() => handleTabChange("student")}
-              className={`flex items-center justify-center gap-2 py-2.5 rounded-lg text-xs font-bold transition-all ${
+              className={`flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-bold transition-all ${
                 activeTab === "student"
                   ? "bg-gradient-to-r from-pink-600 to-rose-500 text-white shadow-md shadow-pink-600/30"
                   : "text-rose-300/60 hover:text-white"
@@ -159,43 +159,35 @@ export default function LoginPage() {
             <button
               type="button"
               onClick={() => handleTabChange("parent")}
-              className={`flex items-center justify-center gap-2 py-2.5 rounded-lg text-xs font-bold transition-all ${
+              className={`flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-bold transition-all ${
                 activeTab === "parent"
                   ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-md shadow-purple-600/30"
                   : "text-rose-300/60 hover:text-white"
               }`}
             >
               <Users className="w-4 h-4" />
-              <span>Parent Advisory</span>
+              <span>Parent Portal</span>
             </button>
           </div>
 
           {/* Portal Description Banner */}
           <div
-            className={`p-3.5 rounded-xl border text-xs leading-relaxed flex items-start gap-3 ${
+            className={`p-3 rounded-xl border text-xs leading-relaxed flex items-center gap-2.5 ${
               activeTab === "student"
                 ? "bg-pink-950/30 border-pink-800/40 text-pink-200"
                 : "bg-purple-950/30 border-purple-800/40 text-rose-200"
             }`}
           >
             <ShieldCheck
-              className={`w-4 h-4 mt-0.5 shrink-0 ${
+              className={`w-4 h-4 shrink-0 ${
                 activeTab === "student" ? "text-pink-400" : "text-purple-400"
               }`}
             />
-            <div>
-              {activeTab === "student" ? (
-                <>
-                  <span className="font-bold text-white">Student Space: </span>
-                  Analyze 5-dimensional career fit, take cognitive aptitude assessments, and interact with the AI Career Mentor.
-                </>
-              ) : (
-                <>
-                  <span className="font-bold text-white">Parent Advisory: </span>
-                  Audit educational costs, linear programming loan viability, and evaluate family career harmony.
-                </>
-              )}
-            </div>
+            <span className="text-xs">
+              {activeTab === "student"
+                ? "Aptitude tests, career recommendations, and roadmaps."
+                : "Annual budget constraints, scholarships, and alignment."}
+            </span>
           </div>
 
           {/* Alert Messages */}

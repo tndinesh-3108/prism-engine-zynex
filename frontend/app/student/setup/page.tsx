@@ -14,7 +14,7 @@ import { useStudentParentFlow } from "@/lib/student-parent-flow";
 import { useStudentProfile } from "@/lib/student-profile-context";
 
 export default function StudentSetupPage() {
-  const { syncCode, generateNewSyncCode, verifyAndLinkSyncCode } = useStudentParentFlow();
+  const { syncCode, generateNewSyncCode } = useStudentParentFlow();
   const { profile, openProfileModal } = useStudentProfile();
   const [copied, setCopied] = useState(false);
 

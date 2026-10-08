@@ -130,13 +130,13 @@ export default function ParentAlignmentPage() {
         <div>
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-950/70 text-purple-200 text-xs font-semibold mb-2 border border-purple-700/50">
             <Scale className="w-3.5 h-3.5 text-pink-400" />
-            <span>Harmonization Engine</span>
+            <span>Alignment</span>
           </div>
-          <h1 className="text-3xl font-extrabold text-white">
-            Parent-Student Alignment & Conflict Index
+          <h1 className="text-3xl font-bold text-white">
+            Family Alignment
           </h1>
-          <p className="text-xs text-rose-200/70">
-            Algorithmic alignment between Arun's career ambitions and parental financial boundaries.
+          <p className="text-sm text-rose-200/80">
+            Student preferences vs family constraints.
           </p>
         </div>
 
@@ -146,37 +146,37 @@ export default function ParentAlignmentPage() {
             className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-purple-950/60 hover:bg-purple-900/60 text-purple-200 border border-purple-800/40 text-xs font-semibold transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>Parent Dashboard</span>
+            <span>Dashboard</span>
           </Link>
           <Link
             href="/parent/funding"
             className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white text-xs font-bold shadow-md shadow-pink-600/30 transition-all"
           >
             <DollarSign className="w-4 h-4" />
-            <span>Scholarships & ROI ➔</span>
+            <span>Scholarships & ROI</span>
           </Link>
         </div>
       </div>
 
       {/* Top 2 Big Hero Cards: Alignment Score & Conflict Index */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="glass-card p-6 rounded-3xl border border-pink-500/30 space-y-3">
+        <div className="glass-card p-6 rounded-2xl border border-pink-500/30 space-y-3">
           <div className="flex items-center justify-between">
             <span className="text-xs text-rose-200/70 font-bold uppercase tracking-wider">
-              Family Alignment Score
+              Alignment Score
             </span>
-            <span className="text-xs font-extrabold text-emerald-400 bg-emerald-950/80 px-2.5 py-0.5 rounded-full border border-emerald-500/40">
+            <span className="text-xs font-bold text-emerald-400 bg-emerald-950/80 px-2.5 py-0.5 rounded-full border border-emerald-500/40">
               {conflict.alignment_level}
             </span>
           </div>
-          <p className="text-4xl font-extrabold text-white">
+          <p className="text-4xl font-bold text-white">
             {conflict.alignment_score}%
           </p>
           <div className="w-full bg-purple-950 h-2 rounded-full overflow-hidden">
             <div className="bg-pink-500 h-full rounded-full" style={{ width: `${conflict.alignment_score}%` }} />
           </div>
-          <p className="text-[11px] text-rose-200/80">
-            Based on multi-objective optimization comparing Arun's 15-Q aptitude results with family constraints.
+          <p className="text-xs text-rose-200/80">
+            Aptitude profile vs parental parameters.
           </p>
         </div>
 

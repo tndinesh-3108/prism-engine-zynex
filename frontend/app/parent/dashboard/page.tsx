@@ -10,7 +10,6 @@ import {
   CheckCircle2, 
   Scale, 
   FileText, 
-  Sliders, 
   DollarSign, 
   GraduationCap, 
   ShieldCheck,

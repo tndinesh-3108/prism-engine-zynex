@@ -1,374 +1,1311 @@
 # PRISM Engine
 
-> **Multi-Dimensional STEAM Career Guidance & Hyper-Local Innovation Platform**
-> *"Turn career confusion into a clear, affordable and future-ready pathway."*
+## Multi-Dimensional STEAM Career Guidance & Hyper-Local Innovation Platform
 
----
+> **One-line vision:** PRISM is an AI-powered career guidance platform
+> that combines student abilities and interests, family financial
+> constraints, parent expectations, and real-world market demand to
+> deliver personalized, financially viable, and future-ready career
+> pathways.
 
-## 1. Project Overview
+**Track:** AI & EdTech\
+**Team:** Zynex\
+**Project:** DataQuest 3.0 -- Round 1
 
-**PRISM Engine** is an AI-powered full-stack decision intelligence platform built for school and college students (and their parents). 
+------------------------------------------------------------------------
 
-Traditional ed-tech platforms recommend careers solely based on arbitrary student interests or generic aptitude questionnaires. In reality, Indian families face complex multi-stakeholder decisions involving **financial constraints, parental expectations, local industry demand, and realistic return on investment**.
+# 1. What is PRISM?
 
-PRISM addresses this fundamental gap with our core thesis:
+PRISM is not just a career quiz.
 
-> **CORE PRINCIPLE:** Never recommend careers based only on student interest. PRISM discovers trajectories that are:
-> 1. Suitable for the student's cognitive aptitude and competencies
-> 2. Financially feasible for the family's annual budget
-> 3. Aligned with parental risk and security expectations
-> 4. High-velocity in the actual regional and national job market
-> 5. Accessible within the student's geographic preference
+It is a multi-dimensional career guidance system that connects:
 
----
+**Student + Family + Market → PRISM Engine → Career Recommendation +
+Financial Feasibility + Alignment + Roadmap**
 
-## 2. System Architecture & Mathematical Model
+The platform is designed to answer four important questions:
 
-PRISM implements a multi-layer architecture separating mathematical decision optimization from generative explainability:
+1.  **What is the student good at?**
+2.  **What careers match the student's interests and abilities?**
+3.  **Can the family realistically afford the pathway?**
+4.  **How do student preferences, parent expectations, and market demand
+    align?**
 
+The final goal is to provide a career pathway that is both **personally
+suitable and financially realistic**.
+
+------------------------------------------------------------------------
+
+# 2. The Problem We Are Solving
+
+Many students do not have access to personalized career guidance.
+
+Career decisions can be affected by:
+
+-   Student interests
+-   Academic/technical abilities
+-   Parent expectations
+-   Family financial constraints
+-   Location limitations
+-   Education costs
+-   Scholarships and loans
+-   Career risk tolerance
+-   Market demand
+-   Future growth
+
+Traditional career guidance often focuses mainly on student interests or
+academic performance.
+
+PRISM combines multiple dimensions into one decision-support system.
+
+------------------------------------------------------------------------
+
+# 3. PRISM Core Idea
+
+The complete PRISM pipeline is:
+
+``` text
+                    STUDENT
+                       |
+             24-Question Assessment
+                       |
+                       v
+              Student PRISM Vector
+                       |
+                       |
+PARENT/FAMILY ---------+---------- MARKET
+                       |
+                       v
+                 PRISM ENGINE
+                       |
+        +--------------+--------------+
+        |              |              |
+        v              v              v
+   Career Fit     Financial       Market Demand
+                   Solver
+        |              |              |
+        +--------------+--------------+
+                       |
+                       v
+              Parent-Student
+                 Alignment
+                       |
+                       v
+              Ranked Career
+                 Pathways
+                       |
+                       v
+             Personalized Roadmap
+                       |
+                       v
+              PRISM Final Report
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                              PRISM ENGINE PIPELINE                          │
-├─────────────────────┬───────────────────────────┬───────────────────────────┤
-│    STUDENT DNA      │       FAMILY BUDGET       │       MARKET & GEO        │
-│ Aptitude (91%)      │ Annual Budget (₹6,00,000) │ Hiring Velocity (95/100)  │
-│ Tech/Math Skills    │ Debt Tolerance: Low       │ Regional Hubs (Chennai)   │
-│ Weight: 35%         │ Weight: 25% + CONSTRAINT  │ Weight: 20% + 10%         │
-└──────────┬──────────┴─────────────┬─────────────┴─────────────┬─────────────┘
-           │                        │                           │
-           └────────────────────────┼───────────────────────────┘
-                                    ▼
-       ┌─────────────────────────────────────────────────────────┐
-       │             PRISM 5-FACTOR MATCHING FORMULA             │
-       │  35% Student + 25% Financial + 20% Market               │
-       │  + 10% Parent Alignment + 10% Geographic Fit            │
-       └────────────────────────────┬────────────────────────────┘
-                                    │
-                                    ▼
-       ┌─────────────────────────────────────────────────────────┐
-       │            FINANCIAL CONSTRAINT SOLVER                  │
-       │  SciPy Linear Programming (linprog):                    │
-       │  Minimizes Debt & Family Distress                       │
-       │  Exceeds Ceiling -> Tagged "Financially Difficult"      │
-       └────────────────────────────┬────────────────────────────┘
-                                    │
-           ┌────────────────────────┴────────────────────────┐
-           ▼                                                 ▼
-┌─────────────────────────────────────┐   ┌─────────────────────────────────────┐
-│        FEASIBLE TOP MATCHES         │   │       FINANCIALLY CONSTRAINED       │
-│ #1 AI / ML Engineer (90.5/100)      │   │ Medicine / MBBS (₹18 Lakhs)         │
-│ #2 Data Scientist (89.2/100)        │   │ Quarantined to Scholarship Pathway  │
-│ #3 Robotics Engineer (88.0/100)     │   │                                     │
-└──────────────────┬──────────────────┘   └─────────────────────────────────────┘
-                   │
-                   ▼
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                             ACTIONABLE EXECUTION                            │
-│  Milestone Roadmap  •  Parent Conflict Index  •  Exams & Scholarships       │
-│  Regional Opportunities  •  Gemini Grounded AI Career Mentor                │
-└─────────────────────────────────────────────────────────────────────────────┘
+
+------------------------------------------------------------------------
+
+# 4. Four Main Intelligence Dimensions
+
+## 4.1 Student Intelligence
+
+The student completes a 24-question assessment.
+
+The assessment has four dimensions:
+
+-   Aptitude
+-   Interest
+-   Cognitive
+-   Competency
+
+Each dimension contains 6 questions.
+
+Answers use a 1--5 Likert scale:
+
+  Score   Meaning
+  ------- -------------------
+  1       Strongly Disagree
+  2       Disagree
+  3       Neutral
+  4       Agree
+  5       Strongly Agree
+
+Each dimension is converted into a **0--100 score**.
+
+------------------------------------------------------------------------
+
+# 5. Student Assessment
+
+## Aptitude
+
+1.  I can identify patterns in numerical data.
+2.  I enjoy solving logical problems.
+3.  I can break complex problems into smaller steps.
+4.  I understand mathematical concepts quickly.
+5.  I enjoy finding different solutions to a problem.
+6.  I can make decisions based on evidence.
+
+## Interest
+
+7.  I am interested in computers and software.
+8.  I enjoy learning science and technology.
+9.  I like creating new technologies.
+10. I am interested in machines and engineering systems.
+11. I enjoy research and discovering new ideas.
+12. I like combining technology, science, design or business.
+
+## Cognitive
+
+13. I prefer analytical and reasoning-based tasks.
+14. I prefer creating new solutions.
+15. I enjoy practical, hands-on activities.
+16. I investigate a problem before deciding.
+17. I enjoy understanding other people's perspectives.
+18. I am comfortable with problems that have no single answer.
+
+## Competency
+
+19. I can learn technical concepts independently.
+20. I can explain my ideas clearly.
+21. I work effectively in a team.
+22. I can stay focused on difficult problems.
+23. I take initiative in projects.
+24. I am willing to continuously develop my skills.
+
+------------------------------------------------------------------------
+
+# 6. Student PRISM Vector
+
+The 24 answers are converted into:
+
+``` text
+{
+  aptitude: 0-100,
+  interest: 0-100,
+  cognitive: 0-100,
+  competency: 0-100
+}
 ```
 
-### The 5-Dimensional Composite Formula
+The system must calculate these values from the **actual student
+answers**.
 
-$$\text{PRISM Score} = 0.35 \cdot S + 0.25 \cdot F + 0.20 \cdot M + 0.10 \cdot P + 0.10 \cdot G$$
+Do not hardcode a student's vector or career result.
 
-Where:
-- $S$ (**Student Fit**): Cosine/vector overlap of student skills, cognitive aptitude test score, and academic score.
-- $F$ (**Financial Fit**): Derived from SciPy optimization. Scaled by budget coverage ratio and debt penalty.
-- $M$ (**Market Fit**): Weighted aggregation of hiring demand, 5-year growth trajectory, and salary potential.
-- $P$ (**Parent Alignment**): Domain taxonomy overlap, risk tolerance match, and postgraduate consensus.
-- $G$ (**Geographic Fit**): Local industry density in the candidate's preferred region (e.g., Chennai automotive/AI cluster).
+Example:
 
-### Hard Financial Feasibility Boundary
-A career path whose total expenditure (tuition + living) exceeds:
-$$\text{Cost} > \text{Max Affordable Ceiling} + \text{Permissible Loan}$$
-is strictly classified as **"Financially Difficult"** and excluded from the primary top recommendations roster until unlocked by external grants.
-
----
-
-## 3. Technology Stack
-
-### Frontend
-- **Framework**: Next.js 14+ (App Router)
-- **Language**: TypeScript (Strict Mode)
-- **Styling**: Tailwind CSS with custom glassmorphism styling
-- **Charts & Visualizations**: Recharts (Responsive Radar, Bar, Area charts)
-- **Iconography**: Lucide React
-- **API Client**: Centralized typed client (`frontend/lib/api.ts`)
-
-### Backend
-- **Framework**: FastAPI (Python 3.10+)
-- **Validation**: Pydantic v2
-- **ORM**: SQLAlchemy
-- **Mathematical Optimization**: SciPy (`scipy.optimize.linprog`) / PuLP
-- **AI & NLP**: Google Gemini API (`google-generativeai`) with graceful offline fallback templates
-- **Server**: Uvicorn ASGI
-
-### Database
-- **Primary / Cloud**: Supabase PostgreSQL (`database_schema.sql`)
-- **Local Fallback**: SQLite (`sqlite:///./prism.db`) for zero-configuration hackathon offline demonstration
-
----
-
-## 4. Repository Structure
-
+``` text
+Aptitude     91
+Interest     87
+Cognitive    74
+Competency   88
 ```
-prism-engine/
+
+This vector becomes the student's input to the career recommendation
+engine.
+
+------------------------------------------------------------------------
+
+# 7. Career Recommendation Engine
+
+PRISM currently evaluates these 10 career pathways:
+
+1.  AI/ML Engineer
+2.  Data Scientist
+3.  Software Engineer
+4.  Cybersecurity Analyst
+5.  Data Analyst
+6.  Cloud Engineer
+7.  Robotics Engineer
+8.  UI/UX Designer
+9.  Product Manager
+10. Electronics/Embedded Engineer
+
+------------------------------------------------------------------------
+
+# 8. Career Fit Calculation
+
+Career fit uses:
+
+  Dimension      Weight
+  ------------ --------
+  Aptitude          25%
+  Interest          30%
+  Cognitive         20%
+  Competency        25%
+
+Conceptually:
+
+``` text
+Career Fit =
+(Aptitude × 25%)
++ (Interest × 30%)
++ (Cognitive × 20%)
++ (Competency × 25%)
+```
+
+The result is the student's **PRISM Fit Score**.
+
+This is a decision-support score, not a guaranteed prediction of future
+success.
+
+------------------------------------------------------------------------
+
+# 9. Final Career Ranking
+
+Career ranking combines:
+
+  Factor            Weight
+  --------------- --------
+  Career Fit           60%
+  Market Demand        25%
+  Growth               15%
+
+Conceptually:
+
+``` text
+Final PRISM Score =
+(Fit × 60%)
++ (Market Demand × 25%)
++ (Growth × 15%)
+```
+
+The system should rank all available careers instead of simply
+displaying one hardcoded career.
+
+------------------------------------------------------------------------
+
+# 10. Explainable Recommendations
+
+Every recommendation should answer:
+
+### Why this career?
+
+Example:
+
+``` text
+AI/ML Engineer
+
+PRISM Fit: 91/100
+
+Why:
+- Strong analytical aptitude
+- High technology interest
+- Strong technical learning competency
+- Good alignment with current market demand
+```
+
+The system should use the student's actual assessment vector.
+
+------------------------------------------------------------------------
+
+# 11. Parent / Family Module
+
+Parents are an important part of the PRISM decision system.
+
+The parent module captures:
+
+### Financial information
+
+-   Education budget
+-   Hostel/travel budget
+-   Scholarships
+-   Loans
+-   Investment willingness
+-   Existing financial commitments
+
+### Career preferences
+
+-   Stability
+-   Prestige
+-   Risk tolerance
+-   Career aspiration
+-   Location preference
+-   Willingness to relocate
+-   Hostel/travel preference
+-   Education duration
+
+------------------------------------------------------------------------
+
+# 12. Financial Constraint Solver
+
+The solver compares:
+
+``` text
+Career Education Cost
+        +
+Hostel/Travel Cost
+        +
+Other Expected Costs
+        |
+        v
+Family Available Budget
+        |
+        v
+Financial Constraint Solver
+```
+
+Possible outputs:
+
+``` text
+AFFORDABLE
+PARTIALLY_AFFORDABLE
+NOT_AFFORDABLE
+```
+
+The system should also show:
+
+-   Estimated cost
+-   Available budget
+-   Financial gap
+-   Scholarship/loan possibility
+-   Risk level
+
+------------------------------------------------------------------------
+
+# 13. Important Financial Rule
+
+A high career-fit score does NOT automatically mean that the career
+should be recommended as the final pathway.
+
+Example:
+
+``` text
+Career Fit = 96%
+Financial Status = NOT AFFORDABLE
+```
+
+The system should not simply call this the best final pathway.
+
+Instead, it should explain the financial constraint and potentially
+suggest:
+
+-   Scholarship
+-   Loan planning
+-   Lower-cost institution/pathway
+-   Alternative pathway
+-   Affordable related career
+
+Possible recommendation statuses:
+
+``` text
+RECOMMENDED
+RECOMMENDED_WITH_FINANCIAL_PLANNING
+ALTERNATIVE_PATHWAY
+NOT_FINANCIALLY_FEASIBLE
+```
+
+This separation is important:
+
+**Fit Score ≠ Financial Feasibility**
+
+------------------------------------------------------------------------
+
+# 14. Student--Parent Alignment
+
+PRISM compares student preferences with parent preferences.
+
+Inputs can include:
+
+-   Career preference
+-   Risk appetite
+-   Location preference
+-   Stability preference
+-   Education budget
+-   Education duration
+
+Output:
+
+``` text
+Alignment Score: 0–100
+```
+
+Example:
+
+``` text
+Alignment Score: 78/100
+Level: Moderate Alignment
+
+Factors:
++ Career preference aligned
++ Education duration aligned
+- Parent prefers local education
+- Student prefers relocation
+```
+
+This is an explainable alignment indicator.
+
+It must NOT be described as a clinical or psychological diagnosis.
+
+------------------------------------------------------------------------
+
+# 15. Market Intelligence
+
+For each career, PRISM can display:
+
+-   Market demand
+-   Growth
+-   Salary range
+-   Required skills
+-   Relevant exams
+-   Hiring/opportunity information
+
+Example:
+
+``` text
+Cloud Engineer
+
+Market Demand: 90/100
+Growth: 85/100
+Salary Range: ₹X–Y LPA
+Key Skills:
+- Cloud platforms
+- Networking
+- Linux
+- DevOps
+```
+
+### Prototype data rule
+
+If live job-board or salary APIs are not connected, the UI must clearly
+label data as:
+
+-   Demo
+-   Estimated
+-   Prototype
+-   Stored dataset
+
+Do not claim that static data is live market data.
+
+------------------------------------------------------------------------
+
+# 16. Feasibility Boundaries
+
+For the current prototype, the following are intentionally outside the
+core Round 1 scope:
+
+-   Full live job-board integration
+-   Real-time salary feeds
+-   Clinical-grade psychometrics
+
+Instead, the prototype can use:
+
+-   Stored datasets
+-   Deterministic scoring
+-   Rule-based fallback
+-   Local calculations
+-   Free/low-cost infrastructure
+
+------------------------------------------------------------------------
+
+# 17. Main User Roles
+
+PRISM supports role-based experiences.
+
+## Student
+
+Route:
+
+``` text
+/student/dashboard
+```
+
+Main capabilities:
+
+-   Complete assessment
+-   View PRISM vector
+-   View career pathways
+-   View market intelligence
+-   View scholarships
+-   View exams/hiring tracker
+-   View PRISM report
+
+## Parent
+
+Route:
+
+``` text
+/parent/dashboard
+```
+
+Main capabilities:
+
+-   Financial profile
+-   Career expectations
+-   Risk/location preferences
+-   Affordability results
+-   Student-parent alignment
+
+## Counsellor
+
+Route:
+
+``` text
+/counsellor/dashboard
+```
+
+Potential capabilities:
+
+-   Review student profile
+-   Review recommendations
+-   Review alignment
+-   Support career discussions
+
+## Institution
+
+Route:
+
+``` text
+/institution/dashboard
+```
+
+Potential capabilities:
+
+-   Student insights
+-   Career trends
+-   Institutional guidance data
+
+## Admin
+
+Route:
+
+``` text
+/admin/dashboard
+```
+
+Potential capabilities:
+
+-   Dataset management
+-   Career data
+-   Market data
+-   User management
+-   System monitoring
+
+------------------------------------------------------------------------
+
+# 18. Student Dashboard
+
+The student dashboard should provide a quick overview.
+
+Important cards can include:
+
+``` text
+PRISM Top Fit Score
+Profile Completion
+Family Alignment
+Market Demand Score
+```
+
+Then:
+
+``` text
+Your PRISM 4-Pillar Vector
+```
+
+with:
+
+-   Aptitude
+-   Interest
+-   Cognitive
+-   Competency
+
+And:
+
+``` text
+Next Recommended Action
+```
+
+The dashboard should be generated from actual user data wherever
+possible.
+
+------------------------------------------------------------------------
+
+# 19. Career Pathways Page
+
+The Career Pathways page should show ranked careers.
+
+Each career should contain:
+
+``` text
+Career Name
+PRISM Fit Score
+Market Demand
+Growth
+Financial Status
+Salary Information
+Why Recommended
+Required Skills
+Possible Roadmap
+```
+
+The ranking must come from the PRISM engine.
+
+------------------------------------------------------------------------
+
+# 20. Landing Page
+
+The landing page communicates the PRISM concept.
+
+The student animation can represent:
+
+``` text
+Students
+   ↓
+Abilities + Interests
+   ↓
+PRISM AI
+   ↓
+Family + Finance + Market
+   ↓
+Career Pathway
+```
+
+The animation should be:
+
+-   Modern
+-   Professional
+-   Youthful
+-   Educational
+-   Subtle
+
+Avoid making it look like a children's cartoon.
+
+------------------------------------------------------------------------
+
+# 21. System Architecture
+
+Recommended architecture:
+
+``` text
+                    React + Vite
+                         |
+                         v
+                  PRISM Frontend
+                         |
+                    REST API
+                         |
+                         v
+                   FastAPI Backend
+                         |
+        +----------------+----------------+
+        |                |                |
+        v                v                v
+   AI/Scoring       Financial Solver   Market Engine
+        |                |                |
+        +----------------+----------------+
+                         |
+                         v
+                    Database
+```
+
+------------------------------------------------------------------------
+
+# 22. Technology Stack
+
+## Frontend
+
+-   React
+-   Vite
+-   Tailwind CSS
+-   React Router
+-   Recharts
+
+## Backend
+
+-   Python
+-   FastAPI
+
+## AI / Data Processing
+
+-   Python
+-   Scikit-learn where useful
+
+## Optimization
+
+-   SciPy
+-   PuLP where appropriate
+
+## Database
+
+-   PostgreSQL / Supabase
+
+## Authentication
+
+Prototype:
+
+-   Local/demo authentication
+
+Future:
+
+-   JWT-based authentication
+
+## Deployment
+
+Frontend:
+
+-   Vercel
+
+Backend:
+
+-   Render or equivalent
+
+Database:
+
+-   Supabase/PostgreSQL
+
+------------------------------------------------------------------------
+
+# 23. Repository Structure
+
+Recommended project structure:
+
+``` text
+PRISM/
 │
-├── frontend/                     # Next.js Frontend Application
-│   ├── app/
-│   │   ├── page.tsx              # Landing page & visual pipeline
-│   │   ├── assessment/page.tsx   # 5-step interactive assessment
-│   │   ├── career-dna/page.tsx   # Recharts radar & cognitive profile
-│   │   ├── parent/page.tsx       # Parent constraint calculator
-│   │   ├── parent/dashboard/page.tsx # Parent executive summary
-│   │   ├── alignment/page.tsx    # Parent–Student Conflict Index
-│   │   ├── recommendations/page.tsx # Top matches & financial tabs
-│   │   ├── compare/page.tsx      # Multi-career comparison matrix
-│   │   ├── market/page.tsx       # Regional STEAM intelligence
-│   │   ├── opportunities/page.tsx# Internships & innovation labs
-│   │   ├── opportunities/trackers/page.tsx # Exams & scholarships
-│   │   ├── roadmap/[career]/page.tsx # Career milestones & skill gaps
-│   │   ├── mentor/page.tsx       # Contextual AI Career Mentor chat
-│   │   ├── dashboard/page.tsx    # Student unified master dashboard
-│   │   ├── layout.tsx            # Global layout with theme
-│   │   └── globals.css           # Styling & design system
+├── frontend/
+│   ├── src/
 │   ├── components/
-│   │   ├── Navbar.tsx            # Responsive glassmorphism nav
-│   │   └── Footer.tsx            # Ethical AI disclaimer & links
-│   ├── lib/
-│   │   └── api.ts                # Centralized REST API client
-│   ├── types/
-│   │   └── index.ts              # Comprehensive TypeScript interfaces
-│   ├── package.json
-│   ├── tailwind.config.ts
-│   └── .env.local
+│   ├── pages/
+│   ├── data/
+│   └── services/
 │
-├── backend/                      # Python FastAPI Analytical Backend
+├── backend/
 │   ├── app/
-│   │   ├── main.py               # FastAPI entry point & CORS
-│   │   ├── database.py           # SQLAlchemy Supabase / SQLite engine
-│   │   ├── models/               # SQLAlchemy DB entities
-│   │   │   ├── student.py        # Student & Assessment models
-│   │   │   ├── parent.py         # Parent financial profiles
-│   │   │   ├── career.py         # 10+ STEAM careers catalog
-│   │   │   ├── opportunity.py    # Labs, exams, scholarships
-│   │   │   └── recommendation.py # Saved recommendations
-│   │   ├── schemas/              # Pydantic request/response schemas
-│   │   ├── routes/               # Modular API routers
-│   │   │   ├── students.py
-│   │   │   ├── parents.py
-│   │   │   ├── careers.py
-│   │   │   ├── recommendations.py
-│   │   │   ├── market.py
-│   │   │   ├── opportunities.py
-│   │   │   ├── roadmap.py
-│   │   │   └── mentor.py
-│   │   └── services/             # Analytical & AI engines
-│   │       ├── career_engine.py  # 5-factor PRISM scoring formula
-│   │       ├── financial_solver.py # SciPy linear optimization
-│   │       ├── conflict_index.py # Parent–Student Conflict Index
-│   │       ├── market_engine.py  # Regional STEAM hubs (Chennai, BLR)
-│   │       ├── roadmap_engine.py # Milestone generation & skill gaps
-│   │       └── gemini_service.py # Gemini API + fallback templates
-│   ├── seed_data.py              # Seeder with Arun Kumar demo dataset
-│   ├── test_api.py               # Automated verification test suite
-│   ├── database_schema.sql       # Pure PostgreSQL schema for Supabase
-│   ├── requirements.txt
-│   └── .env
+│   ├── routes/
+│   ├── services/
+│   ├── models/
+│   └── schemas/
+│
+├── ai-engine/
+│
+├── optimization-engine/
+│
+├── market-engine/
+│
+├── database/
 │
 ├── README.md
+│
 └── .gitignore
 ```
 
----
+------------------------------------------------------------------------
 
-## 5. Local Setup & Running
+# 24. Current Backend
 
-### Prerequisites
-- **Node.js**: v18.0.0 or higher (v20+ recommended)
-- **Python**: 3.10 or higher
-- **Git**
+The local FastAPI backend currently runs on:
 
----
-
-### Step 1: Clone Repository
-```bash
-git clone https://github.com/your-username/prism-engine.git
-cd prism-engine
+``` text
+http://127.0.0.1:8000
 ```
 
----
+Start command:
 
-### Step 2: Backend Setup
-```bash
-cd backend
-
-# Install Python dependencies
-pip install -r requirements.txt
-
-# Configure environment variables
-# Copy template or edit .env:
-# GEMINI_API_KEY=your_gemini_api_key (Optional: app includes robust fallback templates)
-# SUPABASE_DATABASE_URL= (Optional: defaults to local sqlite:///./prism.db)
-
-# Seed database with Arun Kumar profile and STEAM careers
-python seed_data.py
-
-# Run automated verification tests
-python test_api.py
-
-# Start FastAPI backend server
-uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+``` bash
+python -m uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```
-The backend API is now running at `http://localhost:8000` with interactive Swagger docs at `http://localhost:8000/docs`.
 
----
+Health endpoint:
 
-### Step 3: Frontend Setup
-Open a new terminal window:
-```bash
-cd frontend
-
-# Install npm dependencies
-npm install
-
-# Verify Next.js build
-npm run build
-
-# Start Next.js development server
-npm run dev
+``` text
+/api/health
 ```
-The frontend is now running at `http://localhost:3000`.
 
----
+Expected response:
 
-## 6. Supabase PostgreSQL Setup (Production)
+``` json
+{
+  "status": "ok",
+  "service": "PRISM API"
+}
+```
 
-To connect PRISM Engine to a live Supabase cloud database:
+Frontend API configuration should use:
 
-1. Create a project in [Supabase](https://supabase.com).
-2. Go to **SQL Editor** in your Supabase project dashboard.
-3. Paste the contents of `backend/database_schema.sql` and click **Run**.
-4. In your project settings, copy your Connection String under **Database Settings** (URI).
-5. In `backend/.env`, set:
-   ```env
-   SUPABASE_DATABASE_URL=postgresql://postgres:[YOUR-PASSWORD]@db.[YOUR-PROJECT-REF].supabase.co:5432/postgres
-   SUPABASE_URL=https://[YOUR-PROJECT-REF].supabase.co
-   SUPABASE_ANON_KEY=[YOUR-ANON-KEY]
-   ```
-6. Re-run `python seed_data.py` to seed Supabase with careers and demo records.
+``` text
+VITE_API_URL=http://127.0.0.1:8000/api
+```
 
----
+After changing `.env`, restart the Vite development server.
 
-## 7. Google Gemini API Setup
+------------------------------------------------------------------------
 
-PRISM uses Google Gemini to generate explainable rationale and power the interactive AI Career Mentor:
+# 25. Development Workflow
 
-1. Obtain a free API key at [Google AI Studio](https://aistudio.google.com).
-2. Add the key to `backend/.env`:
-   ```env
-   GEMINI_API_KEY=AIzaSy...
-   ```
-3. *Note*: Never expose this key in the frontend. If `GEMINI_API_KEY` is not provided, PRISM gracefully activates its high-precision deterministic explanation templates, ensuring 100% functionality offline.
+Every team member should follow this basic workflow:
 
----
+``` text
+1. Pull latest code
+2. Create/checkout your branch
+3. Make your changes
+4. Test locally
+5. Check console for errors
+6. Commit
+7. Push
+8. Create Pull Request
+9. Team lead reviews
+10. Merge
+```
 
-## 8. Hackathon Demo Walkthrough (Arun Kumar Profile)
+Do not directly overwrite another person's work.
 
-The application includes a pre-seeded student profile configured specifically for live hackathon demonstration:
+------------------------------------------------------------------------
 
-| Parameter | Value |
-|---|---|
-| **Student Name** | Arun Kumar |
-| **Age / Class** | 17 Years Old • Class 12 (Science PCM) |
-| **Location** | Chennai, Tamil Nadu |
-| **Academic Score** | 88% |
-| **Cognitive Aptitude** | 91/100 (Logical: 94, Numerical: 92, Problem Solving: 90) |
-| **Key Skills** | Programming (92), Mathematics (89), Problem Solving (91) |
-| **Interests** | AI, Technology, Robotics |
-| **Parent Annual Budget** | ₹6,00,000 (Max Ceiling: ₹8,00,000) |
-| **Parent Loan Preference** | Low (Zero high-risk debt) |
-| **Parent Preferred Domain** | Engineering / Technology (Chennai) |
+# 26. Git Branching
 
-### Demonstration Flow:
-1. **Landing Page (`/`)**: View the visual 5-node pipeline and core principle statement.
-2. **Student Assessment (`/assessment`)**: Click *"Load Arun Kumar Demo Profile"* to step through Basic Info, Interests, Cognitive Diagnostic test, Skills ratings, and Career Preferences.
-3. **Student Career DNA (`/career-dna`)**: View the Recharts radar chart displaying Arun's 91/100 cognitive aptitude alongside Gemini AI strengths analysis.
-4. **Parent Constraints Portal (`/parent`)**: Adjust family budget sliders and run live SciPy constraint simulations.
-5. **Parent Executive Dashboard (`/parent/dashboard`)**: Inspect transparent cost coverage and the official family advisory statement.
-6. **Parent–Student Conflict Index (`/alignment`)**: Explore the 95.5% harmony score, 4.5/100 conflict index, and synthesized **Common Ground** bridge careers.
-7. **Ranked Recommendations (`/recommendations`)**:
-   - **#1 Top Match**: **AI / ML Engineer** (PRISM Score: 90.5/100) — High aptitude match, ₹4.5L tuition within budget, and robust market demand.
-   - **Financial Boundary Demonstration**: Click *"Financially Difficult / Constrained"* to show Medicine (MBBS: ₹18,00,000) quarantined due to budget excess.
-8. **Career Comparison (`/compare`)**: Compare AI Engineering vs Data Science vs Robotics side-by-side using responsive Recharts bar charts.
-9. **Regional Market Intelligence (`/market`)**: Switch between Chennai, Bengaluru, and Hyderabad to see local EV/AI clusters.
-10. **Opportunities & Trackers (`/opportunities`, `/opportunities/trackers`)**: Browse internships at IIT Madras Research Park and track JEE Main and Reliance Foundation scholarships.
-11. **Career Roadmap (`/roadmap/ai-ml-engineer`)**: Follow the 5-stage progression from Class 12 to industry placement with prioritized skill gap badges.
-12. **PRISM AI Career Mentor (`/mentor`)**: Chat interactively with the context-grounded AI mentor.
+Recommended:
 
----
+``` text
+main
+│
+├── frontend
+├── backend
+├── ai-engine
+├── financial-engine
+├── market-engine
+└── docs
+```
 
-## 9. API Reference
+Example:
 
-All backend endpoints are prefixed with `/api`:
+``` bash
+git checkout -b feature/assessment-engine
+```
 
-| Method | Endpoint | Description |
-|---|---|---|
-| `POST` | `/api/students` | Create or update student profile |
-| `GET` | `/api/students/{id}` | Retrieve student profile details |
-| `POST` | `/api/assessment` | Submit cognitive diagnostic responses |
-| `GET` | `/api/career-dna/{id}` | Generate Career DNA radar and summary |
-| `POST` | `/api/parents` | Save family budget and loan boundaries |
-| `GET` | `/api/parents/{id}` | Retrieve parent configuration |
-| `POST` | `/api/financial/check` | Execute SciPy linear optimization solver |
-| `POST` | `/api/conflict` | Calculate Conflict Index and common ground |
-| `GET` | `/api/recommendations/{id}`| Compute 5-factor ranked careers |
-| `GET` | `/api/careers` | Catalog of 10+ STEAM careers |
-| `GET` | `/api/market/{slug}` | Regional hiring trends and city hubs |
-| `GET` | `/api/opportunities` | Local internships and hackathons |
-| `GET` | `/api/opportunities/trackers`| National exams and scholarships |
-| `GET` | `/api/roadmap/{slug}` | Multi-stage roadmap with skill gaps |
-| `POST` | `/api/mentor` | Grounded AI Career Mentor conversation |
+Commit example:
 
----
+``` bash
+git add .
+git commit -m "feat: implement PRISM assessment scoring"
+git push origin feature/assessment-engine
+```
 
-## 10. Deployment Instructions
+------------------------------------------------------------------------
 
-### Deploying Frontend to Vercel
-1. Push this repository to GitHub.
-2. In [Vercel](https://vercel.com), import the repository and set the **Root Directory** to `frontend`.
-3. Set the environment variable:
-   ```
-   NEXT_PUBLIC_API_URL=https://your-backend-url.onrender.com
-   ```
-4. Click **Deploy**.
+# 27. Team Responsibilities
 
-### Deploying Backend to Render / Railway
-1. In [Render](https://render.com), create a new **Web Service** connected to your repository.
-2. Set **Root Directory** to `backend`.
-3. Set **Build Command**: `pip install -r requirements.txt && python seed_data.py`
-4. Set **Start Command**: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
-5. Configure Environment Variables:
-   - `GEMINI_API_KEY`
-   - `SUPABASE_DATABASE_URL`
+## Member 1 -- Lead / Integration
 
----
+Responsible for:
 
-## 11. Verification & Quality Assurance
+-   Overall architecture
+-   Integration
+-   GitHub
+-   Final testing
+-   Demo flow
+-   Ensuring all modules communicate correctly
 
-- **TypeScript Compilation**: Clean build verified (`npm run build` completed with zero errors).
-- **Backend Test Suite**: `backend/test_api.py` verified with 100% pass rate.
-- **Offline Reliability**: Tested and functional even without external AI API availability.
-- **Optimization Stability**: High-precision linear programming verified with SciPy.
+## Member 2 -- Frontend
 
----
+Responsible for:
 
-## 12. License & Acknowledgments
+-   React UI
+-   Dashboard
+-   Landing page
+-   Navigation
+-   Charts
+-   Responsive design
 
-Built for the **DataQuest 3.0 Hackathon**.
-Designed with dedication to student potential and family financial peace of mind.
+## Member 3 -- Backend
 
-#   p r i s m - a l m o s t - f i n a l  
- 
+Responsible for:
+
+-   FastAPI
+-   API routes
+-   Validation
+-   Database integration
+-   CORS
+-   Backend testing
+
+## Member 4 -- AI / Assessment
+
+Responsible for:
+
+-   24-question assessment
+-   Student vector
+-   Career-fit scoring
+-   Explainability
+-   AI/data-processing logic
+
+## Member 5 -- Financial / Optimization
+
+Responsible for:
+
+-   Family financial profile
+-   Financial Constraint Solver
+-   Affordability classification
+-   Financial gap
+-   Scholarship/loan considerations
+
+## Member 6 -- Market Intelligence
+
+Responsible for:
+
+-   Career dataset
+-   Market demand
+-   Growth
+-   Salary data
+-   Skills
+-   Exams/hiring/scholarships
+-   Data labeling and validation
+
+------------------------------------------------------------------------
+
+# 28. Important Rule for Everyone
+
+Do not hardcode results just to make the dashboard look impressive.
+
+Bad:
+
+``` text
+AI/ML Engineer = 97%
+```
+
+for every student.
+
+Good:
+
+``` text
+Student answers
+      ↓
+Student vector
+      ↓
+Career calculation
+      ↓
+Actual ranking
+```
+
+The same principle applies to:
+
+-   Financial status
+-   Alignment score
+-   Market score
+-   Profile completion
+-   Recommendation reasons
+
+Whenever possible, display values calculated from actual stored data.
+
+------------------------------------------------------------------------
+
+# 29. Demo Flow
+
+The hackathon demo should follow this sequence:
+
+``` text
+1. Open PRISM Landing Page
+        ↓
+2. Student Login
+        ↓
+3. Student Dashboard
+        ↓
+4. Complete 24-Q Assessment
+        ↓
+5. Generate PRISM Vector
+        ↓
+6. View Career Pathways
+        ↓
+7. Show Ranked Careers
+        ↓
+8. Open Parent Profile
+        ↓
+9. Enter Financial Constraints
+        ↓
+10. Run Financial Solver
+        ↓
+11. Show Student-Parent Alignment
+        ↓
+12. Show Market Intelligence
+        ↓
+13. Generate PRISM Report
+        ↓
+14. Show Personalized Career Roadmap
+```
+
+This demonstrates the complete PRISM concept instead of showing
+disconnected pages.
+
+------------------------------------------------------------------------
+
+# 30. What Makes PRISM Different?
+
+PRISM combines three major perspectives:
+
+``` text
+STUDENT
+"What am I suited for?"
+
+       +
+
+FAMILY
+"Can we realistically support it?"
+
+       +
+
+MARKET
+"Does the pathway have demand and growth?"
+
+       ↓
+
+       PRISM
+
+       ↓
+
+"Which pathway is suitable,
+financially realistic,
+and future-ready?"
+```
+
+This is the central product story.
+
+------------------------------------------------------------------------
+
+# 31. Important UI/Data Integrity Rules
+
+The interface must never claim something is live when it is not.
+
+For example:
+
+Bad:
+
+``` text
+LIVE MARKET DATA
+```
+
+when using a static prototype dataset.
+
+Good:
+
+``` text
+MARKET DATA
+Prototype / Estimated
+```
+
+Similarly:
+
+Bad:
+
+``` text
+AI prediction: You WILL become an AI Engineer
+```
+
+Good:
+
+``` text
+PRISM Fit Score: 91/100
+Recommended based on your assessment profile
+```
+
+PRISM is a decision-support platform, not a guarantee engine.
+
+------------------------------------------------------------------------
+
+# 32. Testing Checklist
+
+Before the final demo, test:
+
+### Authentication
+
+-   [ ] Student login
+-   [ ] Parent login
+-   [ ] Role switching
+-   [ ] Logout
+
+### Assessment
+
+-   [ ] All 24 questions appear
+-   [ ] All 5 options work
+-   [ ] Previous/Next works
+-   [ ] Answers persist
+-   [ ] Submission works
+-   [ ] Vector is calculated correctly
+-   [ ] Refresh does not unexpectedly lose results
+
+### Career Engine
+
+-   [ ] All 10 careers appear
+-   [ ] Ranking changes according to student answers
+-   [ ] Fit score is calculated
+-   [ ] Market score is shown
+-   [ ] Growth is shown
+-   [ ] Recommendation reason is displayed
+
+### Financial Engine
+
+-   [ ] Parent profile saves
+-   [ ] Budget is processed
+-   [ ] Affordability status is calculated
+-   [ ] Financial gap is shown
+-   [ ] Scholarship/loan option is considered
+
+### Alignment
+
+-   [ ] Student preference is captured
+-   [ ] Parent preference is captured
+-   [ ] Alignment score is calculated
+-   [ ] Factors are explained
+
+### Backend
+
+-   [ ] `/api/health` works
+-   [ ] CORS works
+-   [ ] API errors are handled
+-   [ ] Frontend does not break if API is temporarily unavailable
+
+### UI
+
+-   [ ] Full-width desktop layout
+-   [ ] No unwanted horizontal scrolling
+-   [ ] Responsive tablet layout
+-   [ ] Responsive mobile layout
+-   [ ] No console errors
+-   [ ] No broken routes
+
+------------------------------------------------------------------------
+
+# 33. Development Priority
+
+Do not build everything at once.
+
+Use this order:
+
+``` text
+PHASE 1
+Assessment
+      ↓
+Student Vector
+
+PHASE 2
+Career Engine
+      ↓
+Career Ranking
+
+PHASE 3
+Parent Profile
+      ↓
+Financial Solver
+
+PHASE 4
+Student-Parent Alignment
+
+PHASE 5
+Market Intelligence
+
+PHASE 6
+Roadmap + Opportunities
+
+PHASE 7
+PRISM Report
+
+PHASE 8
+Testing + Demo + Deployment
+```
+
+The most important rule:
+
+**Make the core data pipeline work before adding decorative features.**
+
+------------------------------------------------------------------------
+
+# 34. What We Should NOT Do
+
+Avoid:
+
+-   Fake AI outputs
+-   Random hardcoded scores
+-   Claiming static data is live
+-   Unexplained recommendations
+-   Clinical psychological claims
+-   Overly complicated ML when deterministic scoring is enough
+-   Adding unnecessary features before the core pipeline works
+-   Breaking working backend functionality while modifying UI
+-   Replacing working components unnecessarily
+
+------------------------------------------------------------------------
+
+# 35. Future Enhancements
+
+After the core prototype works, possible extensions include:
+
+-   Live job-market APIs
+-   Real-time salary feeds
+-   Scholarship API integration
+-   College/course recommendation
+-   Regional opportunity mapping
+-   More career pathways
+-   Better personalization
+-   Secure authentication
+-   Production database
+-   Advanced analytics
+-   More sophisticated ML models
+
+These should come **after the Round 1 core pipeline is stable**.
+
+------------------------------------------------------------------------
+
+# 36. Final Product Vision
+
+PRISM should ultimately behave like this:
+
+``` text
+                    ┌───────────────┐
+                    │    STUDENT    │
+                    └───────┬───────┘
+                            │
+                     24-Q Assessment
+                            │
+                            ▼
+                    ┌───────────────┐
+                    │ PRISM VECTOR  │
+                    └───────┬───────┘
+                            │
+                            ▼
+              ┌──────────────────────────┐
+              │     CAREER ENGINE        │
+              └────────────┬─────────────┘
+                           │
+              ┌────────────┼────────────┐
+              ▼            ▼            ▼
+           Student       Family       Market
+             Fit        Finance       Demand
+              │            │            │
+              └────────────┼────────────┘
+                           ▼
+                 ┌──────────────────┐
+                 │ PRISM DECISION   │
+                 │     ENGINE       │
+                 └────────┬─────────┘
+                          │
+                          ▼
+                 Career Recommendation
+                          │
+                          ▼
+                    Roadmap + Skills
+                          │
+                          ▼
+                    PRISM REPORT
+```
+
+------------------------------------------------------------------------
+
+# 37. One Sentence Everyone on the Team Should Remember
+
+> **PRISM does not simply tell a student what career they like; it finds
+> career pathways that match the student's abilities and interests,
+> considers family financial reality and parent expectations, and
+> combines those factors with market demand to produce an explainable,
+> financially realistic career pathway.**
+
+------------------------------------------------------------------------
+
+## Status
+
+This README is the shared project understanding document.
+
+Before adding a new feature, the team should ask:
+
+1.  Does it support the PRISM core idea?
+2.  Does it use real data instead of hardcoded output?
+3.  Does it integrate with the existing pipeline?
+4.  Does it improve the final demo?
+5.  Will it break an existing module?
+
+If the answer to these questions is unclear, discuss it with the
+integration lead before implementing it.

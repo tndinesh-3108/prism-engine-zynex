@@ -1,0 +1,392 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0d0614;
+  --foreground: #fff1f2;
+  --card-bg: rgba(24, 12, 36, 0.75);
+  --card-border: rgba(244, 114, 182, 0.2);
+}
+
+*, *::before, *::after {
+  font-family: "Times New Roman", Times, Georgia, serif;
+}
+
+body {
+  font-family: "Times New Roman", Times, Georgia, serif;
+  color: var(--foreground);
+  background: var(--background);
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(168, 85, 247, 0.16) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(244, 114, 182, 0.14) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(251, 146, 60, 0.10) 0px, transparent 50%),
+    radial-gradient(at 50% 50%, rgba(253, 164, 175, 0.08) 0px, transparent 60%);
+  background-attachment: fixed;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Custom modern scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0d0614;
+}
+::-webkit-scrollbar-thumb {
+  background: #3b1d4a;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #d946ef;
+}
+
+.glass-card {
+  background: rgba(24, 12, 36, 0.70);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(244, 114, 182, 0.14);
+}
+
+.glass-card-hover {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.glass-card-hover:hover {
+  border-color: rgba(244, 114, 182, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -10px rgba(217, 70, 239, 0.3);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #f472b6 0%, #fda4af 30%, #c084fc 70%, #fdba74 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-badge {
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.2) 0%, rgba(168, 85, 247, 0.2) 100%);
+  border: 1px solid rgba(253, 164, 175, 0.35);
+}
+
+/* ========================================================================= */
+/* WHITE THEME PALETTE (Pink, Peach, Purple, Light Rose)                     */
+/* ========================================================================= */
+
+html[data-theme="white"],
+body.theme-white,
+.theme-white {
+  --background: #fff8fa;
+  --foreground: #2e1065;
+  --card-bg: rgba(255, 255, 255, 0.95);
+  --card-border: rgba(244, 114, 182, 0.28);
+}
+
+body.theme-white {
+  color: #2e1065;
+  background-color: #fff8fa;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(244, 114, 182, 0.16) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(168, 85, 247, 0.12) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(251, 146, 60, 0.12) 0px, transparent 50%),
+    radial-gradient(at 50% 50%, rgba(253, 164, 175, 0.14) 0px, transparent 60%);
+  background-attachment: fixed;
+}
+
+/* White theme scrollbars */
+.theme-white ::-webkit-scrollbar-track,
+body.theme-white::-webkit-scrollbar-track {
+  background: #fff1f5;
+}
+.theme-white ::-webkit-scrollbar-thumb,
+body.theme-white::-webkit-scrollbar-thumb {
+  background: #f472b6;
+}
+.theme-white ::-webkit-scrollbar-thumb:hover,
+body.theme-white::-webkit-scrollbar-thumb:hover {
+  background: #ec4899;
+}
+
+/* ------------------------------------------------------------------------- */
+/* CONTAINER & CARD SURFACES IN WHITE MODE (NO BLACK BOXES)                  */
+/* ------------------------------------------------------------------------- */
+
+/* Universal wildcard match: Every dark hex background (#0..., #1..., #2...) becomes a light card */
+.theme-white .glass-card,
+.theme-white [class*="bg-[#0"],
+.theme-white [class*="bg-[#1"],
+.theme-white [class*="bg-[#2"],
+.theme-white [class*="bg-slate-900"],
+.theme-white [class*="bg-slate-950"],
+.theme-white [class*="bg-purple-950"],
+.theme-white [class*="bg-pink-950"],
+.theme-white [class*="bg-rose-950"],
+.theme-white [class*="bg-peach-950"],
+.theme-white [class*="bg-black"] {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  border-color: rgba(244, 114, 182, 0.28) !important;
+  box-shadow: 0 4px 20px -2px rgba(244, 114, 182, 0.08), 0 2px 6px -1px rgba(168, 85, 247, 0.05) !important;
+}
+
+/* Selected active tabs & highlight cards in White Mode */
+.theme-white [class*="ring-pink-500"],
+.theme-white [class*="border-pink-500"].shadow-lg,
+.theme-white [class*="border-pink-500"].shadow-md {
+  background-color: #fdf2f8 !important;
+  border-color: #db2777 !important;
+}
+
+.theme-white [class*="ring-peach-500"],
+.theme-white [class*="border-peach-500"].shadow-lg,
+.theme-white [class*="border-peach-500"].shadow-md {
+  background-color: #fff7ed !important;
+  border-color: #ea580c !important;
+}
+
+.theme-white [class*="ring-purple-500"],
+.theme-white [class*="border-purple-500"].shadow-lg,
+.theme-white [class*="border-purple-500"].shadow-md {
+  background-color: #faf5ff !important;
+  border-color: #9333ea !important;
+}
+
+.theme-white [class*="ring-rose-400"],
+.theme-white [class*="ring-rose-500"] {
+  background-color: #fff1f2 !important;
+  border-color: #e11d48 !important;
+}
+
+/* Subtle inner chips, tracks, and pills in White Mode */
+.theme-white [class*="bg-purple-950/"],
+.theme-white [class*="bg-purple-900/"],
+.theme-white [class*="bg-pink-950/"],
+.theme-white [class*="bg-pink-900/"],
+.theme-white [class*="bg-rose-950/"],
+.theme-white [class*="bg-peach-950/"] {
+  background-color: #fff1f5 !important;
+  border-color: #fbcfe8 !important;
+}
+
+/* Green and Emerald badges/chips in White Mode - Never dark, muddy or camouflaged */
+.theme-white [class*="bg-emerald-950"],
+.theme-white [class*="bg-emerald-900"],
+.theme-white [class*="bg-green-950"],
+.theme-white [class*="bg-green-900"],
+.theme-white [class*="bg-teal-950"],
+.theme-white [class*="bg-emerald-500/"],
+.theme-white [class*="bg-green-500/"],
+.theme-white [class*="bg-[#101c1c]"] {
+  background-color: #f0fdf4 !important;
+  border-color: #86efac !important;
+  color: #14532d !important;
+  box-shadow: 0 1px 3px 0 rgba(22, 101, 52, 0.08) !important;
+}
+
+.theme-white [class*="bg-amber-950"],
+.theme-white [class*="bg-amber-900"],
+.theme-white [class*="bg-yellow-950"] {
+  background-color: #fffbeb !important;
+  border-color: #fde68a !important;
+  color: #92400e !important;
+}
+
+/* Hover effects on cards in White Mode */
+.theme-white .glass-card-hover:hover {
+  border-color: rgba(236, 72, 153, 0.5) !important;
+  box-shadow: 0 12px 28px -8px rgba(217, 70, 239, 0.15) !important;
+}
+
+/* Header, Sidebar, and Footer in White Mode */
+.theme-white header {
+  background-color: rgba(255, 255, 255, 0.94) !important;
+  border-bottom-color: rgba(244, 114, 182, 0.25) !important;
+}
+
+.theme-white aside {
+  background-color: #ffffff !important;
+  border-right-color: rgba(244, 114, 182, 0.25) !important;
+}
+
+.theme-white footer {
+  background-color: #fff8fa !important;
+  border-top-color: rgba(244, 114, 182, 0.25) !important;
+}
+
+/* ------------------------------------------------------------------------- */
+/* TEXT COLOR TRANSFORMATIONS IN WHITE MODE (NO WHITE TEXT ON WHITE)        */
+/* ------------------------------------------------------------------------- */
+
+/* Headings and primary high-contrast text change to Deep Imperial Purple */
+.theme-white .text-white {
+  color: #2e1065 !important;
+}
+
+/* Light rose text variants change to Deep Palette Purple / Plum */
+.theme-white .text-rose-50,
+.theme-white .text-rose-100 {
+  color: #3b0764 !important;
+}
+.theme-white .text-rose-200 {
+  color: #581c87 !important;
+}
+.theme-white .text-rose-300 {
+  color: #701a75 !important;
+}
+.theme-white .text-rose-400 {
+  color: #831843 !important;
+}
+
+/* Pink text variants change to Rich Vibrant Pink */
+.theme-white .text-pink-100,
+.theme-white .text-pink-200,
+.theme-white .text-pink-300 {
+  color: #be185d !important;
+}
+.theme-white .text-pink-400,
+.theme-white .text-pink-500 {
+  color: #db2777 !important;
+}
+
+/* Peach text variants change to Rich Warm Peach */
+.theme-white .text-peach-100,
+.theme-white .text-peach-200,
+.theme-white .text-peach-300 {
+  color: #c2410c !important;
+}
+.theme-white .text-peach-400,
+.theme-white .text-peach-500 {
+  color: #ea580c !important;
+}
+
+/* Purple text variants change to Royal Deep Purple */
+.theme-white .text-purple-100,
+.theme-white .text-purple-200,
+.theme-white .text-purple-300 {
+  color: #6b21a8 !important;
+}
+.theme-white .text-purple-400,
+.theme-white .text-purple-500 {
+  color: #7e22ce !important;
+}
+
+/* Slate and Gray muted text classes */
+.theme-white .text-slate-100,
+.theme-white .text-slate-200,
+.theme-white .text-slate-300,
+.theme-white .text-slate-400,
+.theme-white .text-gray-100,
+.theme-white .text-gray-200,
+.theme-white .text-gray-300,
+.theme-white .text-gray-400 {
+  color: #475569 !important;
+}
+
+/* Status text classes in White Mode (High-contrast, never pale or washed out) */
+.theme-white .text-emerald-100,
+.theme-white .text-emerald-200,
+.theme-white .text-emerald-300,
+.theme-white .text-emerald-400,
+.theme-white .text-emerald-500,
+.theme-white .text-green-200,
+.theme-white .text-green-300,
+.theme-white .text-green-400,
+.theme-white .text-teal-200,
+.theme-white .text-teal-300,
+.theme-white .text-teal-400 {
+  color: #14532d !important; /* Deep Forest Green - maximum readability */
+}
+
+.theme-white .text-amber-200,
+.theme-white .text-amber-300,
+.theme-white .text-amber-400,
+.theme-white .text-amber-500 {
+  color: #92400e !important;
+}
+
+/* Opacity text classes: convert to legible palette shades */
+.theme-white [class*="text-rose-"][class*="/"],
+.theme-white [class*="text-white/"] {
+  color: #4c1d95 !important;
+}
+.theme-white [class*="text-pink-"][class*="/"] {
+  color: #9d174d !important;
+}
+.theme-white [class*="text-peach-"][class*="/"] {
+  color: #9a3412 !important;
+}
+.theme-white [class*="text-purple-"][class*="/"] {
+  color: #581c87 !important;
+}
+
+/* ONLY Solid Action Buttons retain crisp white text */
+.theme-white button[class*="from-pink-"],
+.theme-white button[class*="from-purple-"],
+.theme-white a[class*="from-pink-"],
+.theme-white a[class*="from-purple-"],
+.theme-white button[class*="bg-pink-600"],
+.theme-white button[class*="bg-purple-600"],
+.theme-white .btn-solid-white {
+  color: #ffffff !important;
+}
+
+.theme-white button[class*="from-pink-"] *,
+.theme-white button[class*="from-purple-"] *,
+.theme-white a[class*="from-pink-"] *,
+.theme-white a[class*="from-purple-"] * {
+  color: #ffffff !important;
+}
+
+/* Gradient text with high readability in white mode */
+.theme-white .gradient-text {
+  background: linear-gradient(135deg, #db2777 0%, #c026d3 35%, #7e22ce 70%, #ea580c 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* ------------------------------------------------------------------------- */
+/* BORDERS & INPUTS IN WHITE MODE                                            */
+/* ------------------------------------------------------------------------- */
+
+.theme-white [class*="border-purple-900"],
+.theme-white [class*="border-purple-950"],
+.theme-white [class*="border-rose-950"],
+.theme-white [class*="border-pink-900"] {
+  border-color: #fce7f3 !important;
+}
+
+/* Form Inputs & Controls in White Mode */
+.theme-white input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+.theme-white select,
+.theme-white textarea {
+  background-color: #ffffff !important;
+  color: #2e1065 !important;
+  border-color: #fbcfe8 !important;
+}
+
+.theme-white input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):focus,
+.theme-white select:focus,
+.theme-white textarea:focus {
+  border-color: #ec4899 !important;
+  box-shadow: 0 0 0 2px rgba(236, 72, 153, 0.18) !important;
+}
+
+.theme-white input::placeholder,
+.theme-white textarea::placeholder {
+  color: #7e22ce !important;
+  opacity: 0.5;
+}
+
+/* Badges in White Mode */
+.theme-white .gradient-badge {
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.12) 0%, rgba(168, 85, 247, 0.12) 100%) !important;
+  border-color: rgba(244, 114, 182, 0.35) !important;
+}
+
+/* Certificate Document Viewer in White Mode */
+.theme-white .cert-document {
+  background: linear-gradient(180deg, #ffffff 0%, #fffbfa 50%, #fff7f9 100%) !important;
+  border-color: #ec4899 !important;
+  box-shadow: 0 12px 36px -6px rgba(236, 72, 153, 0.18), 0 4px 12px rgba(168, 85, 247, 0.08) !important;
+}
+

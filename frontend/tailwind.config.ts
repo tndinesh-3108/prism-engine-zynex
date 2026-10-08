@@ -56,8 +56,8 @@ const config: Config = {
         }
       },
       fontFamily: {
-        sans: ['"Times New Roman"', "Times", "serif"],
-        serif: ['"Times New Roman"', "Times", "serif"],
+        sans: ['"Segoe UI"', "-apple-system", "BlinkMacSystemFont", "Roboto", "Helvetica", "Arial", "sans-serif"],
+        serif: ['"Segoe UI"', "-apple-system", "BlinkMacSystemFont", "Roboto", "Helvetica", "Arial", "sans-serif"],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

@@ -10,14 +10,14 @@
 }
 
 *, *::before, *::after {
-  font-family: "Times New Roman", Times, Georgia, serif;
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 html {
   font-size: 16px;
 }
 
-/* Elevate small font sizes for Times New Roman readability */
+/* Elevate small font sizes for readability */
 .text-\[8px\],
 .text-\[9px\],
 .text-\[10px\] {
@@ -37,7 +37,7 @@ html {
 }
 
 body {
-  font-family: "Times New Roman", Times, Georgia, serif;
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 15px;
   line-height: 1.6;
   color: var(--foreground);

@@ -89,17 +89,23 @@ export default function ParentDashboardPage() {
     resetFlow
   } = useStudentParentFlow();
 
-  // Live Interactive Sliders in Parent Portal initialized from flow state
-  const [annualBudget, setAnnualBudget] = useState(parentParameters.annualBudget);
-  const [maxAffordableCost, setMaxAffordableCost] = useState(parentParameters.degreeCeiling);
-  const [loanPreference, setLoanPreference] = useState<"None" | "Low" | "Moderate" | "High">(parentParameters.loanTolerance);
+  // Live Interactive Inputs in Parent Portal
+  const [parentAnnualIncome, setParentAnnualIncome] = useState(
+    parentParameters.parentAnnualIncome || 1000000
+  );
+  const [feesCanBePaidPerYear, setFeesCanBePaidPerYear] = useState(
+    parentParameters.feesCanBePaidPerYear || 400000
+  );
+  const [loanPreference, setLoanPreference] = useState<"None" | "Low" | "Moderate" | "High">(
+    parentParameters.loanTolerance || "Low"
+  );
   const [submittedMessage, setSubmittedMessage] = useState(false);
 
   // Sync state when parentParameters updates externally
   useEffect(() => {
-    setAnnualBudget(parentParameters.annualBudget);
-    setMaxAffordableCost(parentParameters.degreeCeiling);
-    setLoanPreference(parentParameters.loanTolerance);
+    if (parentParameters.parentAnnualIncome) setParentAnnualIncome(parentParameters.parentAnnualIncome);
+    if (parentParameters.feesCanBePaidPerYear) setFeesCanBePaidPerYear(parentParameters.feesCanBePaidPerYear);
+    if (parentParameters.loanTolerance) setLoanPreference(parentParameters.loanTolerance);
   }, [parentParameters]);
 
   useEffect(() => {
@@ -122,24 +128,47 @@ export default function ParentDashboardPage() {
   const altCareers = recs?.top_recommendations?.slice(1, 4) || [];
 
   // Live Reactive Calculations based on Selected Course and Parent Sliders
-  const targetTuition = Number(selectedCourse?.annualFee || 450000);
-  const totalCost = Number(selectedCourse?.total4YearFee || 1800000);
-  const budgetSurplus = annualBudget - targetTuition;
-  const coveragePercentage = Math.min(100, Math.round((maxAffordableCost / totalCost) * 100));
-  const loanRequired = Math.max(0, totalCost - maxAffordableCost);
-  const isFeasible = maxAffordableCost >= totalCost;
+  const studentAnnualFee = Number(selectedCourse?.annualFee || 350000);
+  const studentTotal4Year = Number(selectedCourse?.total4YearFee || studentAnnualFee * 4);
+  const total4YearPayable = feesCanBePaidPerYear * 4;
+  const budgetSurplus = feesCanBePaidPerYear - studentAnnualFee;
 
-  // Macroeconomic Financial Viability Index (Deterministic Sigmoid curve matching solver.py)
-  const costRatio = maxAffordableCost / Math.max(totalCost, 1);
-  const rawViability = (1 / (1 + Math.exp(-3.0 * (costRatio - 1.0)))) * 100;
-  const liveFinancialViabilityIndex = Math.min(100, Math.max(0, Math.round(rawViability * 10) / 10));
+  // Evaluation criteria requested by user:
+  // "and if the student fees, is less than annual income its ok at margin of annual income its critical and not safe, if exceeded the course should be avoided."
+  const feeToIncomeRatio = studentAnnualFee / Math.max(parentAnnualIncome, 1);
+  const isExceeded = studentAnnualFee > parentAnnualIncome;
+  const isCritical = !isExceeded && feeToIncomeRatio >= 0.7;
+  const liveFinancialViabilityIndex = !isExceeded && !isCritical ? 94 : isCritical ? 62 : 18;
 
-  const viabilityGrade =
-    liveFinancialViabilityIndex >= 75
-      ? { label: "Optimal Viability", badge: "bg-emerald-950/80 text-emerald-300 border-emerald-500/40", text: "text-emerald-400" }
-      : liveFinancialViabilityIndex >= 45
-      ? { label: "Moderate Viability", badge: "bg-peach-950/80 text-peach-300 border-peach-500/40", text: "text-peach-300" }
-      : { label: "High Deficit", badge: "bg-rose-950/80 text-rose-300 border-rose-500/40", text: "text-rose-400" };
+  const affordabilityStatus: "safe" | "critical" | "avoid" = isExceeded
+    ? "avoid"
+    : isCritical
+    ? "critical"
+    : "safe";
+
+  const affordabilityLabel = isExceeded
+    ? "Course Should Be Avoided"
+    : isCritical
+    ? "Critical & Not Safe"
+    : "OK (Safe & Affordable)";
+
+  const affordabilityBadge = isExceeded
+    ? "bg-rose-950/80 text-rose-300 border-rose-500/50"
+    : isCritical
+    ? "bg-amber-950/80 text-amber-300 border-amber-500/50"
+    : "bg-emerald-950/80 text-emerald-300 border-emerald-500/50";
+
+  const affordabilityText = isExceeded
+    ? "text-rose-400"
+    : isCritical
+    ? "text-amber-400"
+    : "text-emerald-400";
+
+  const affordabilityDetail = isExceeded
+    ? `Student annual fee (₹${studentAnnualFee.toLocaleString("en-IN")}) exceeds parent annual income (₹${parentAnnualIncome.toLocaleString("en-IN")}). This course should be avoided.`
+    : isCritical
+    ? `Student annual fee (₹${studentAnnualFee.toLocaleString("en-IN")}) is at the margin of parent annual income (${Math.round(feeToIncomeRatio * 100)}%). This poses high financial strain.`
+    : `Student annual fee (₹${studentAnnualFee.toLocaleString("en-IN")}) is comfortably less than parent annual income (${Math.round(feeToIncomeRatio * 100)}%). Safe to proceed.`;
 
   // Parent-Student Conflict Index (Friction) for Gauge Visualization
   const conflictScore =
@@ -501,100 +530,140 @@ export default function ParentDashboardPage() {
       </div>
 
       {/* ========================================================================= */}
-      {/* INTERACTIVE BUDGET & LOAN CEILING SLIDERS IN PARENT PORTAL               */}
+      {/* INTERACTIVE BUDGET & FEE CONTROLS IN PARENT PORTAL                        */}
       {/* ========================================================================= */}
       <div className="glass-card p-6 sm:p-8 rounded-2xl border-2 border-purple-500/40 space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-purple-900/40">
           <div>
             <h2 className="text-xl font-bold text-white flex items-center gap-2">
               <DollarSign className="w-5 h-5 text-peach-400" />
-              <span>Budget & Loan Controls</span>
+              <span>Budget & Fee Controls</span>
             </h2>
-            <p className="text-sm text-rose-200/70">
-              Adjust parameters to calculate feasibility and loan exposure.
+            <p className="text-sm text-rose-200/80">
+              Set parent annual income and payable fees to evaluate course affordability.
             </p>
           </div>
 
           <span
-            className={`text-xs font-bold px-3 py-1.5 rounded-xl border ${
-              isFeasible
-                ? "bg-emerald-950/70 text-emerald-300 border-emerald-700/50"
-                : "bg-rose-950/70 text-rose-300 border-rose-700/50"
-            }`}
+            className={`text-xs font-bold px-3 py-1.5 rounded-xl border flex items-center gap-1.5 ${affordabilityBadge}`}
           >
-            {isFeasible ? "✓ Feasible" : "⚠️ Exceeds Budget"}
+            {affordabilityStatus === "safe" && "✓"}
+            {affordabilityStatus === "critical" && "⚠️"}
+            {affordabilityStatus === "avoid" && "⛔"}
+            <span>{affordabilityLabel}</span>
           </span>
         </div>
 
-        {/* Sliders Grid */}
+        {/* Student Course Banner */}
+        <div className="p-4 rounded-xl bg-[#12071d] border border-purple-800/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+          <div className="flex items-center gap-3">
+            <GraduationCap className="w-5 h-5 text-pink-400 shrink-0" />
+            <div>
+              <span className="text-rose-300/70 font-semibold uppercase text-[10px] block">Selected Student Program</span>
+              <strong className="text-white text-sm">{selectedCourse.title}</strong>
+            </div>
+          </div>
+          <div className="flex items-center gap-4 text-left sm:text-right">
+            <div>
+              <span className="text-rose-300/70 text-[10px] block">Annual Fee</span>
+              <strong className="text-pink-300 font-mono text-sm">₹{studentAnnualFee.toLocaleString("en-IN")}/yr</strong>
+            </div>
+            <div>
+              <span className="text-rose-300/70 text-[10px] block">4-Year Total</span>
+              <strong className="text-white font-mono text-sm">₹{studentTotal4Year.toLocaleString("en-IN")}</strong>
+            </div>
+          </div>
+        </div>
+
+        {/* Inputs Grid: Parent Annual Income & Fees Payable Slider */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-          {/* Slider 1: Annual Family Budget */}
+          {/* Input 1: Parent Annual Income */}
           <div className="p-4 rounded-xl bg-[#140822] border border-pink-900/40 space-y-3">
             <div className="flex justify-between items-center text-xs">
               <span className="text-rose-100 font-semibold flex items-center gap-1.5">
                 <Wallet className="w-4 h-4 text-pink-400" />
-                <span>Annual Education Budget</span>
+                <span>Parent Annual Income</span>
               </span>
-              <span className="font-black text-pink-300 bg-pink-950/80 px-2.5 py-1 rounded-lg border border-pink-700/50 text-xs">
-                ₹{Number(annualBudget).toLocaleString("en-IN")} / yr
+              <span className="font-bold text-pink-300 bg-pink-950/80 px-2.5 py-1 rounded-lg border border-pink-700/50 text-xs font-mono">
+                ₹{Number(parentAnnualIncome).toLocaleString("en-IN")} / yr
               </span>
             </div>
 
-            <input
-              type="range"
-              min="100000"
-              max="2500000"
-              step="50000"
-              value={annualBudget}
-              onChange={(e) => setAnnualBudget(Number(e.target.value))}
-              className="w-full accent-pink-500 h-2 bg-purple-950 rounded-lg cursor-pointer transition-all"
-            />
-
-            <div className="flex justify-between text-[10px] text-purple-300/60 font-medium">
-              <span>₹1 Lakh</span>
-              <span>₹10 Lakhs</span>
-              <span>₹25 Lakhs</span>
+            <div className="relative">
+              <span className="absolute left-3 top-2.5 text-rose-300/60 font-bold text-sm">₹</span>
+              <input
+                type="number"
+                min="100000"
+                max="5000000"
+                step="50000"
+                value={parentAnnualIncome}
+                onChange={(e) => setParentAnnualIncome(Math.max(0, Number(e.target.value)))}
+                className="w-full pl-8 pr-3 py-2 rounded-xl bg-purple-950/60 border border-purple-700/50 text-white text-sm font-mono focus:outline-none focus:ring-2 focus:ring-pink-500"
+                placeholder="1000000"
+              />
             </div>
 
-            <p className="text-[10px] text-rose-300/70">
-              Liquid capital available per academic year without relying on high-interest personal credit.
+            <div className="flex items-center gap-1.5 flex-wrap pt-1">
+              <span className="text-[10px] text-rose-300/60 font-semibold mr-1">Quick Select:</span>
+              {[600000, 1000000, 1500000, 2500000].map((inc) => (
+                <button
+                  key={inc}
+                  type="button"
+                  onClick={() => setParentAnnualIncome(inc)}
+                  className={`text-[10px] font-semibold px-2 py-0.5 rounded-lg border transition-all ${
+                    parentAnnualIncome === inc
+                      ? "bg-pink-600 text-white border-pink-400"
+                      : "bg-purple-950/40 text-rose-200 border-purple-800/40 hover:bg-purple-900/50"
+                  }`}
+                >
+                  ₹{(inc / 100000).toFixed(0)}L
+                </button>
+              ))}
+            </div>
+
+            <p className="text-xs text-rose-300/70">
+              Total household gross annual earnings used to evaluate fee sustainability.
             </p>
           </div>
 
-          {/* Slider 2: Maximum Total Degree Ceiling */}
+          {/* Input 2: Fees Can Be Paid Per Year (Slider) */}
           <div className="p-4 rounded-xl bg-[#140822] border border-peach-900/40 space-y-3">
             <div className="flex justify-between items-center text-xs">
               <span className="text-rose-100 font-semibold flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4 text-peach-400" />
-                <span>Maximum 4-Year Total Ceiling</span>
+                <span>Fees Can Be Paid (Per Year)</span>
               </span>
-              <span className="font-black text-peach-300 bg-peach-950/80 px-2.5 py-1 rounded-lg border border-peach-700/50 text-xs">
-                ₹{Number(maxAffordableCost).toLocaleString("en-IN")} Total
+              <span className="font-bold text-peach-300 bg-peach-950/80 px-2.5 py-1 rounded-lg border border-peach-700/50 text-xs font-mono">
+                ₹{Number(feesCanBePaidPerYear).toLocaleString("en-IN")} / yr
               </span>
             </div>
 
             <input
               type="range"
-              min="200000"
-              max="3500000"
-              step="50000"
-              value={maxAffordableCost}
-              onChange={(e) => setMaxAffordableCost(Number(e.target.value))}
+              min="50000"
+              max="2000000"
+              step="25000"
+              value={feesCanBePaidPerYear}
+              onChange={(e) => setFeesCanBePaidPerYear(Number(e.target.value))}
               className="w-full accent-peach-500 h-2 bg-purple-950 rounded-lg cursor-pointer transition-all"
             />
 
-            <div className="flex justify-between text-[10px] text-purple-300/60 font-medium">
-              <span>₹2 Lakhs</span>
-              <span>₹15 Lakhs</span>
-              <span>₹35 Lakhs</span>
+            <div className="flex justify-between text-xs text-purple-300/60 font-mono">
+              <span>₹50K</span>
+              <span>₹10 Lakhs</span>
+              <span>₹20 Lakhs</span>
             </div>
 
-            <p className="text-[10px] text-rose-300/70">
-              The absolute financial upper bound including tuition, boarding, hardware, and certifications.
-            </p>
+            {/* Display: Payment per year * 4 years */}
+            <div className="p-2.5 rounded-xl bg-peach-950/30 border border-peach-700/40 flex items-center justify-between text-xs">
+              <span className="text-rose-200 font-semibold">4-Year Total Payment (Payment × 4):</span>
+              <strong className="text-peach-300 font-mono text-sm">
+                ₹{total4YearPayable.toLocaleString("en-IN")} Total
+              </strong>
+            </div>
           </div>
 
-          {/* Selector 3: Family Debt Exposure & Tolerance */}
+          {/* Loan Preference Selector */}
           <div className="p-4 rounded-xl bg-[#140822] border border-purple-900/40 space-y-2 md:col-span-2">
             <div className="flex justify-between items-center text-xs">
               <span className="text-rose-100 font-semibold flex items-center gap-1.5">
@@ -610,7 +679,7 @@ export default function ParentDashboardPage() {
                 <button
                   key={tier}
                   type="button"
-                  onClick={() => setLoanPreference(tier)}
+                  onClick={() => setLoanPreference(tier as "None" | "Low" | "Moderate" | "High")}
                   className={`py-1.5 px-2 rounded-lg text-xs font-semibold border transition-all ${
                     loanPreference === tier
                       ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white border-pink-500 shadow-sm"
@@ -624,101 +693,80 @@ export default function ParentDashboardPage() {
           </div>
         </div>
 
-        {/* ========================================================================= */}
-        {/* FINANCIAL VIABILITY INDEX (FVI) & MACROECONOMIC ABSORPTION DISPLAY         */}
-        {/* ========================================================================= */}
-        <div className="space-y-4 pt-2">
-          {/* Featured Financial Viability Index Hero Card */}
-          <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-[#1b082e] via-[#240c3c] to-[#160626] border-2 border-pink-500/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xl shadow-pink-950/40">
-            <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-pink-500 via-purple-600 to-peach-400 flex items-center justify-center text-white shadow-lg shadow-pink-500/25 shrink-0">
-                <DollarSign className="w-7 h-7 text-white" />
-              </div>
-              <div className="space-y-0.5">
-                <div className="flex items-center gap-2 flex-wrap">
-                  <span className="text-[10px] text-pink-300 uppercase font-black tracking-wider">
-                    Macroeconomic Affordability Metric
-                  </span>
-                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${viabilityGrade.badge}`}>
-                    {viabilityGrade.label}
-                  </span>
-                </div>
-                <h3 className="text-base sm:text-lg font-black text-white">
-                  Financial Viability Index (FVI)
-                </h3>
-                <p className="text-[11px] text-rose-200/80 max-w-xl">
-                  Deterministic sigmoid score weighing 4-year degree absorption against liquid household savings, annual income buffer, and debt ceiling.
-                </p>
-              </div>
-            </div>
+        {/* Affordability Evaluation Banner */}
+        <div className={`p-4 rounded-2xl border text-xs leading-relaxed space-y-2 ${
+          affordabilityStatus === "safe"
+            ? "bg-emerald-950/30 border-emerald-500/40 text-emerald-200"
+            : affordabilityStatus === "critical"
+            ? "bg-amber-950/30 border-amber-500/40 text-amber-200"
+            : "bg-rose-950/30 border-rose-500/40 text-rose-200"
+        }`}>
+          <div className="flex items-center gap-2 font-bold text-sm">
+            <span>{affordabilityStatus === "safe" ? "✓" : affordabilityStatus === "critical" ? "⚠️" : "⛔"}</span>
+            <span>{affordabilityLabel}</span>
+            <span className="text-xs opacity-75 font-normal">
+              (Student Fee: ₹{studentAnnualFee.toLocaleString("en-IN")} vs Annual Income: ₹{parentAnnualIncome.toLocaleString("en-IN")})
+            </span>
+          </div>
+          <p>{affordabilityDetail}</p>
+          <div className="flex items-center gap-3 pt-1 text-[11px] opacity-90 border-t border-white/10">
+            <span>• Less than Income: <strong>OK (Safe)</strong></span>
+            <span>• At Margin (≥ 70%): <strong>Critical & Not Safe</strong></span>
+            <span>• Exceeds Income: <strong>Course Should Be Avoided</strong></span>
+          </div>
+        </div>
 
-            <div className="flex items-center sm:justify-end gap-3 shrink-0">
-              <div className="text-left sm:text-right">
-                <div className="flex items-baseline justify-start sm:justify-end gap-1">
-                  <span className="text-3xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-peach-300 to-white">
-                    {liveFinancialViabilityIndex}
-                  </span>
-                  <span className="text-sm font-bold text-rose-300/70">/ 100</span>
-                </div>
-                <span className={`text-[10px] font-bold block ${viabilityGrade.text}`}>
-                  {liveFinancialViabilityIndex >= 75 ? "✓ Safe Absorption Headroom" : liveFinancialViabilityIndex >= 45 ? "⚠️ Moderate Capital Coverage" : "⛔ High Financial Stress"}
-                </span>
-              </div>
-            </div>
+        {/* 4 Summary Cards */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-1">
+          <div className="p-3.5 rounded-xl bg-[#12071d] border border-purple-900/40 text-center space-y-1">
+            <span className="text-xs text-rose-300/70 block uppercase font-bold">Student Annual Fee</span>
+            <strong className="text-sm font-bold text-pink-300 font-mono">
+              ₹{studentAnnualFee.toLocaleString("en-IN")}/yr
+            </strong>
+            <span className="text-xs text-purple-300/60 block">4-Yr: ₹{studentTotal4Year.toLocaleString("en-IN")}</span>
           </div>
 
-          {/* Sub-Metrics Grid: Degree Cost, Coverage %, Loan Exposure, Buffer */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <div className="p-3.5 rounded-xl bg-[#12071d] border border-purple-900/40 text-center space-y-1">
-              <span className="text-[10px] text-rose-300/70 block uppercase font-bold">4-Year Degree Cost</span>
-              <strong className="text-sm font-black text-white">
-                ₹{totalCost.toLocaleString("en-IN")}
-              </strong>
-              <span className="text-[10px] text-purple-300/60 block">₹{targetTuition.toLocaleString("en-IN")}/yr</span>
-            </div>
+          <div className="p-3.5 rounded-xl bg-[#12071d] border border-purple-900/40 text-center space-y-1">
+            <span className="text-xs text-rose-300/70 block uppercase font-bold">Fees Can Be Paid</span>
+            <strong className="text-sm font-bold text-peach-300 font-mono">
+              ₹{feesCanBePaidPerYear.toLocaleString("en-IN")}/yr
+            </strong>
+            <span className="text-xs text-peach-300/70 block">4-Yr: ₹{total4YearPayable.toLocaleString("en-IN")}</span>
+          </div>
 
-            <div className="p-3.5 rounded-xl bg-[#12071d] border border-purple-900/40 text-center space-y-1">
-              <span className="text-[10px] text-rose-300/70 block uppercase font-bold">Viability Coverage</span>
-              <strong className="text-sm font-black text-emerald-400">
-                {coveragePercentage}%
-              </strong>
-              <span className="text-[10px] text-emerald-300/70 block">
-                {coveragePercentage >= 100 ? "100% Self-Funded" : "Partial Self-Funded"}
-              </span>
-            </div>
+          <div className="p-3.5 rounded-xl bg-[#12071d] border border-purple-900/40 text-center space-y-1">
+            <span className="text-xs text-rose-300/70 block uppercase font-bold">Parent Annual Income</span>
+            <strong className="text-sm font-bold text-white font-mono">
+              ₹{parentAnnualIncome.toLocaleString("en-IN")}/yr
+            </strong>
+            <span className="text-xs text-purple-300/60 block">{Math.round(feeToIncomeRatio * 100)}% Fee Ratio</span>
+          </div>
 
-            <div className="p-3.5 rounded-xl bg-[#12071d] border border-purple-900/40 text-center space-y-1">
-              <span className="text-[10px] text-rose-300/70 block uppercase font-bold">Required Loan</span>
-              <strong className={`text-sm font-black ${loanRequired === 0 ? "text-emerald-400" : "text-peach-400"}`}>
-                {loanRequired === 0 ? "₹0 (Zero Debt)" : `₹${loanRequired.toLocaleString("en-IN")}`}
-              </strong>
-              <span className="text-[10px] text-purple-300/60 block">
-                {loanRequired === 0 ? "No Debt Required" : "Manageable Low Debt"}
-              </span>
-            </div>
-
-            <div className="p-3.5 rounded-xl bg-[#12071d] border border-purple-900/40 text-center space-y-1">
-              <span className="text-[10px] text-rose-300/70 block uppercase font-bold">Family Surplus</span>
-              <strong className={`text-sm font-black ${budgetSurplus >= 0 ? "text-pink-300" : "text-rose-400"}`}>
-                {budgetSurplus >= 0 ? `+₹${budgetSurplus.toLocaleString("en-IN")}` : `-₹${Math.abs(budgetSurplus).toLocaleString("en-IN")}`}
-              </strong>
-              <span className="text-[10px] text-pink-300/70 block">Annual Liquidity</span>
-            </div>
+          <div className="p-3.5 rounded-xl bg-[#12071d] border border-purple-900/40 text-center space-y-1">
+            <span className="text-xs text-rose-300/70 block uppercase font-bold">Decision Status</span>
+            <strong className={`text-sm font-bold ${affordabilityText}`}>
+              {affordabilityStatus === "safe" ? "OK / Safe" : affordabilityStatus === "critical" ? "Critical" : "Avoid"}
+            </strong>
+            <span className="text-xs text-rose-300/60 block">
+              {budgetSurplus >= 0 ? `+₹${budgetSurplus.toLocaleString("en-IN")} Surplus` : `₹${Math.abs(budgetSurplus).toLocaleString("en-IN")} Gap`}
+            </span>
           </div>
         </div>
 
         {/* Submit Financial Parameters Button */}
         <div className="pt-4 border-t border-purple-900/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <p className="text-xs text-rose-300/80">
-            Sync financial parameters to Arun&apos;s Student Portal.
+            Sync fee parameters to Arun&apos;s Student Portal.
           </p>
 
           <button
             type="button"
             onClick={() => {
               approveParentFinancials({
-                annualBudget,
-                degreeCeiling: maxAffordableCost,
+                parentAnnualIncome,
+                feesCanBePaidPerYear,
+                annualBudget: feesCanBePaidPerYear,
+                degreeCeiling: total4YearPayable,
                 loanTolerance: loanPreference
               });
               setSubmittedMessage(true);
@@ -796,12 +844,12 @@ export default function ParentDashboardPage() {
             <div className="flex justify-between items-center text-xs pb-2 border-b border-purple-900/40">
               <span className="text-rose-200/70">Degree Cost:</span>
               <span className="font-extrabold text-white">
-                ₹{targetTuition.toLocaleString("en-IN")}
+                ₹{studentTotal4Year.toLocaleString("en-IN")}
               </span>
             </div>
             <div className="flex justify-between items-center text-xs pb-2 border-b border-purple-900/40">
-              <span className="text-rose-200/70">Annual Ceiling:</span>
-              <span className="font-semibold text-pink-400">₹{annualBudget.toLocaleString("en-IN")}</span>
+              <span className="text-rose-200/70">Fees Payable:</span>
+              <span className="font-semibold text-pink-400">₹{feesCanBePaidPerYear.toLocaleString("en-IN")}/yr</span>
             </div>
             <div className="flex justify-between items-center text-xs">
               <span className="text-rose-200/70">Avg Starting Package:</span>
@@ -818,7 +866,7 @@ export default function ParentDashboardPage() {
             <Award className="w-4 h-4 text-pink-400" />
             <span>Alternative Financially Viable Options</span>
           </h3>
-          <span className="text-xs text-rose-200/70">Pre-screened against ₹{annualBudget.toLocaleString("en-IN")} budget</span>
+          <span className="text-xs text-rose-200/70">Pre-screened against ₹{feesCanBePaidPerYear.toLocaleString("en-IN")}/yr budget</span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

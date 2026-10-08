@@ -19,11 +19,16 @@ export interface SelectedCourseInfo {
 }
 
 export interface ParentParametersInfo {
+  parentAnnualIncome: number;
+  feesCanBePaidPerYear: number;
+  total4YearPayable: number;
   annualBudget: number;
   degreeCeiling: number;
   loanTolerance: "None" | "Low" | "Moderate" | "High";
   geographyPreference: string;
   approvedAt: string | null;
+  affordabilityStatus?: "safe" | "critical" | "avoid";
+  affordabilityLabel?: string;
 }
 
 export interface CalculatedFinancialMetrics {
@@ -37,6 +42,14 @@ export interface CalculatedFinancialMetrics {
   loanNeeded: number;
   budgetSurplus: number;
   isFeasible: boolean;
+  affordabilityStatus: "safe" | "critical" | "avoid";
+  affordabilityLabel: string;
+  affordabilityDescription: string;
+  studentAnnualFee: number;
+  studentTotal4YearFee: number;
+  parentAnnualIncome: number;
+  feesCanBePaidPerYear: number;
+  total4YearPayable: number;
 }
 
 export interface CareerTierItem {
@@ -76,9 +89,11 @@ export interface FlowContextType {
   requestParentPermission: () => void;
   updateParentConstraints: (params: Partial<ParentParametersInfo>) => void;
   approveParentFinancials: (params: {
-    annualBudget: number;
-    degreeCeiling: number;
-    loanTolerance: "None" | "Low" | "Moderate" | "High";
+    parentAnnualIncome?: number;
+    feesCanBePaidPerYear?: number;
+    annualBudget?: number;
+    degreeCeiling?: number;
+    loanTolerance?: "None" | "Low" | "Moderate" | "High";
     geographyPreference?: string;
   }) => void;
   resetFlow: () => void;
@@ -91,17 +106,22 @@ const DEFAULT_COURSE: SelectedCourseInfo = {
   title: "B.Tech in Computer Science & Artificial Intelligence",
   degreeType: "4-Year Elite Undergraduate Degree",
   expectedPackage: "₹32 LPA – ₹55 LPA",
-  annualFee: 450000,
-  total4YearFee: 1800000,
+  annualFee: 350000,
+  total4YearFee: 1400000,
   topInstitutes: ["IIT Madras", "IIT Bombay", "BITS Pilani", "IIIT Hyderabad", "NIT Trichy"],
 };
 
 const DEFAULT_PARENT_PARAMS: ParentParametersInfo = {
-  annualBudget: 600000,
-  degreeCeiling: 2400000,
+  parentAnnualIncome: 1000000,
+  feesCanBePaidPerYear: 400000,
+  total4YearPayable: 1600000,
+  annualBudget: 400000,
+  degreeCeiling: 1600000,
   loanTolerance: "Low",
   geographyPreference: "Regional Tech Hubs (Chennai & Bengaluru)",
   approvedAt: null,
+  affordabilityStatus: "safe",
+  affordabilityLabel: "OK (Safe & Affordable)",
 };
 
 const CAREER_TIERS_DATA: {
@@ -222,25 +242,55 @@ const CAREER_TIERS_DATA: {
 const STORAGE_KEY = "prism_flow_full_v2";
 
 function computeMetrics(course: SelectedCourseInfo, parent: ParentParametersInfo): CalculatedFinancialMetrics {
-  const totalCost = course.total4YearFee;
-  const ceiling = parent.degreeCeiling;
-  const annualFee = course.annualFee;
-  const annualBudget = parent.annualBudget;
+  const studentAnnualFee = course.annualFee || 350000;
+  const studentTotal4YearFee = studentAnnualFee * 4;
+  const parentAnnualIncome = parent.parentAnnualIncome || 1000000;
+  const feesCanBePaidPerYear = parent.feesCanBePaidPerYear || parent.annualBudget || 400000;
+  const total4YearPayable = feesCanBePaidPerYear * 4;
 
-  const coveragePercentage = Math.min(100, Math.round((ceiling / totalCost) * 100));
-  const loanNeeded = Math.max(0, totalCost - ceiling);
-  const budgetSurplus = annualBudget - annualFee;
-  const isFeasible = ceiling >= totalCost;
+  const coveragePercentage = Math.min(100, Math.round((total4YearPayable / studentTotal4YearFee) * 100));
+  const loanNeeded = Math.max(0, studentTotal4YearFee - total4YearPayable);
+  const budgetSurplus = feesCanBePaidPerYear - studentAnnualFee;
 
-  // Alignment score formula: Base 92% + bonus if feasible + bonus if surplus
-  let parentAlignmentScore = 92.0;
-  if (isFeasible) parentAlignmentScore += 4.5;
-  if (budgetSurplus > 0) parentAlignmentScore += 1.5;
-  if (parentAlignmentScore > 99.0) parentAlignmentScore = 99.0;
+  // 3-Tier Rule requested by user:
+  // "and if the student fees, is less than annual income its ok at margin of annual income its critical and not safe, if exceeded the course should be avoided."
+  const feeToIncomeRatio = studentAnnualFee / Math.max(parentAnnualIncome, 1);
+
+  let affordabilityStatus: "safe" | "critical" | "avoid";
+  let affordabilityLabel: string;
+  let affordabilityDescription: string;
+  let isFeasible: boolean;
+  let financialStabilityScore: number;
+  let financialViabilityIndex: number;
+
+  if (studentAnnualFee > parentAnnualIncome) {
+    affordabilityStatus = "avoid";
+    affordabilityLabel = "Course Should Be Avoided";
+    affordabilityDescription = "Student fees exceed parent annual income. This course should be avoided.";
+    isFeasible = false;
+    financialStabilityScore = 20;
+    financialViabilityIndex = 15;
+  } else if (feeToIncomeRatio >= 0.7) {
+    affordabilityStatus = "critical";
+    affordabilityLabel = "Critical & Not Safe";
+    affordabilityDescription = "Student fees are at the margin of annual income (≥ 70%). High financial risk.";
+    isFeasible = feesCanBePaidPerYear >= studentAnnualFee;
+    financialStabilityScore = 60;
+    financialViabilityIndex = 58;
+  } else {
+    affordabilityStatus = "safe";
+    affordabilityLabel = "OK (Safe & Affordable)";
+    affordabilityDescription = "Student fees are comfortably less than annual income. Safe to proceed.";
+    isFeasible = true;
+    financialStabilityScore = 95;
+    financialViabilityIndex = 92;
+  }
+
+  // Alignment score formula: Base 95% + bonus if safe
+  let parentAlignmentScore = affordabilityStatus === "safe" ? 96.5 : affordabilityStatus === "critical" ? 82.0 : 45.0;
+  if (budgetSurplus >= 0) parentAlignmentScore = Math.min(99.0, parentAlignmentScore + 2.0);
 
   const conflictIndex = Number((100 - parentAlignmentScore).toFixed(1));
-  const financialStabilityScore = Math.min(100, coveragePercentage);
-  const financialViabilityIndex = Math.min(100, Math.round(coveragePercentage * 0.95 + (budgetSurplus > 0 ? 5 : 0)));
 
   return {
     coveragePercentage,
@@ -253,6 +303,14 @@ function computeMetrics(course: SelectedCourseInfo, parent: ParentParametersInfo
     loanNeeded,
     budgetSurplus,
     isFeasible,
+    affordabilityStatus,
+    affordabilityLabel,
+    affordabilityDescription,
+    studentAnnualFee,
+    studentTotal4YearFee,
+    parentAnnualIncome,
+    feesCanBePaidPerYear,
+    total4YearPayable,
   };
 }
 
@@ -374,14 +432,28 @@ export function StudentParentFlowProvider({ children }: { children: React.ReactN
   };
 
   const approveParentFinancials = (params: {
-    annualBudget: number;
-    degreeCeiling: number;
-    loanTolerance: "None" | "Low" | "Moderate" | "High";
+    parentAnnualIncome?: number;
+    feesCanBePaidPerYear?: number;
+    annualBudget?: number;
+    degreeCeiling?: number;
+    loanTolerance?: "None" | "Low" | "Moderate" | "High";
     geographyPreference?: string;
   }) => {
+    const parentAnnualIncome = params.parentAnnualIncome ?? parentParameters.parentAnnualIncome ?? 1000000;
+    const feesCanBePaidPerYear = params.feesCanBePaidPerYear ?? params.annualBudget ?? parentParameters.feesCanBePaidPerYear ?? 400000;
+    const total4YearPayable = feesCanBePaidPerYear * 4;
+    const annualBudget = feesCanBePaidPerYear;
+    const degreeCeiling = total4YearPayable;
+
     const updatedParent: ParentParametersInfo = {
       ...parentParameters,
       ...params,
+      parentAnnualIncome,
+      feesCanBePaidPerYear,
+      total4YearPayable,
+      annualBudget,
+      degreeCeiling,
+      loanTolerance: params.loanTolerance || parentParameters.loanTolerance || "Low",
       geographyPreference: params.geographyPreference || parentParameters.geographyPreference,
       approvedAt: new Date().toLocaleTimeString("en-IN", {
         hour: "2-digit",

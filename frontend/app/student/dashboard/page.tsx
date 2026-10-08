@@ -171,51 +171,80 @@ export default function StudentDashboardPage() {
           </div>
         </div>
 
-        {/* Revealed Values: Parent Alignment & Financial Stability */}
+        {/* Revealed Values: Parent Alignment, Affordability & Financial Stability */}
         {step === "parent_approved" ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-2">
-            <div className="p-3.5 rounded-xl bg-purple-950/40 border border-purple-800/40 space-y-1">
-              <div className="flex items-center justify-between text-xs text-rose-300/80">
-                <span>Parent Alignment</span>
-                <Users className="w-3.5 h-3.5 text-pink-400" />
+          <div className="space-y-3 pt-2">
+            {/* Affordability Banner */}
+            <div className={`p-3 rounded-xl border flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-xs ${
+              metrics.affordabilityStatus === "safe"
+                ? "bg-emerald-950/40 border-emerald-500/40"
+                : metrics.affordabilityStatus === "critical"
+                ? "bg-amber-950/40 border-amber-500/40"
+                : "bg-rose-950/40 border-rose-500/40"
+            }`}>
+              <div className="flex items-center gap-2">
+                <span className={`px-2.5 py-0.5 rounded-full font-bold text-[11px] border ${
+                  metrics.affordabilityStatus === "safe"
+                    ? "bg-emerald-900/80 text-emerald-300 border-emerald-500/50"
+                    : metrics.affordabilityStatus === "critical"
+                    ? "bg-amber-900/80 text-amber-300 border-amber-500/50"
+                    : "bg-rose-900/80 text-rose-300 border-rose-500/50"
+                }`}>
+                  {metrics.affordabilityLabel}
+                </span>
+                <span className="text-rose-200/90">{metrics.affordabilityDescription}</span>
               </div>
-              <p className="text-xl font-extrabold text-white">
-                {metrics.parentAlignmentScore.toFixed(1)}%
-              </p>
-              <p className="text-[10px] text-pink-300/80">Conflict Index: {metrics.conflictIndex}% (High Harmony)</p>
+              <span className="text-[11px] text-rose-300/70 font-mono self-start sm:self-auto">
+                Income: ₹{(parentParameters.parentAnnualIncome / 100000).toFixed(1)}L/yr
+              </span>
             </div>
 
-            <div className="p-3.5 rounded-xl bg-purple-950/40 border border-purple-800/40 space-y-1">
-              <div className="flex items-center justify-between text-xs text-rose-300/80">
-                <span>Financial Stability</span>
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              <div className="p-3.5 rounded-xl bg-purple-950/40 border border-purple-800/40 space-y-1">
+                <div className="flex items-center justify-between text-xs text-rose-300/80">
+                  <span>Parent Alignment</span>
+                  <Users className="w-3.5 h-3.5 text-pink-400" />
+                </div>
+                <p className="text-xl font-extrabold text-white">
+                  {metrics.parentAlignmentScore.toFixed(1)}%
+                </p>
+                <p className="text-[10px] text-pink-300/80">Conflict Index: {metrics.conflictIndex}% (High Harmony)</p>
               </div>
-              <p className="text-xl font-extrabold text-emerald-300">
-                {metrics.financialStabilityScore}/100
-              </p>
-              <p className="text-[10px] text-emerald-300/80">Cost is {metrics.coveragePercentage}% covered</p>
-            </div>
 
-            <div className="p-3.5 rounded-xl bg-purple-950/40 border border-purple-800/40 space-y-1">
-              <div className="flex items-center justify-between text-xs text-rose-300/80">
-                <span>Annual Budget Set</span>
-                <DollarSign className="w-3.5 h-3.5 text-peach-400" />
+              <div className="p-3.5 rounded-xl bg-purple-950/40 border border-purple-800/40 space-y-1">
+                <div className="flex items-center justify-between text-xs text-rose-300/80">
+                  <span>Financial Stability</span>
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                </div>
+                <p className="text-xl font-extrabold text-emerald-300">
+                  {metrics.financialStabilityScore}/100
+                </p>
+                <p className="text-[10px] text-emerald-300/80">Cost is {metrics.coveragePercentage}% covered</p>
               </div>
-              <p className="text-xl font-extrabold text-white font-mono">
-                ₹{(parentParameters.annualBudget / 100000).toFixed(1)}L
-              </p>
-              <p className="text-[10px] text-peach-300/80">Ceiling: ₹{(parentParameters.degreeCeiling / 100000).toFixed(1)}L</p>
-            </div>
 
-            <div className="p-3.5 rounded-xl bg-purple-950/40 border border-purple-800/40 space-y-1">
-              <div className="flex items-center justify-between text-xs text-rose-300/80">
-                <span>Loan Required</span>
-                <TrendingUp className="w-3.5 h-3.5 text-purple-400" />
+              <div className="p-3.5 rounded-xl bg-purple-950/40 border border-purple-800/40 space-y-1">
+                <div className="flex items-center justify-between text-xs text-rose-300/80">
+                  <span>Fees Payable (Per Yr)</span>
+                  <DollarSign className="w-3.5 h-3.5 text-peach-400" />
+                </div>
+                <p className="text-xl font-extrabold text-white font-mono">
+                  ₹{(parentParameters.feesCanBePaidPerYear / 100000).toFixed(1)}L
+                </p>
+                <p className="text-[10px] text-peach-300/80">
+                  Payment × 4 Yrs: ₹{(parentParameters.total4YearPayable / 100000).toFixed(1)}L
+                </p>
               </div>
-              <p className="text-xl font-extrabold text-white font-mono">
-                {metrics.loanNeeded === 0 ? "₹0 (Zero Debt)" : `₹${(metrics.loanNeeded / 100000).toFixed(1)}L`}
-              </p>
-              <p className="text-[10px] text-purple-300/80">Tolerance: {parentParameters.loanTolerance}</p>
+
+              <div className="p-3.5 rounded-xl bg-purple-950/40 border border-purple-800/40 space-y-1">
+                <div className="flex items-center justify-between text-xs text-rose-300/80">
+                  <span>Loan Required</span>
+                  <TrendingUp className="w-3.5 h-3.5 text-purple-400" />
+                </div>
+                <p className="text-xl font-extrabold text-white font-mono">
+                  {metrics.loanNeeded === 0 ? "₹0 (Zero Debt)" : `₹${(metrics.loanNeeded / 100000).toFixed(1)}L`}
+                </p>
+                <p className="text-[10px] text-purple-300/80">Tolerance: {parentParameters.loanTolerance}</p>
+              </div>
             </div>
           </div>
         ) : (

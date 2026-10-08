@@ -281,10 +281,10 @@ export default function StudentDashboardPage() {
               <div className="space-y-0.5">
                 <p className="text-xs font-semibold text-emerald-300 flex items-center gap-1.5">
                   <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                  <span>Family Financial Parameters Confirmed & Unlocked!</span>
+                  <span>Family Financial Parameters Confirmed: <strong>{metrics.affordabilityLabel}</strong></span>
                 </p>
                 <p className="text-[11px] text-rose-200/70">
-                  Parent set Annual Budget: <strong>₹{parentParameters.annualBudget.toLocaleString("en-IN")}/yr</strong> (Tuition: ₹{selectedCourse.annualFee.toLocaleString("en-IN")}/yr). Financial Stability ({metrics.financialStabilityScore}%) and Parent Alignment ({metrics.parentAlignmentScore}%) are now active below!
+                  Annual Income: ₹{(parentParameters.parentAnnualIncome / 100000).toFixed(1)}L • Fees Payable: <strong>₹{parentParameters.feesCanBePaidPerYear.toLocaleString("en-IN")}/yr</strong> (Tuition: ₹{selectedCourse.annualFee.toLocaleString("en-IN")}/yr). Financial Stability ({metrics.financialStabilityScore}%) and Parent Alignment ({metrics.parentAlignmentScore}%) are now active!
                 </p>
               </div>
               <div className="flex items-center gap-2 shrink-0">
@@ -513,20 +513,33 @@ export default function StudentDashboardPage() {
               <div className="space-y-3">
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
                   <div className="p-3 rounded-xl bg-[#140822] border border-peach-900/40">
-                    <span className="text-[10px] text-rose-300/70 block uppercase font-semibold">Annual Course Tuition</span>
+                    <span className="text-[10px] text-rose-300/70 block uppercase font-semibold">Course Tuition (Annual)</span>
                     <strong className="text-sm font-black text-rose-100">₹{selectedCourse.annualFee.toLocaleString("en-IN")} / yr</strong>
+                    <span className="text-[10px] text-rose-300/60 block">4-Yr Total: ₹{selectedCourse.total4YearFee.toLocaleString("en-IN")}</span>
                   </div>
                   <div className="p-3 rounded-xl bg-[#140822] border border-peach-900/40">
-                    <span className="text-[10px] text-rose-300/70 block uppercase font-semibold">Parent Approved Budget</span>
-                    <strong className="text-sm font-black text-peach-300">₹{parentParameters.annualBudget.toLocaleString("en-IN")} / yr</strong>
+                    <span className="text-[10px] text-rose-300/70 block uppercase font-semibold">Fees Payable by Parent</span>
+                    <strong className="text-sm font-black text-peach-300">₹{parentParameters.feesCanBePaidPerYear.toLocaleString("en-IN")} / yr</strong>
+                    <span className="text-[10px] text-peach-300/70 block font-mono">Payment × 4 Yrs: ₹{parentParameters.total4YearPayable.toLocaleString("en-IN")}</span>
                   </div>
                   <div className="p-3 rounded-xl bg-[#140822] border border-peach-900/40">
-                    <span className="text-[10px] text-rose-300/70 block uppercase font-semibold">Net Family Surplus</span>
-                    <strong className="text-sm font-black text-emerald-400">+₹{metrics.budgetSurplus.toLocaleString("en-IN")} / yr</strong>
+                    <span className="text-[10px] text-rose-300/70 block uppercase font-semibold">Affordability Status</span>
+                    <strong className={`text-sm font-black ${
+                      metrics.affordabilityStatus === "safe"
+                        ? "text-emerald-400"
+                        : metrics.affordabilityStatus === "critical"
+                        ? "text-amber-400"
+                        : "text-rose-400"
+                    }`}>
+                      {metrics.affordabilityLabel}
+                    </strong>
+                    <span className="text-[10px] text-rose-300/60 block">
+                      {metrics.budgetSurplus >= 0 ? `Surplus: +₹${(metrics.budgetSurplus / 1000).toFixed(0)}k/yr` : `Shortfall: -₹${(Math.abs(metrics.budgetSurplus) / 1000).toFixed(0)}k/yr`}
+                    </span>
                   </div>
                 </div>
                 <p className="text-xs text-rose-200/80">
-                  The {selectedCourse.degreeType} pathway is <strong>100% financially feasible</strong> without requiring personal debt. Parent confirmed payment ability on {parentParameters.approvedAt || "recent update"}.
+                  {metrics.affordabilityDescription} Parent Income: <strong>₹{(parentParameters.parentAnnualIncome / 100000).toFixed(1)}L/yr</strong>. Confirmed on {parentParameters.approvedAt || "recent update"}.
                 </p>
               </div>
             )}

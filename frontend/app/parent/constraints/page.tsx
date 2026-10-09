@@ -94,59 +94,59 @@ export default function ParentConstraintsPage() {
     <div className="max-w-4xl mx-auto py-8 px-4 space-y-6">
       {/* Header */}
       <div className="space-y-1">
-        <h1 className="text-2xl sm:text-3xl font-black text-[#123835]">
+        <h1 className="text-2xl sm:text-3xl font-bold text-white">
           Parent Financial Setup
         </h1>
-        <p className="text-sm text-[rgb(18,84,79)]/75">
+        <p className="text-sm text-rose-200/70">
           Enter annual income and student fee capacity to evaluate course affordability.
         </p>
       </div>
 
       {/* Target Degree Info Banner */}
-      <div className="p-4 rounded-2xl bg-white border border-[#cbe1d0] shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+      <div className="p-4 rounded-2xl bg-[#140822] border border-purple-800/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-[#daf0e3] text-[rgb(18,84,79)] flex items-center justify-center shrink-0 border border-[#a2cfb2]">
+          <div className="w-9 h-9 rounded-xl bg-pink-500/20 text-pink-300 flex items-center justify-center shrink-0 border border-pink-500/30">
             <GraduationCap className="w-5 h-5" />
           </div>
           <div>
-            <span className="text-[10px] text-[rgb(18,84,79)]/70 uppercase font-semibold block">Target Degree</span>
-            <strong className="text-sm text-[#123835] font-bold">{selectedCourse.title}</strong>
+            <span className="text-[10px] text-rose-300/70 uppercase font-semibold block">Target Degree</span>
+            <strong className="text-sm text-white font-bold">{selectedCourse.title}</strong>
           </div>
         </div>
         <div className="flex items-center gap-4 text-left sm:text-right">
           <div>
-            <span className="text-[10px] text-[rgb(18,84,79)]/70 block">Annual Tuition</span>
-            <strong className="text-sm text-[rgb(18,84,79)] font-mono">₹{studentAnnualFee.toLocaleString("en-IN")}/yr</strong>
+            <span className="text-[10px] text-rose-300/70 block">Annual Tuition</span>
+            <strong className="text-sm text-pink-300 font-mono">₹{studentAnnualFee.toLocaleString("en-IN")}/yr</strong>
           </div>
           <div>
-            <span className="text-[10px] text-[rgb(18,84,79)]/70 block">4-Year Total</span>
-            <strong className="text-sm text-[#123835] font-mono">₹{studentTotal4Year.toLocaleString("en-IN")}</strong>
+            <span className="text-[10px] text-rose-300/70 block">4-Year Total</span>
+            <strong className="text-sm text-white font-mono">₹{studentTotal4Year.toLocaleString("en-IN")}</strong>
           </div>
         </div>
       </div>
 
       {/* Live Affordability Status Alert Banner */}
-      <div className={`p-4 rounded-2xl border shadow-sm flex items-center justify-between gap-3 ${
+      <div className={`p-4 rounded-2xl border flex items-center justify-between gap-3 ${
         isSafe 
-          ? "bg-[#daf0e3] border-[#a2cfb2]" 
+          ? "bg-emerald-950/40 border-emerald-500/40" 
           : isCritical 
-          ? "bg-[#fef9ee] border-[#f3e5c8]" 
-          : "bg-rose-50 border-rose-200"
+          ? "bg-amber-950/40 border-amber-500/40" 
+          : "bg-rose-950/40 border-rose-500/40"
       }`}>
         <div className="flex items-center gap-3">
-          {isSafe && <CheckCircle2 className="w-6 h-6 text-[rgb(42,131,95)] shrink-0" />}
-          {isCritical && <AlertTriangle className="w-6 h-6 text-amber-600 shrink-0" />}
-          {isExceeded && <XCircle className="w-6 h-6 text-rose-600 shrink-0" />}
+          {isSafe && <CheckCircle2 className="w-6 h-6 text-emerald-400 shrink-0" />}
+          {isCritical && <AlertTriangle className="w-6 h-6 text-amber-400 shrink-0" />}
+          {isExceeded && <XCircle className="w-6 h-6 text-rose-400 shrink-0" />}
           <div>
             <div className="flex items-center gap-2">
               <span className={`text-xs font-bold px-2.5 py-0.5 rounded-full border ${badgeClasses}`}>
                 {affordabilityLabel}
               </span>
-              <span className="text-xs text-[#123835] font-mono font-medium">
+              <span className="text-xs text-rose-200/80 font-mono">
                 Ratio: {Math.round(feeToIncomeRatio * 100)}% of Annual Income
               </span>
             </div>
-            <p className="text-xs text-[#2a4e46] mt-1">
+            <p className="text-xs text-rose-200/90 mt-1">
               {affordabilityDesc}
             </p>
           </div>
@@ -156,21 +156,21 @@ export default function ParentConstraintsPage() {
       {/* Main Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Controls Form */}
-        <div className="lg:col-span-7 bg-white p-6 rounded-2xl border border-[#cbe1d0] shadow-sm space-y-5">
+        <div className="lg:col-span-7 glass-card p-6 rounded-2xl border border-purple-500/30 space-y-5">
           <form onSubmit={handleSubmit} className="space-y-5">
             {/* 1. Parent Annual Income */}
             <div className="space-y-2">
               <div className="flex justify-between items-center text-xs">
-                <label className="text-sm font-semibold text-[#123835] flex items-center gap-1.5">
-                  <Wallet className="w-4 h-4 text-[rgb(18,84,79)]" />
+                <label className="text-sm font-semibold text-rose-100 flex items-center gap-1.5">
+                  <Wallet className="w-4 h-4 text-pink-400" />
                   <span>Parent Annual Income</span>
                 </label>
-                <span className="font-bold text-[rgb(18,84,79)] bg-[#daf0e3] px-2.5 py-1 rounded-lg border border-[#a2cfb2] text-xs font-mono">
+                <span className="font-bold text-pink-300 bg-pink-950/80 px-2.5 py-1 rounded-lg border border-pink-700/50 text-xs font-mono">
                   ₹{Number(parentAnnualIncome).toLocaleString("en-IN")} / yr
                 </span>
               </div>
               <div className="relative">
-                <span className="absolute left-3 top-2.5 text-[rgb(18,84,79)]/60 font-bold text-sm">₹</span>
+                <span className="absolute left-3 top-2.5 text-rose-300/60 font-bold text-sm">₹</span>
                 <input
                   type="number"
                   min="100000"
@@ -178,12 +178,12 @@ export default function ParentConstraintsPage() {
                   step="50000"
                   value={parentAnnualIncome}
                   onChange={(e) => setParentAnnualIncome(Math.max(0, Number(e.target.value)))}
-                  className="w-full pl-8 pr-3 py-2.5 rounded-xl bg-white border border-[#cbe1d0] text-[#123835] text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[rgb(18,84,79)]"
+                  className="w-full pl-8 pr-3 py-2.5 rounded-xl bg-purple-950/60 border border-purple-700/50 text-white text-sm font-mono focus:outline-none focus:ring-2 focus:ring-pink-500"
                   placeholder="1000000"
                 />
               </div>
               <div className="flex items-center gap-1.5 flex-wrap pt-0.5">
-                <span className="text-[10px] text-[rgb(18,84,79)]/70 font-semibold mr-1">Quick Select:</span>
+                <span className="text-[10px] text-rose-300/60 font-semibold mr-1">Quick Select:</span>
                 {[600000, 1000000, 1500000, 2500000].map((inc) => (
                   <button
                     key={inc}
@@ -191,8 +191,8 @@ export default function ParentConstraintsPage() {
                     onClick={() => setParentAnnualIncome(inc)}
                     className={`text-[10px] font-semibold px-2 py-0.5 rounded-lg border transition-all ${
                       parentAnnualIncome === inc
-                        ? "bg-[rgb(18,84,79)] text-white border-[rgb(18,84,79)]"
-                        : "bg-white text-[rgb(18,84,79)] border-[#cbe1d0] hover:bg-[#daf0e3]"
+                        ? "bg-pink-600 text-white border-pink-400"
+                        : "bg-purple-950/40 text-rose-200 border-purple-800/40 hover:bg-purple-900/50"
                     }`}
                   >
                     ₹{(inc / 100000).toFixed(0)}L
@@ -204,11 +204,11 @@ export default function ParentConstraintsPage() {
             {/* 2. Fees Can Be Paid Per Year (Slider) */}
             <div className="space-y-2">
               <div className="flex justify-between items-center text-xs">
-                <label className="text-sm font-semibold text-[#123835] flex items-center gap-1.5">
-                  <ShieldCheck className="w-4 h-4 text-[rgb(42,131,95)]" />
+                <label className="text-sm font-semibold text-rose-100 flex items-center gap-1.5">
+                  <ShieldCheck className="w-4 h-4 text-peach-400" />
                   <span>Fees Can Be Paid (Per Year)</span>
                 </label>
-                <span className="font-bold text-[rgb(42,131,95)] bg-[#daf0e3] px-2.5 py-1 rounded-lg border border-[#a2cfb2] text-xs font-mono">
+                <span className="font-bold text-peach-300 bg-peach-950/80 px-2.5 py-1 rounded-lg border border-peach-700/50 text-xs font-mono">
                   ₹{Number(feesCanBePaidPerYear).toLocaleString("en-IN")} / yr
                 </span>
               </div>
@@ -219,9 +219,9 @@ export default function ParentConstraintsPage() {
                 step="25000"
                 value={feesCanBePaidPerYear}
                 onChange={(e) => setFeesCanBePaidPerYear(Number(e.target.value))}
-                className="w-full accent-[rgb(18,84,79)] h-2 bg-[#cbe1d0] rounded-lg cursor-pointer"
+                className="w-full accent-peach-500 h-2 bg-purple-950 rounded-lg cursor-pointer"
               />
-              <div className="flex justify-between text-xs text-[rgb(18,84,79)]/70 font-mono">
+              <div className="flex justify-between text-xs text-rose-300/60 font-mono">
                 <span>₹50k/yr</span>
                 <span>₹5.0L/yr</span>
                 <span>₹10.0L/yr</span>
@@ -230,23 +230,23 @@ export default function ParentConstraintsPage() {
             </div>
 
             {/* 3. Payment * 4 Years Display Card */}
-            <div className="p-3.5 rounded-xl bg-[#daf0e3] border border-[#a2cfb2] flex items-center justify-between">
+            <div className="p-3.5 rounded-xl bg-purple-950/50 border border-purple-800/40 flex items-center justify-between">
               <div>
-                <span className="text-xs font-bold text-[#123835] block">
+                <span className="text-xs font-bold text-rose-200/90 block">
                   4-Year Total Payment (Payment × 4 Years)
                 </span>
-                <span className="text-[11px] text-[rgb(18,84,79)]/70 font-mono">
+                <span className="text-[11px] text-rose-300/60 font-mono">
                   ₹{feesCanBePaidPerYear.toLocaleString("en-IN")} × 4 Years
                 </span>
               </div>
-              <span className="text-lg font-black text-[rgb(18,84,79)] font-mono">
+              <span className="text-lg font-black text-peach-300 font-mono">
                 ₹{total4YearPayable.toLocaleString("en-IN")}
               </span>
             </div>
 
             {/* Loan Tolerance Selector */}
             <div className="space-y-1.5">
-              <label className="text-sm font-semibold text-[#123835]">
+              <label className="text-sm font-semibold text-rose-200">
                 Loan Tolerance
               </label>
               <div className="grid grid-cols-4 gap-2">
@@ -257,8 +257,8 @@ export default function ParentConstraintsPage() {
                     onClick={() => setLoanTolerance(lvl)}
                     className={`py-2 px-1 rounded-xl text-xs font-semibold border transition-all ${
                       loanTolerance === lvl
-                        ? "bg-[rgb(18,84,79)] text-white border-[rgb(18,84,79)] shadow-sm"
-                        : "bg-white text-[rgb(18,84,79)] border-[#cbe1d0] hover:bg-[#daf0e3]"
+                        ? "bg-pink-600 text-white border-pink-400"
+                        : "bg-purple-950/40 text-purple-200/80 border-purple-800/40 hover:bg-purple-900/50"
                     }`}
                   >
                     {lvl}
@@ -269,14 +269,14 @@ export default function ParentConstraintsPage() {
 
             {/* Geography Selector */}
             <div className="space-y-1.5">
-              <label className="text-sm font-semibold text-[#123835] flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5 text-[rgb(42,131,95)]" />
+              <label className="text-sm font-semibold text-rose-200 flex items-center gap-1.5">
+                <MapPin className="w-3.5 h-3.5 text-peach-400" />
                 <span>Location Preference</span>
               </label>
               <select
                 value={geographyPreference}
                 onChange={(e) => setGeographyPreference(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#cbe1d0] text-[#123835] text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[rgb(18,84,79)]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-purple-950/60 border border-purple-700/50 text-white text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-pink-500"
               >
                 <option value="Regional Tech Hubs (Chennai & Bengaluru)">
                   Regional Tech Hubs (Chennai & Bengaluru)
@@ -295,7 +295,7 @@ export default function ParentConstraintsPage() {
             <button
               type="submit"
               disabled={isSaving}
-              className="w-full py-3 px-6 rounded-xl bg-[rgb(18,84,79)] hover:bg-[rgb(14,68,64)] text-white font-bold text-sm shadow-sm flex items-center justify-center gap-2 transition-all disabled:opacity-50"
+              className="w-full py-3 px-6 rounded-xl bg-pink-600 hover:bg-pink-500 text-white font-bold text-sm shadow flex items-center justify-center gap-2 transition-all disabled:opacity-50"
             >
               {isSaving ? (
                 <span>Saving Financial Parameters...</span>
@@ -311,10 +311,10 @@ export default function ParentConstraintsPage() {
 
         {/* Right Summary */}
         <div className="lg:col-span-5 space-y-4">
-          <div className="bg-white p-6 rounded-2xl border border-[#cbe1d0] shadow-sm space-y-4">
-            <div className="flex items-center justify-between border-b border-[#e2ede5] pb-2.5">
-              <h3 className="text-base font-bold text-[#123835] flex items-center gap-1.5">
-                <Sparkles className="w-4 h-4 text-[rgb(42,131,95)]" />
+          <div className="glass-card p-6 rounded-2xl border border-peach-500/20 space-y-4">
+            <div className="flex items-center justify-between border-b border-purple-900/40 pb-2.5">
+              <h3 className="text-base font-bold text-white flex items-center gap-1.5">
+                <Sparkles className="w-4 h-4 text-peach-400" />
                 <span>Affordability Summary</span>
               </h3>
               <span className={`text-xs font-bold px-2 py-0.5 rounded-full border ${badgeClasses}`}>
@@ -325,14 +325,14 @@ export default function ParentConstraintsPage() {
             {/* Coverage Meter */}
             <div className="space-y-1.5">
               <div className="flex justify-between items-center text-xs">
-                <span className="text-[rgb(18,84,79)]/80">Tuition Coverage</span>
-                <span className="font-bold text-[#123835] font-mono">{coveragePercent}%</span>
+                <span className="text-rose-200/80">Tuition Coverage</span>
+                <span className="font-bold text-white font-mono">{coveragePercent}%</span>
               </div>
-              <div className="w-full bg-[#e2ede5] h-2 rounded-full overflow-hidden border border-[#cbe1d0]">
+              <div className="w-full bg-purple-950 h-2 rounded-full overflow-hidden border border-purple-800/40">
                 <div
                   className={`h-full rounded-full transition-all ${
                     coveragePercent >= 100 
-                      ? "bg-[rgb(42,131,95)]" 
+                      ? "bg-emerald-500" 
                       : coveragePercent >= 70 
                       ? "bg-amber-500" 
                       : "bg-rose-500"
@@ -344,37 +344,37 @@ export default function ParentConstraintsPage() {
 
             {/* 4 Metric Cards */}
             <div className="grid grid-cols-2 gap-3 pt-1">
-              <div className="p-3 rounded-xl bg-[#f7faf8] border border-[#cbe1d0] text-center">
-                <span className="text-[10px] text-[rgb(18,84,79)]/70 block uppercase font-semibold">Annual Buffer</span>
-                <p className={`text-base font-bold font-mono ${annualBuffer >= 0 ? "text-[rgb(42,131,95)]" : "text-rose-600"}`}>
+              <div className="p-3 rounded-xl bg-purple-950/50 border border-purple-800/40 text-center">
+                <span className="text-[10px] text-rose-300/70 block uppercase font-semibold">Annual Buffer</span>
+                <p className={`text-base font-bold font-mono ${annualBuffer >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
                   {annualBuffer >= 0 ? `+₹${(annualBuffer / 1000).toFixed(0)}k` : `-₹${(Math.abs(annualBuffer) / 1000).toFixed(0)}k`}
                 </p>
               </div>
 
-              <div className="p-3 rounded-xl bg-[#f7faf8] border border-[#cbe1d0] text-center">
-                <span className="text-[10px] text-[rgb(18,84,79)]/70 block uppercase font-semibold">Loan Needed</span>
-                <p className="text-base font-bold font-mono text-[rgb(18,84,79)]">
+              <div className="p-3 rounded-xl bg-purple-950/50 border border-purple-800/40 text-center">
+                <span className="text-[10px] text-rose-300/70 block uppercase font-semibold">Loan Needed</span>
+                <p className="text-base font-bold font-mono text-purple-300">
                   {loanNeeded === 0 ? "₹0" : `₹${(loanNeeded / 100000).toFixed(1)}L`}
                 </p>
               </div>
 
-              <div className="p-3 rounded-xl bg-[#f7faf8] border border-[#cbe1d0] text-center">
-                <span className="text-[10px] text-[rgb(18,84,79)]/70 block uppercase font-semibold">Payment / Yr</span>
-                <p className="text-base font-bold font-mono text-[rgb(42,131,95)]">
+              <div className="p-3 rounded-xl bg-purple-950/50 border border-purple-800/40 text-center">
+                <span className="text-[10px] text-rose-300/70 block uppercase font-semibold">Payment / Yr</span>
+                <p className="text-base font-bold font-mono text-peach-300">
                   ₹{(feesCanBePaidPerYear / 100000).toFixed(1)}L
                 </p>
               </div>
 
-              <div className="p-3 rounded-xl bg-[#f7faf8] border border-[#cbe1d0] text-center">
-                <span className="text-[10px] text-[rgb(18,84,79)]/70 block uppercase font-semibold">Payment × 4 Yrs</span>
-                <p className="text-base font-bold font-mono text-[#123835]">
+              <div className="p-3 rounded-xl bg-purple-950/50 border border-purple-800/40 text-center">
+                <span className="text-[10px] text-rose-300/70 block uppercase font-semibold">Payment × 4 Yrs</span>
+                <p className="text-base font-bold font-mono text-white">
                   ₹{(total4YearPayable / 100000).toFixed(1)}L
                 </p>
               </div>
             </div>
 
             {/* Explanation Note */}
-            <div className="p-3 rounded-xl bg-[#daf0e3]/50 border border-[#b8dec5] text-xs text-[#2a4e46] leading-relaxed">
+            <div className="p-3 rounded-xl bg-purple-950/40 border border-purple-800/30 text-xs text-rose-200/80 leading-relaxed">
               {affordabilityDesc}
             </div>
           </div>

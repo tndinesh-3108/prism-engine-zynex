@@ -11,53 +11,57 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        // Primary Teal: rgb(18, 84, 79)
-        prismteal: {
-          DEFAULT: "rgb(18, 84, 79)",
-          50: "#e6f2f1",
-          100: "#cce5e3",
-          200: "#99cbc7",
-          300: "#66b1ab",
-          400: "#33978f",
-          500: "rgb(18, 84, 79)", // #12544f
-          600: "#0e433f",
-          700: "#0b3431",
-          800: "#072422",
-          900: "#041514",
+        peach: {
+          50: "#fff8f5",
+          100: "#ffede5",
+          200: "#ffd9cb",
+          300: "#ffbba6",
+          400: "#ff977a",
+          500: "#f97352",
+          600: "#e65432",
+          700: "#bf3f22",
+          800: "#9c3720",
+          900: "#7e311f",
+          950: "#45140b",
         },
-        // Secondary Green: rgb(42, 131, 95)
-        prismgreen: {
-          DEFAULT: "rgb(42, 131, 95)",
-          50: "#edf7f2",
-          100: "#dbeee5",
-          200: "#b7decb",
-          300: "#93ceb1",
-          400: "#6fbe97",
-          500: "rgb(42, 131, 95)", // #2a835f
-          600: "#226f50",
-          700: "#1a573e",
-          800: "#133f2d",
-          900: "#0b261b",
+        lightrose: {
+          50: "#fff1f2",
+          100: "#ffe4e6",
+          200: "#fecdd3",
+          300: "#fda4af",
+          400: "#fb7185",
+          500: "#f43f5e",
+          600: "#e11d48",
+          700: "#be123c",
+          800: "#9f1239",
+          950: "#4c0519",
         },
-        // Background Sage: rgb(139, 187, 146)
-        prismsage: {
-          DEFAULT: "rgb(139, 187, 146)",
-          50: "#f5f9f6",
-          100: "#eaf4ec",
-          200: "#d5e9d9",
-          300: "#bfdec6",
-          400: "#a5d2ad",
-          500: "rgb(139, 187, 146)", // #8bbb92
-          600: "#75aa7e",
-          700: "#5c9265",
-          800: "#45724d",
-          900: "#2d4d33",
+        prism: {
+          50: "#fdf4ff",
+          100: "#fae8ff",
+          200: "#f5d0fe",
+          300: "#f0abfc",
+          400: "#e879f9",
+          500: "#d946ef",
+          600: "#c026d3",
+          700: "#a21caf",
+          800: "#86198f",
+          900: "#701a75",
+          950: "#3b0764",
         },
+        slate: {
+          850: "#160d1f",
+          900: "#120a1a",
+          950: "#0d0614",
+        }
       },
       fontFamily: {
         sans: ['"Segoe UI"', "-apple-system", "BlinkMacSystemFont", "Roboto", "Helvetica", "Arial", "sans-serif"],
         serif: ['"Segoe UI"', "-apple-system", "BlinkMacSystemFont", "Roboto", "Helvetica", "Arial", "sans-serif"],
       },
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+      }
     },
   },
   plugins: [],

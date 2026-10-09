@@ -128,7 +128,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const res = await registerUser(payload);
         handleAuthSuccess(res);
         return res;
-      } catch (err) {
+      } catch {
         // Fallback registration if backend is offline
         const fallback: AuthResponse = {
           status: "success",

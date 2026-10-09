@@ -66,19 +66,19 @@ export default function Header({ onOpenSidebar, hideSidebar = false, isLoginPage
     pathname.startsWith("/parent") || pathname === "/alignment" || pathname === "/compare";
 
   return (
-    <header className="sticky top-0 z-30 h-16 bg-[rgb(139,187,146)]/90 backdrop-blur-md border-b border-[#a9caa6] px-4 sm:px-6 lg:px-8 flex items-center justify-between transition-colors">
+    <header className="sticky top-0 z-30 h-16 bg-[#0d0614]/85 backdrop-blur-xl border-b border-pink-900/30 px-4 sm:px-6 lg:px-8 flex items-center justify-between transition-colors">
       {/* Left: Brand Logo on Landing Page, or Mobile Sidebar Trigger + Breadcrumb */}
       <div className="flex items-center gap-3">
         {pathname === "/" ? (
           <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="w-8 h-8 rounded-xl bg-[rgb(18,84,79)] p-[2px] shadow-sm group-hover:scale-105 transition-transform">
-              <div className="w-full h-full bg-[rgb(18,84,79)] rounded-[10px] flex items-center justify-center">
-                <Sparkles className="w-4 h-4 text-white" />
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-purple-600 via-pink-500 to-peach-400 p-[2px] shadow-md shadow-pink-500/20 group-hover:scale-105 transition-transform">
+              <div className="w-full h-full bg-[#0d0614] rounded-[10px] flex items-center justify-center">
+                <Sparkles className="w-4 h-4 text-pink-400" />
               </div>
             </div>
             <div className="flex items-center gap-1.5">
-              <span className="font-extrabold text-base tracking-wider text-[rgb(18,84,79)]">PRISM</span>
-              <span className="text-[9px] font-bold tracking-widest uppercase bg-[#daf0e3] text-[rgb(42,131,95)] px-1.5 py-0.5 rounded border border-[#a2cfb2]">
+              <span className="font-extrabold text-base tracking-wider text-white">PRISM</span>
+              <span className="text-[9px] font-bold tracking-widest uppercase bg-pink-950/80 text-pink-300 px-1.5 py-0.5 rounded border border-pink-700/40">
                 ENGINE
               </span>
             </div>
@@ -86,7 +86,7 @@ export default function Header({ onOpenSidebar, hideSidebar = false, isLoginPage
         ) : !hideSidebar && !isLoginPage ? (
           <button
             onClick={onOpenSidebar}
-            className="p-2 rounded-xl text-[rgb(18,84,79)] hover:bg-white/40 lg:hidden transition-colors"
+            className="p-2 rounded-xl text-rose-300/70 hover:text-white hover:bg-purple-950/40 lg:hidden transition-colors"
             aria-label="Open Navigation"
           >
             <Menu className="w-5 h-5" />
@@ -94,7 +94,7 @@ export default function Header({ onOpenSidebar, hideSidebar = false, isLoginPage
         ) : (
           <Link
             href="/"
-            className="flex items-center gap-1.5 text-xs text-[rgb(18,84,79)] hover:text-[#0b3834] transition-colors py-1 px-2 rounded-lg hover:bg-white/30"
+            className="flex items-center gap-1.5 text-xs text-rose-300/80 hover:text-pink-300 transition-colors py-1 px-2 rounded-lg hover:bg-pink-950/30"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span className="font-semibold">Overview</span>
@@ -103,9 +103,9 @@ export default function Header({ onOpenSidebar, hideSidebar = false, isLoginPage
 
         {pathname !== "/" && (
           <div className="flex items-center gap-1.5 text-xs">
-            <span className="text-[rgb(18,84,79)]/75 font-semibold hidden sm:inline">{pageInfo.group}</span>
-            <ChevronRight className="w-3.5 h-3.5 text-[rgb(18,84,79)]/50 hidden sm:inline" />
-            <h1 className="font-bold text-[#123835] text-sm sm:text-base tracking-tight truncate">
+            <span className="text-rose-400/70 font-semibold hidden sm:inline">{pageInfo.group}</span>
+            <ChevronRight className="w-3.5 h-3.5 text-purple-400/50 hidden sm:inline" />
+            <h1 className="font-bold text-white text-sm sm:text-base tracking-tight truncate">
               {pageInfo.title}
             </h1>
           </div>
@@ -118,10 +118,10 @@ export default function Header({ onOpenSidebar, hideSidebar = false, isLoginPage
         {!isLoginPage && !isParentPortal && (
           <button
             onClick={openProfileModal}
-            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white hover:bg-white/90 text-[rgb(18,84,79)] border border-[#cbe1d0] text-xs font-bold shadow-sm transition-all"
+            className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-purple-950/70 hover:bg-pink-950 text-pink-300 border border-pink-700/40 text-xs font-bold transition-all"
             title="Click to customize Country, State, Qualification, or Stream"
           >
-            <Sliders className="w-3 h-3 text-[rgb(42,131,95)]" />
+            <Sliders className="w-3 h-3 text-pink-400" />
             <span>{qualificationShort}</span>
           </button>
         )}
@@ -129,12 +129,14 @@ export default function Header({ onOpenSidebar, hideSidebar = false, isLoginPage
         {/* Theme Slider (Dark <-> White) */}
         <ThemeSlider />
 
+
+
         {/* User Auth CTA */}
         {!isLoginPage && (
           isAuthenticated && user ? (
             <button
               onClick={logout}
-              className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-xl bg-white/70 hover:bg-white text-[rgb(18,84,79)] border border-[#cbe1d0] transition-all"
+              className="flex items-center gap-1.5 text-xs font-medium px-2.5 py-1.5 rounded-xl bg-[#180d24]/60 hover:bg-pink-500/10 text-rose-300/70 hover:text-pink-300 border border-purple-900/40 hover:border-pink-500/30 transition-all"
             >
               <LogOut className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">Logout</span>
@@ -142,7 +144,7 @@ export default function Header({ onOpenSidebar, hideSidebar = false, isLoginPage
           ) : (
             <Link
               href="/login"
-              className="flex items-center gap-1.5 text-xs font-bold px-3.5 py-1.5 rounded-xl bg-[rgb(18,84,79)] hover:bg-[rgb(14,68,64)] text-white shadow-sm transition-all"
+              className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-xl bg-gradient-to-r from-purple-600 via-pink-600 to-rose-500 hover:from-purple-500 hover:to-rose-400 text-white shadow-md shadow-pink-600/30 transition-all"
             >
               <LogIn className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">Sign In</span>
